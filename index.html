@@ -6,6 +6,32 @@
   <title>최호 | 기록과 신념</title>
 
   <style>
+    :root {
+      --bg-gradient: linear-gradient(to bottom, #0f172a, #1e293b, #020617);
+      --text-main: #ffffff;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(15,23,42,0.8);
+      --card-bg-solid: #0f172a;
+      --border-color: rgba(255,255,255,0.1);
+      --highlight: #60a5fa;
+      --btn-secondary-bg: transparent;
+      --btn-secondary-border: rgba(255,255,255,0.2);
+    }
+
+    [data-theme="light"] {
+      --bg-gradient: linear-gradient(to bottom, #f8fafc, #f1f5f9, #e2e8f0);
+      --text-main: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-bg-solid: #ffffff;
+      --border-color: rgba(0, 0, 0, 0.1);
+      --highlight: #2563eb;
+      --btn-secondary-bg: #ffffff;
+      --btn-secondary-border: rgba(0, 0, 0, 0.1);
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -14,9 +40,10 @@
 
     body {
       font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-      background: linear-gradient(to bottom, #0f172a, #1e293b, #020617);
-      color: white;
+      background: var(--bg-gradient);
+      color: var(--text-main);
       line-height: 1.7;
+      transition: background 0.3s, color 0.3s;
     }
 
     .container {
@@ -26,9 +53,37 @@
       padding: 0 24px;
     }
 
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 1000;
+    }
+
+    .theme-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      backdrop-filter: blur(12px);
+      transition: 0.3s;
+    }
+
+    .theme-btn:hover {
+      transform: scale(1.1);
+    }
+
     .hero {
       padding: 120px 0 100px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid var(--border-color);
     }
 
     .hero-grid {
@@ -40,11 +95,11 @@
 
     .badge {
       display: inline-block;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
       padding: 10px 18px;
       border-radius: 999px;
-      color: #cbd5e1;
+      color: var(--text-secondary);
       margin-bottom: 24px;
       font-size: 14px;
     }
@@ -57,12 +112,12 @@
     }
 
     .highlight {
-      color: #60a5fa;
+      color: var(--highlight);
     }
 
     .hero-text {
       font-size: 20px;
-      color: #cbd5e1;
+      color: var(--text-secondary);
       margin-bottom: 40px;
     }
 
@@ -92,13 +147,13 @@
     }
 
     .btn-secondary {
-      background: transparent;
-      color: white;
-      border: 1px solid rgba(255,255,255,0.2);
+      background: var(--btn-secondary-bg);
+      color: var(--text-main);
+      border: 1px solid var(--btn-secondary-border);
     }
 
     .btn-secondary:hover {
-      border-color: rgba(255,255,255,0.5);
+      border-color: var(--text-muted);
     }
 
     .profile-image-wrapper {
@@ -112,13 +167,13 @@
       height: 220px;
       object-fit: cover;
       border-radius: 50%;
-      border: 4px solid rgba(96,165,250,0.5);
+      border: 4px solid var(--highlight);
       box-shadow: 0 20px 50px rgba(59,130,246,0.25);
     }
 
     .card-box {
-      background: rgba(15,23,42,0.8);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
       border-radius: 32px;
       padding: 36px;
       backdrop-filter: blur(12px);
@@ -131,14 +186,14 @@
     }
 
     .stat-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(127, 127, 127, 0.05);
+      border: 1px solid var(--border-color);
       border-radius: 24px;
       padding: 24px;
     }
 
     .stat-title {
-      color: #94a3b8;
+      color: var(--text-muted);
       font-size: 14px;
       margin-bottom: 10px;
     }
@@ -159,7 +214,7 @@
     }
 
     .section-desc {
-      color: #94a3b8;
+      color: var(--text-muted);
       font-size: 18px;
       margin-bottom: 50px;
     }
@@ -171,8 +226,8 @@
     }
 
     .info-card {
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
       border-radius: 28px;
       padding: 36px;
       transition: 0.3s;
@@ -193,20 +248,20 @@
     }
 
     .info-card p {
-      color: #cbd5e1;
+      color: var(--text-secondary);
     }
 
     .timeline {
-      background: rgba(15,23,42,0.5);
-      border-top: 1px solid rgba(255,255,255,0.06);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: var(--card-bg);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
     }
 
     .timeline-item {
       display: flex;
       gap: 40px;
-      background: rgba(2,6,23,0.8);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--card-bg-solid);
+      border: 1px solid var(--border-color);
       border-radius: 28px;
       padding: 34px;
       margin-bottom: 24px;
@@ -216,7 +271,7 @@
       min-width: 120px;
       font-size: 28px;
       font-weight: 900;
-      color: #60a5fa;
+      color: var(--highlight);
     }
 
     .timeline-content h3 {
@@ -225,7 +280,7 @@
     }
 
     .timeline-content p {
-      color: #cbd5e1;
+      color: var(--text-secondary);
     }
 
     footer {
@@ -236,20 +291,20 @@
     .footer-quote {
       font-size: 40px;
       font-weight: 900;
-      color: #60a5fa;
+      color: var(--highlight);
       margin-bottom: 24px;
     }
 
     .footer-text {
-      color: #94a3b8;
+      color: var(--text-muted);
       max-width: 700px;
       margin: 0 auto 40px;
     }
 
     .copyright {
-      border-top: 1px solid rgba(255,255,255,0.08);
+      border-top: 1px solid var(--border-color);
       padding-top: 30px;
-      color: #64748b;
+      color: var(--text-muted);
       font-size: 14px;
     }
 
@@ -274,8 +329,37 @@
       }
     }
   </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggleBtn = document.getElementById('theme-toggle-btn');
+      const htmlElement = document.documentElement;
+
+      // 로컬 스토리지에서 테마 불러오기
+      const currentTheme = localStorage.getItem('theme') || 'dark';
+      htmlElement.setAttribute('data-theme', currentTheme);
+      updateToggleButton(currentTheme);
+
+      themeToggleBtn.addEventListener('click', () => {
+        const targetTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        htmlElement.setAttribute('data-theme', targetTheme);
+        localStorage.setItem('theme', targetTheme);
+        updateToggleButton(targetTheme);
+      });
+
+      function updateToggleButton(theme) {
+        themeToggleBtn.textContent = theme === 'dark' ? '🌙' : '☀️';
+      }
+    });
+  </script>
 </head>
 <body>
+
+  <div class="theme-toggle">
+    <button class="theme-btn" id="theme-toggle-btn" aria-label="테마 변경">
+      🌙
+    </button>
+  </div>
 
   <section class="hero">
     <div class="container hero-grid">
