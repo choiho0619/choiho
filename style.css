@@ -1,1 +1,128 @@
-/* Add styles here */
+/* 기본 스타일 및 다크 테마 설정 */
+:root {
+    --bg-color: #1a1a2e; /* 깊은 네이비 */
+    --text-color: #dcdcdc; /* 밝은 회색 */
+    --primary-color: #e94560; /* 네온 핑크 */
+    --container-bg: #0f3460; /* 컨테이너 배경 */
+    --font-family: 'Nanum Gothic', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    background-color: var(--container-bg);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* 헤더 스타일 */
+header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+header p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+/* 메인 콘텐츠 (로또 번호) */
+.lotto-numbers-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.lotto-ball {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, opacity 0.5s;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* 번호대별 색상 */
+.color-1 { background: #fbc400; } /* 1-10 */
+.color-2 { background: #69c8f2; } /* 11-20 */
+.color-3 { background: #ff7272; } /* 21-30 */
+.color-4 { background: #aaa; }    /* 31-40 */
+.color-5 { background: #b0d840; } /* 41-45 */
+
+/* 버튼 스타일 */
+#generate-btn {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+}
+
+#generate-btn:hover {
+    background-color: #ff6680;
+    transform: translateY(-3px);
+}
+
+/* 푸터 스타일 */
+footer {
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .lotto-ball {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+
+    #generate-btn {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+}
