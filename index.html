@@ -1,177 +1,545 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>최호 | 책임과 기록의 질서</title>
+
   <style>
     :root {
-      --bg-primary: #0f172a;
-      --bg-secondary: #1e293b;
-      --text-main: #f8fafc;
+      --bg-gradient: linear-gradient(to bottom, #0f172a, #1e293b, #020617);
+      --text-main: #ffffff;
+      --text-secondary: #cbd5e1;
       --text-muted: #94a3b8;
-      --accent: #3b82f6;
-      --border: #334155;
+      --card-bg: rgba(15,23,42,0.8);
+      --card-bg-solid: #0f172a;
+      --border-color: rgba(255,255,255,0.1);
+      --highlight: #60a5fa;
+      --btn-secondary-bg: transparent;
+      --btn-secondary-border: rgba(255,255,255,0.2);
+    }
+
+    [data-theme="light"] {
+      --bg-gradient: linear-gradient(to bottom, #f8fafc, #f1f5f9, #e2e8f0);
+      --text-main: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-bg-solid: #ffffff;
+      --border-color: rgba(0, 0, 0, 0.1);
+      --highlight: #2563eb;
+      --btn-secondary-bg: #ffffff;
+      --btn-secondary-border: rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      background-color: var(--bg-primary);
+      font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+      background: var(--bg-gradient);
       color: var(--text-main);
-      line-height: 1.6;
-      word-break: keep-all;
+      line-height: 1.7;
+      transition: background 0.3s, color 0.3s;
     }
 
     .container {
-      max-width: 800px;
+      width: 100%;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 24px;
     }
 
-    header {
-      padding: 80px 0 60px;
-      border-bottom: 1px solid var(--border);
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 1000;
+    }
+
+    .theme-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      backdrop-filter: blur(12px);
+      transition: 0.3s;
+    }
+
+    .theme-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .hero {
+      padding: 120px 0 100px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 10px 18px;
+      border-radius: 999px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      font-size: 14px;
     }
 
     h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin: 0;
+      font-size: 68px;
+      line-height: 1.1;
+      font-weight: 900;
+      margin-bottom: 28px;
     }
 
-    h2 {
-      font-size: 1.8rem;
+    .highlight {
+      color: var(--highlight);
+    }
+
+    .hero-text {
+      font-size: 20px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: 18px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
       font-weight: 700;
-      margin-bottom: 24px;
-      color: var(--accent);
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: #3b82f6;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #60a5fa;
+    }
+
+    .btn-secondary {
+      background: var(--btn-secondary-bg);
+      color: var(--text-main);
+      border: 1px solid var(--btn-secondary-border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text-muted);
+    }
+
+    .profile-image-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    .profile-image {
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid var(--highlight);
+      box-shadow: 0 20px 50px rgba(59,130,246,0.25);
+    }
+
+    .card-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 32px;
+      padding: 36px;
+      backdrop-filter: blur(12px);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .stat-card {
+      background: rgba(127, 127, 127, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .stat-title {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
     }
 
     section {
-      padding: 80px 0;
-      border-bottom: 1px solid var(--border);
+      padding: 100px 0;
     }
 
-    .summary {
-      font-size: 1.25rem;
-      font-weight: 600;
+    .section-title {
+      font-size: 48px;
+      font-weight: 900;
       margin-bottom: 20px;
-      display: block;
     }
 
-    .details {
+    .section-desc {
       color: var(--text-muted);
+      font-size: 18px;
+      margin-bottom: 50px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .info-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 28px;
+      padding: 36px;
+      transition: 0.3s;
+    }
+
+    .info-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .emoji {
+      font-size: 42px;
+      margin-bottom: 18px;
+    }
+
+    .info-card h3 {
+      font-size: 28px;
+      margin-bottom: 18px;
+    }
+
+    .info-card p {
+      color: var(--text-secondary);
+    }
+
+    .timeline {
+      background: var(--card-bg);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 40px;
+      background: var(--card-bg-solid);
+      border: 1px solid var(--border-color);
+      border-radius: 28px;
+      padding: 34px;
       margin-bottom: 24px;
     }
 
-    .btn-link {
-      display: inline-block;
-      background-color: var(--accent);
-      color: white;
-      text-decoration: none;
-      padding: 12px 24px;
-      border-radius: 6px;
-      font-weight: 700;
-      margin-top: 20px;
-      transition: opacity 0.2s;
+    .year {
+      min-width: 120px;
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--highlight);
     }
 
-    .btn-link:hover {
-      opacity: 0.9;
+    .timeline-content h3 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .timeline-content p {
+      color: var(--text-secondary);
     }
 
     footer {
-      padding: 40px 0;
       text-align: center;
+      padding: 80px 24px;
+    }
+
+    .footer-quote {
+      font-size: 40px;
+      font-weight: 900;
+      color: var(--highlight);
+      margin-bottom: 24px;
+    }
+
+    .footer-text {
       color: var(--text-muted);
-      font-size: 0.9rem;
+      max-width: 700px;
+      margin: 0 auto 40px;
     }
 
-    blockquote {
-      margin: 0;
-      padding: 0;
-      font-style: normal;
+    .copyright {
+      border-top: 1px solid var(--border-color);
+      padding-top: 30px;
+      color: var(--text-muted);
+      font-size: 14px;
     }
 
-    @media (max-width: 640px) {
-      h1 { font-size: 2rem; }
-      section { padding: 60px 0; }
+    @media (max-width: 900px) {
+      .hero-grid,
+      .grid-3,
+      .timeline-item {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+      }
+
+      h1 {
+        font-size: 48px;
+      }
+
+      .section-title {
+        font-size: 36px;
+      }
+
+      .footer-quote {
+        font-size: 30px;
+      }
     }
   </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggleBtn = document.getElementById('theme-toggle-btn');
+      const htmlElement = document.documentElement;
+
+      // 로컬 스토리지에서 테마 불러오기
+      const currentTheme = localStorage.getItem('theme') || 'dark';
+      htmlElement.setAttribute('data-theme', currentTheme);
+      updateToggleButton(currentTheme);
+
+      themeToggleBtn.addEventListener('click', () => {
+        const targetTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        htmlElement.setAttribute('data-theme', targetTheme);
+        localStorage.setItem('theme', targetTheme);
+        updateToggleButton(targetTheme);
+      });
+
+      function updateToggleButton(theme) {
+        themeToggleBtn.textContent = theme === 'dark' ? '🌙' : '☀️';
+      }
+    });
+  </script>
 </head>
 <body>
 
-  <div class="container">
-    <header>
-      <h1>최호: 책임과 기록</h1>
-      <p class="details">성실함과 체계적인 질서로 구축된 삶의 궤적</p>
-    </header>
-
-    <main>
-      <!-- 섹션 1. 본업과 책임의 무게 -->
-      <section id="responsibility">
-        <h2>1. 본업과 책임의 무게</h2>
-        <blockquote class="summary">
-          "11년 이상 유지해 온 무사고 운행"은 승객의 안전을 최우선으로 하는 직업 윤리의 결과물입니다.
-        </blockquote>
-        <div class="details">
-          1. 2014년 5월부터 현재까지 시흥교통에서 버스 운행 업무를 수행하고 있습니다.<br>
-          2. 경기도 시흥과 서울 강남을 연결하는 광역 노선을 담당하며 장거리 운행의 피로도를 체계적으로 관리합니다.<br>
-          3. 대형 2층 전기버스를 운용하며 첨단 장비에 대한 적응력과 정밀한 조작 능력을 유지하고 있습니다.<br>
-          4. 매일 수백 명의 시민을 목적지까지 이송하는 업무를 통해 "사회적 책임"과 "성실함"을 실천합니다.
-        </div>
-      </section>
-
-      <!-- 섹션 2. 창작과 분석의 기록 -->
-      <section id="records">
-        <h2>2. 창작과 분석의 기록</h2>
-        <blockquote class="summary">
-          "사실과 논리"에 기반한 콘텐츠 제작은 복잡한 세상을 명료하게 정리하는 과정입니다.
-        </blockquote>
-        <div class="details">
-          1. 유튜브 채널 "프리한 버스인생"과 "루카 로그"를 통해 창작 활동을 지속하고 있습니다.<br>
-          2. 'Canon 5D Mark2'를 활용한 고전적인 촬영 방식부터 AI 도구를 활용한 최신 후반 작업까지 모든 공정을 직접 통제합니다.<br>
-          3. 시각적 질서와 청각적 명료함을 확보하기 위해 데이터 분석에 기반한 편집 가이드라인을 준수합니다.<br>
-          4. 사회적 이슈를 다룰 때 주관적 감정을 배제하고 확인된 사실을 근거로 논리적인 서사를 구축합니다.
-        </div>
-      </section>
-
-      <!-- 섹션 3. 비즈니스와 정밀함 -->
-      <section id="business">
-        <h2>3. 비즈니스와 정밀함</h2>
-        <blockquote class="summary">
-          "0.1mm 단위의 정밀함"으로 구현하는 3D 프린팅 기술은 창조Lab이 추구하는 비즈니스의 핵심입니다.
-        </blockquote>
-        <div class="details">
-          1. 스마트스토어 "창조Lab"을 운영하며 3D 프린팅 기반의 맞춤형 제조 솔루션을 제공합니다.<br>
-          2. 'Bambu Lab' 하이엔드 3D 프린터를 운용하여 정밀도가 요구되는 산업용 및 생활용 부품을 생산합니다.<br>
-          3. 고객의 요구 사항을 분석하여 최적의 출력물을 설계하며, 불량률 제로를 목표로 공정을 관리합니다.<br>
-          4. 디지털 도면을 실물로 구현하는 과정에서 오차 없는 체계적인 워크플로우를 유지하고 있습니다.
-        </div>
-        <a href="https://smartstore.naver.com/createlab_shop" target="_blank" class="btn-link">스토어 방문하여 제품 확인</a>
-      </section>
-
-      <!-- 섹션 4. 일상의 규율 -->
-      <section id="discipline">
-        <h2>4. 일상의 규율</h2>
-        <blockquote class="summary">
-          "자아를 통제하는 신체적 단련"은 일상의 규칙성을 유지하는 근간입니다.
-        </blockquote>
-        <div class="details">
-          1. 미니벨로를 활용한 장거리 라이딩을 통해 지구력과 정신력을 강화합니다.<br>
-          2. 매일 10km 러닝을 수행하며 하프 마라톤 완주를 목표로 페이스를 정밀하게 조절하고 있습니다.<br>
-          3. 운동 기록을 체계적으로 수집하여 신체 변화를 모니터링하고 자기 관리의 지표로 삼습니다.<br>
-          4. 철저한 시간 관리와 신체 훈련은 업무의 정확도를 높이는 원동력이 됩니다.
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <p>© 2026 CHOI HO. ALL RIGHTS RESERVED.</p>
-      <p>본 페이지는 사실과 데이터에 기반하여 작성되었습니다.</p>
-    </footer>
+  <div class="theme-toggle">
+    <button class="theme-btn" id="theme-toggle-btn" aria-label="테마 변경">
+      🌙
+    </button>
   </div>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge">
+          성실함과 체계적인 질서로 구축된 삶의 궤적
+        </div>
+
+        <h1>
+          최호:<br>
+          <span class="highlight">책임과 기록</span>
+        </h1>
+
+        <p class="hero-text">
+          "11년 이상 유지해 온 무사고 운행"과 "사실과 논리"에 기반한 기록을 통해
+          사회적 책임과 창작의 질서를 실천합니다.
+        </p>
+
+        <div class="button-group">
+          <a href="https://smartstore.naver.com/createlab_shop" target="_blank" class="btn btn-primary" style="text-decoration: none;">창조Lab 스토어 방문</a>
+          <button class="btn btn-secondary">나의 이야기</button>
+        </div>
+      </div>
+
+      <div class="card-box">
+        <div class="profile-image-wrapper">
+          <img src="profile_photo.jpg" alt="최호 프로필 사진" class="profile-image">
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-title">운행 경력</div>
+            <div class="stat-value">11년+</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-title">창작 도구</div>
+            <div class="stat-value">5D Mark2</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-title">비즈니스</div>
+            <div class="stat-value">3D 프린팅</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-title">자기 관리</div>
+            <div class="stat-value">10km+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">나를 움직이는 가치</h2>
+
+      <p class="section-desc">
+        단순한 취미나 기록이 아닌, 신념과 메시지를 담아내는 삶의 방향성입니다.
+      </p>
+
+      <div class="grid-3">
+        <div class="info-card">
+          <div class="emoji">🚌</div>
+          <h3>본업과 책임의 무게</h3>
+          <p>
+            "11년 이상 유지해 온 무사고 운행"은 승객의 안전을 최우선으로 하는 직업 윤리의 결과물입니다.
+            대형 2층 전기버스를 운용하며 정밀한 조작 능력을 유지합니다.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <div class="emoji">🎥</div>
+          <h3>창작과 분석의 기록</h3>
+          <p>
+            "사실과 논리"에 기반한 콘텐츠 제작은 복잡한 세상을 명료하게 정리하는 과정입니다.
+            데이터 분석에 기반한 편집 가이드라인을 준수합니다.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <div class="emoji">🖨️</div>
+          <h3>비즈니스와 정밀함</h3>
+          <p>
+            "0.1mm 단위의 정밀함"으로 구현하는 3D 프린팅 기술은 창조Lab의 핵심입니다.
+            Bambu Lab 프린터를 통해 불량률 제로를 목표로 공정을 관리합니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="timeline">
+    <div class="container">
+      <h2 class="section-title" style="text-align:center; margin-bottom:60px;">
+        삶의 여정
+      </h2>
+
+      <div class="timeline-item">
+        <div class="year">2014</div>
+        <div class="timeline-content">
+          <h3>시흥교통 버스 운행 업무 시작</h3>
+          <p>경기도 시흥과 서울 강남을 연결하는 광역 노선을 담당하며 사회적 책임을 실천해오고 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="year">2019</div>
+        <div class="timeline-content">
+          <h3>3D 프린팅 비즈니스 "창조Lab" 런칭</h3>
+          <p>정밀도가 요구되는 맞춤형 제조 솔루션을 제공하며 디지털 도면을 실물로 구현하는 체계적인 워크플로우를 유지합니다.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="year">2020s</div>
+        <div class="timeline-content">
+          <h3>유튜브 채널 "프리한 버스인생" & "루카 로그"</h3>
+          <p>확인된 사실을 근거로 논리적인 서사를 구축하며, 시각적 질서와 청각적 명료함을 확보한 콘텐츠를 제작합니다.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="year">Daily</div>
+        <div class="timeline-content">
+          <h3>일상의 규율과 자기 관리</h3>
+          <p>"자아를 통제하는 신체적 단련"을 위해 매일 10km 러닝과 장거리 라이딩을 수행하며 일상의 규칙성을 유지합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title">보유 역량 및 자격</h2>
+      <div class="grid-3">
+        <div class="info-card">
+          <h3>전문 기술</h3>
+          <p>
+            • 대형 버스 정밀 운전<br>
+            • 3D 디자인 (Fusion 360)<br>
+            • 3D 프린팅 출력 및 가공<br>
+            • 응급처치 및 심폐소생술
+          </p>
+        </div>
+        <div class="info-card">
+          <h3>국가 자격</h3>
+          <p>
+            • 굴삭기 운전 기능사<br>
+            • 지게차 운전 기능사<br>
+            • 대형 운전 면허<br>
+            • 사무자동화 / 워드 1급
+          </p>
+        </div>
+        <div class="info-card">
+          <h3>핵심 역량</h3>
+          <p>
+            • 문제 해결 및 위기 대응<br>
+            • 사실 기반 논리적 서사 구축<br>
+            • 프로젝트 관리 및 공정 제어<br>
+            • 철저한 시간 관리와 신체 규율
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-quote">
+      “기록은 결국 방향을 남긴다.”
+    </div>
+
+    <p class="footer-text">
+      성실함과 체계적인 질서로 구축된 삶의 궤적을 기록합니다.
+    </p>
+
+    <div class="copyright">
+      © 2026 CHOI HO. ALL RIGHTS RESERVED.
+    </div>
+  </footer>
 
 </body>
 </html>
