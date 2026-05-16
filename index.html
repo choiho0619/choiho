@@ -158,6 +158,18 @@
       z-index: 1000;
     }
 
+    /* Game Button */
+    .game-btn {
+      position: fixed;
+      top: 144px; /* Positioned below theme toggle and color wrapper */
+      right: 24px;
+      z-index: 1000;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .theme-btn {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
@@ -534,6 +546,14 @@
 
       .color-theme-wrapper {
         top: 64px; /* Adjusted for scaled theme button */
+        right: 12px;
+        transform: scale(0.85);
+        transform-origin: top right;
+        z-index: 1100;
+      }
+
+      .game-btn {
+        top: 116px;
         right: 12px;
         transform: scale(0.85);
         transform-origin: top right;
