@@ -70,6 +70,87 @@
       padding: 0 24px;
     }
 
+    /* Language Switcher */
+    .lang-switcher {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      z-index: 1000;
+      display: flex;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      background: var(--card-bg);
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(12px);
+    }
+
+    .lang-btn {
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: 0.3s;
+      border: none;
+      background: none;
+      font-family: inherit;
+      font-weight: inherit;
+    }
+
+    .lang-btn.active {
+      color: var(--highlight);
+    }
+
+    /* Color Theme Dropdown */
+    .color-theme-wrapper {
+      position: fixed;
+      top: 84px;
+      right: 24px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .color-dropdown {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: 0.3s;
+      background: var(--card-bg);
+      padding: 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(12px);
+    }
+
+    .color-theme-wrapper:hover .color-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .color-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: 0.2s;
+    }
+
+    .color-dot:hover {
+      transform: scale(1.2);
+    }
+
+    .color-dot.active {
+      border-color: var(--text-main);
+    }
+
     /* Theme Toggle */
     .theme-toggle {
       position: fixed;
@@ -568,15 +649,69 @@
         themeToggleBtn.textContent = theme === 'dark' ? '🌙' : '☀️';
       }
     });
+
+    // Language Toggle
+    function setLanguage(lang) {
+      document.querySelectorAll('[data-ko]').forEach(el => {
+        el.textContent = lang === 'ko' ? el.getAttribute('data-ko') : el.getAttribute('data-en');
+      });
+      
+      // Update Active State
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`lang-${lang}`).classList.add('active');
+      localStorage.setItem('preferred-lang', lang);
+    }
+
+    // Color Theme Switcher
+    function setColorTheme(color) {
+      document.documentElement.setAttribute('data-color-theme', color);
+      localStorage.setItem('color-theme', color);
+      
+      // Update Active State
+      document.querySelectorAll('.color-dot').forEach(dot => {
+        dot.classList.remove('active');
+        if (dot.getAttribute('onclick').includes(color)) {
+          dot.classList.add('active');
+        }
+      });
+    }
+
+    // Initialize Language and Color Theme
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('preferred-lang') || 'ko';
+      setLanguage(savedLang);
+      
+      const savedColor = localStorage.getItem('color-theme') || 'blue';
+      setColorTheme(savedColor);
+    });
   </script>
 </head>
 <body>
   <div id="root-wrapper">
 
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLanguage('ko')" id="lang-ko">KOR</button>
+      <span style="color: var(--border-color)">|</span>
+      <button class="lang-btn" onclick="setLanguage('en')" id="lang-en">ENG</button>
+    </div>
+
     <div class="theme-toggle">
       <button class="theme-btn" id="theme-toggle-btn" aria-label="테마 변경">
         🌙
       </button>
+    </div>
+
+    <div class="color-theme-wrapper">
+      <button class="theme-btn" aria-label="색상 테마 변경">🎨</button>
+      <div class="color-dropdown">
+        <div class="color-dot active" style="background: #3b82f6;" onclick="setColorTheme('blue')" title="Blue"></div>
+        <div class="color-dot" style="background: #8b5cf6;" onclick="setColorTheme('purple')" title="Purple"></div>
+        <div class="color-dot" style="background: #10b981;" onclick="setColorTheme('emerald')" title="Emerald"></div>
+        <div class="color-dot" style="background: #ef4444;" onclick="setColorTheme('red')" title="Red"></div>
+        <div class="color-dot" style="background: #f59e0b;" onclick="setColorTheme('orange')" title="Orange"></div>
+        <div class="color-dot" style="background: #ec4899;" onclick="setColorTheme('pink')" title="Pink"></div>
+        <div class="color-dot" style="background: #06b6d4;" onclick="setColorTheme('teal')" title="Teal"></div>
+      </div>
     </div>
 
     <section class="hero">
@@ -860,65 +995,6 @@
               })();
           </script>
           <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <div class="footer-quote">
-        “기록은 결국 방향을 남긴다.”
-      </div>
-
-      <p class="footer-text">
-        성실함과 체계적인 질서로 구축된 삶의 궤적을 기록합니다.
-      </p>
-
-      <div class="copyright">
-        © 2026 CHOI HO. ALL RIGHTS RESERVED.
-      </div>
-    </footer>
-
-  </div>
-</body>
-</html>
-       s.setAttribute('data-timestamp', +new Date());
-              (d.head || d.body).appendChild(s);
-              })();
-          </script>
-          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <div class="footer-quote">
-        “기록은 결국 방향을 남긴다.”
-      </div>
-
-      <p class="footer-text">
-        성실함과 체계적인 질서로 구축된 삶의 궤적을 기록합니다.
-      </p>
-
-      <div class="copyright">
-        © 2026 CHOI HO. ALL RIGHTS RESERVED.
-      </div>
-    </footer>
-
-  </div>
-</body>
-</html>
-삶의 궤적을 기록합니다.
-      </p>
-
-      <div class="copyright">
-        © 2026 CHOI HO. ALL RIGHTS RESERVED.
-      </div>
-    </footer>
-
-  </div>
-</body>
-</html>
-t">comments powered by Disqus.</a></noscript>
         </div>
       </div>
     </section>
