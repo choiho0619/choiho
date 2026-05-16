@@ -19,15 +19,6 @@
       --btn-secondary-border: rgba(255,255,255,0.2);
     }
 
-    /* Color Themes */
-    [data-color-theme="purple"] { --highlight: #8b5cf6; }
-    [data-color-theme="emerald"] { --highlight: #10b981; }
-    [data-color-theme="red"] { --highlight: #ef4444; }
-    [data-color-theme="orange"] { --highlight: #f59e0b; }
-    [data-color-theme="pink"] { --highlight: #ec4899; }
-    [data-color-theme="teal"] { --highlight: #06b6d4; }
-    [data-color-theme="blue"] { --highlight: #3b82f6; }
-
     [data-theme="light"] {
       --bg-gradient: linear-gradient(to bottom, #f8fafc, #f1f5f9, #e2e8f0);
       --text-main: #0f172a;
@@ -36,10 +27,18 @@
       --card-bg: rgba(255, 255, 255, 0.8);
       --card-bg-solid: #ffffff;
       --border-color: rgba(0, 0, 0, 0.1);
-      --highlight: #2563eb;
       --btn-secondary-bg: #ffffff;
       --btn-secondary-border: rgba(0, 0, 0, 0.1);
     }
+
+    /* Color Themes (Should override light theme highlight) */
+    [data-color-theme="purple"] { --highlight: #8b5cf6 !important; }
+    [data-color-theme="emerald"] { --highlight: #10b981 !important; }
+    [data-color-theme="red"] { --highlight: #ef4444 !important; }
+    [data-color-theme="orange"] { --highlight: #f59e0b !important; }
+    [data-color-theme="pink"] { --highlight: #ec4899 !important; }
+    [data-color-theme="teal"] { --highlight: #06b6d4 !important; }
+    [data-color-theme="blue"] { --highlight: #3b82f6 !important; }
 
     * {
       margin: 0;
