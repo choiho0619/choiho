@@ -491,6 +491,35 @@
         box-sizing: border-box !important;
       }
 
+      /* 상단 버튼 모바일 최적화 및 오버랩 방지 */
+      .lang-switcher {
+        top: 12px;
+        left: 12px;
+        transform: scale(0.85);
+        transform-origin: top left;
+        z-index: 1100;
+      }
+
+      .theme-toggle {
+        top: 12px;
+        right: 12px;
+        transform: scale(0.85);
+        transform-origin: top right;
+        z-index: 1100;
+      }
+
+      .color-theme-wrapper {
+        top: 64px; /* Adjusted for scaled theme button */
+        right: 12px;
+        transform: scale(0.85);
+        transform-origin: top right;
+        z-index: 1100;
+      }
+
+      .hero {
+        padding: 100px 0 40px !important; /* 상단 버튼 공간 확보 */
+      }
+
       /* 2. 제목의 강제 한 줄(nowrap) 속성 무력화 및 단어 단위 줄바꿈 허용 */
       h1 span, h2 span, p span {
         white-space: normal !important;
