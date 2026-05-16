@@ -477,88 +477,6 @@
       resize: vertical;
     }
 
-    /* Native Comment System UI */
-    .comment-section {
-      max-width: 800px;
-      margin: 4rem auto;
-      padding: 0 24px;
-    }
-
-    .comment-header {
-      font-size: 1.5rem;
-      font-weight: 800;
-      margin-bottom: 2rem;
-      color: var(--text-main);
-    }
-
-    .comment-header #comment-count {
-      color: var(--highlight);
-      margin-left: 4px;
-    }
-
-    .comment-form {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 24px;
-      padding: 24px;
-      margin-bottom: 3rem;
-      backdrop-filter: blur(12px);
-    }
-
-    .comment-input-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-
-    @media (max-width: 600px) {
-      .comment-input-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .comment-list {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .comment-item {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
-      padding: 24px;
-      animation: fadeIn 0.5s ease-out forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .comment-meta {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      font-size: 0.9rem;
-    }
-
-    .comment-author {
-      font-weight: 700;
-      color: var(--highlight);
-    }
-
-    .comment-date {
-      color: var(--text-muted);
-    }
-
-    .comment-text {
-      color: var(--text-secondary);
-      line-height: 1.6;
-      white-space: pre-wrap;
-    }
-
     @media (max-width: 900px) {
       /* --- 모바일 가로 밀림 및 텍스트 짤림 강제 수정 --- */
       html, body {
@@ -752,45 +670,6 @@
       document.getElementById(`lang-${lang}`).classList.add('active');
       localStorage.setItem('preferred-lang', lang);
     }
-
-    // Native Comment System Controller
-    document.addEventListener('DOMContentLoaded', () => {
-      const commentForm = document.getElementById('comment-form');
-      const commentList = document.getElementById('comment-list');
-      const commentCount = document.getElementById('comment-count');
-      let count = 0;
-
-      if (commentForm) {
-        commentForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-          
-          const nickname = document.getElementById('comment-nickname').value;
-          const content = document.getElementById('comment-content').value;
-          const date = new Date().toLocaleString(localStorage.getItem('preferred-lang') === 'ko' ? 'ko-KR' : 'en-US');
-
-          // Create new comment element
-          const commentItem = document.createElement('div');
-          commentItem.className = 'comment-item';
-          commentItem.innerHTML = `
-            <div class="comment-meta">
-              <span class="comment-author">${nickname}</span>
-              <span class="comment-date">${date}</span>
-            </div>
-            <div class="comment-text">${content}</div>
-          `;
-
-          // Add to list (top)
-          commentList.prepend(commentItem);
-
-          // Update count
-          count++;
-          commentCount.textContent = count;
-
-          // Reset form
-          commentForm.reset();
-        });
-      }
-    });
 
     // Color Theme Switcher
     function setColorTheme(color) {
@@ -1096,29 +975,6 @@
 
             <button type="submit" class="btn btn-primary" style="width: 100%; padding: 18px; font-size: 18px;" data-ko="문의 보내기" data-en="Send Message">문의 보내기</button>
           </form>
-        </div>
-      </div>
-    </section>
-
-    <section id="comments">
-      <div class="container">
-        <div class="comment-section">
-          <div class="comment-header">
-            <span data-ko="댓글" data-en="Comments">댓글</span> <span id="comment-count">0</span><span data-ko="개" data-en="">개</span>
-          </div>
-
-          <form id="comment-form" class="comment-form">
-            <div class="comment-input-grid">
-              <input type="text" id="comment-nickname" placeholder="닉네임" data-ko-placeholder="닉네임" data-en-placeholder="Nickname" required class="form-control">
-              <input type="email" id="comment-email" placeholder="이메일 (공개되지 않음)" data-ko-placeholder="이메일 (공개되지 않음)" data-en-placeholder="Email (Private)" required class="form-control">
-            </div>
-            <textarea id="comment-content" placeholder="댓글을 입력해주세요" data-ko-placeholder="댓글을 입력해주세요" data-en-placeholder="Enter your comment" required class="form-control"></textarea>
-            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;" data-ko="댓글 남기기" data-en="Post Comment">댓글 남기기</button>
-          </form>
-
-          <div id="comment-list" class="comment-list">
-            <!-- Comments will be added here via JS -->
-          </div>
         </div>
       </div>
     </section>
