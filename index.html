@@ -477,16 +477,19 @@
       resize: vertical;
     }
 
-    /* Cusdis Layout Optimization */
+    /* --- Cusdis 댓글창 레이아웃 및 스크롤바 최적화 --- */
     #cusdis_thread {
       width: 100%;
-      max-width: 1200px;
-      margin: 4rem auto 0;
+      max-width: 800px; /* Reduced for better text readability */
+      margin: 3rem auto;
+      min-height: 400px; 
       padding: 0 24px;
     }
 
-    [data-theme="light"] #cusdis_thread {
-      filter: none;
+    #cusdis_thread iframe {
+      width: 100% !important;
+      border: none !important;
+      overflow-y: hidden !important; 
     }
 
     @media (max-width: 900px) {
