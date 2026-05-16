@@ -227,10 +227,11 @@
     }
 
     .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 24px;
-      max-width: 900px;
+      max-width: 1000px;
       margin-left: auto;
       margin-right: auto;
     }
@@ -243,6 +244,8 @@
       transition: 0.3s;
       display: flex;
       flex-direction: column;
+      width: calc(50% - 12px);
+      min-width: 300px;
     }
 
     .info-card:hover {
@@ -380,10 +383,13 @@
 
     @media (max-width: 900px) {
       .hero-grid,
-      .grid-3,
       .timeline-item {
         grid-template-columns: 1fr;
         flex-direction: column;
+      }
+
+      .info-card {
+        width: 100%;
       }
 
       h1 {
@@ -594,7 +600,7 @@
 
   <section id="skills">
     <div class="container">
-      <h2 class="section-title">보유 역량 및 자격</h2>
+      <h2 class="section-title" style="text-align:center;">보유 역량 및 자격</h2>
       <div class="grid-3">
         <div class="info-card">
           <h3>전문 기술</h3>
