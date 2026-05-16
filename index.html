@@ -227,9 +227,8 @@
     }
 
     .grid-3 {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 24px;
       max-width: 1000px;
       margin-left: auto;
@@ -244,8 +243,6 @@
       transition: 0.3s;
       display: flex;
       flex-direction: column;
-      width: calc(50% - 12px);
-      min-width: 300px;
     }
 
     .info-card:hover {
@@ -627,6 +624,15 @@
             • A.I 활용 효율적 콘텐츠 기획<br>
             • 프로젝트 관리 및 공정 제어<br>
             • 자전거 국토종주 기반의 인내력
+          </p>
+        </div>
+        <div class="info-card">
+          <h3>비즈니스 및 운영</h3>
+          <p>
+            • 네이버 스마트스토어 스페이스 기획 및 관리<br>
+            • 데이터 기반 상품 키워드 및 SEO 최적화 분석<br>
+            • 1인 제조 비즈니스 공정 원가 및 수익 정산<br>
+            • 멀티 채널 연계 디지털 마케팅 프로세스 실행
           </p>
         </div>
       </div>
