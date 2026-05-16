@@ -315,6 +315,60 @@
       font-size: 14px;
     }
 
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg-solid);
+      color: var(--text-main);
+      font-size: 16px;
+      transition: 0.3s;
+      font-family: inherit;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--highlight);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    }
+
+    select.form-control {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 18px center;
+      background-size: 16px;
+    }
+
+    [data-theme="light"] select.form-control {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    }
+
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+
     @media (max-width: 900px) {
       .hero-grid,
       .grid-3,
@@ -548,6 +602,50 @@
             • 자전거 국토종주 기반의 인내력
           </p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title" style="text-align:center;">제휴 및 문의</h2>
+      <p class="section-desc" style="text-align:center;">
+        협업 제안이나 궁금하신 점이 있다면 아래 폼을 통해 남겨주세요.
+      </p>
+
+      <div class="card-box contact-form">
+        <!-- action 속성의 'your-form-id' 부분을 본인의 Formspree ID로 변경하세요 -->
+        <form action="https://formspree.io/f/mzdonqqw" method="POST">
+          <div class="form-group">
+            <label for="name">성함 / 업체명</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="성함 또는 업체명을 입력해주세요" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">이메일 주소</label>
+            <input type="email" id="email" name="_replyto" class="form-control" placeholder="example@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">문의 유형</label>
+            <select id="subject" name="subject" class="form-control">
+              <option value="제휴 문의">제휴 문의</option>
+              <option value="3D 프린팅 의뢰">3D 프린팅 의뢰</option>
+              <option value="콘텐츠 협업">콘텐츠 협업</option>
+              <option value="기타 문의">기타 문의</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">문의 내용</label>
+            <textarea id="message" name="message" class="form-control" placeholder="상세한 내용을 입력해주세요" required></textarea>
+          </div>
+
+          <!-- 스팸 방지 (honeypot) -->
+          <input type="text" name="_gotcha" style="display:none">
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 18px; font-size: 18px;">문의 보내기</button>
+        </form>
       </div>
     </div>
   </section>
