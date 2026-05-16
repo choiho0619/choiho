@@ -188,6 +188,11 @@
       font-size: 20px;
       backdrop-filter: blur(12px);
       transition: 0.3s;
+      padding: 0 !important;
+      margin: 0 !important;
+      line-height: 0 !important; /* Critical: Remove line-height offset */
+      text-align: center;
+      flex-shrink: 0;
     }
 
     .theme-btn:hover {
@@ -547,7 +552,7 @@
         min-height: 48px !important;
         padding: 0 !important;
         margin: 0 !important;
-        line-height: 1 !important;
+        line-height: 0 !important; /* Critical: Remove line-height offset */
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
