@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>창작의 선율: 자작곡 갤러리 | 최호</title>
+  <meta name="description" content="Suno AI와 정교한 프로듀싱으로 완성된 최호의 자작곡 갤러리입니다. 메시지를 담은 선율을 감상해보세요.">
+  
+  <link rel="stylesheet" href="../css/startup-article.css">
+  <style>
+    .song-list {
+      display: grid;
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .song-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 24px;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: 0.3s;
+    }
+    .song-card:hover {
+      border-color: var(--highlight);
+      transform: translateY(-4px);
+    }
+    .song-info h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--highlight);
+    }
+    .song-info p {
+      margin: 8px 0 0;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+    audio {
+      width: 100%;
+      height: 40px;
+      filter: invert(0);
+    }
+    [data-theme="dark"] audio {
+      filter: invert(0.8) hue-rotate(180deg);
+    }
+  </style>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggleBtn = document.getElementById('theme-toggle-btn');
+      const htmlElement = document.documentElement;
+      const currentTheme = localStorage.getItem('theme') || 'dark';
+      htmlElement.setAttribute('data-theme', currentTheme);
+      updateToggleButton(currentTheme);
+
+      themeToggleBtn.addEventListener('click', () => {
+        const targetTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        htmlElement.setAttribute('data-theme', targetTheme);
+        localStorage.setItem('theme', targetTheme);
+        updateToggleButton(targetTheme);
+      });
+
+      function updateToggleButton(theme) {
+        themeToggleBtn.textContent = theme === 'dark' ? '🌙' : '☀️';
+      }
+    });
+  </script>
+</head>
+<body>
+
+  <div class="theme-toggle">
+    <button class="theme-btn" id="theme-toggle-btn" aria-label="테마 변경">🌙</button>
+  </div>
+
+  <div class="container">
+    <header>
+      <a href="../index.html" class="btn-back">← 포트폴리오로 돌아가기</a>
+      <h1>창작의 선율:<br>자작곡 갤러리</h1>
+      <p>A.I 기반의 기술력과 감성적 서사가 만난 음악적 기록들입니다.</p>
+    </header>
+
+    <article>
+      <div class="song-list">
+        
+        <div class="song-card">
+          <div class="song-info">
+            <h3>나를 부르시는 시선 (데아오마이)</h3>
+            <p>깊은 서사와 영성을 담은 선율</p>
+          </div>
+          <audio controls src="나를 부르시는 시선 (데아오마이)_320k.mp3"></audio>
+        </div>
+
+        <div class="song-card">
+          <div class="song-info">
+            <h3>다바르(Dabar)</h3>
+            <p>말씀과 창조의 에너지를 형상화한 곡</p>
+          </div>
+          <audio controls src="다바르(Dabar)_320k.mp3"></audio>
+        </div>
+
+        <div class="song-card">
+          <div class="song-info">
+            <h3>다시, 봄 (Re_Spring)</h3>
+            <p>회복과 희망의 메시지를 담은 따뜻한 선율</p>
+          </div>
+          <audio controls src="다시, 봄 (Re_Spring)_320k.mp3"></audio>
+        </div>
+
+        <div class="song-card">
+          <div class="song-info">
+            <h3>미드나잇 프레넬</h3>
+            <p>밤의 정적과 빛의 굴절을 표현한 몽환적인 곡</p>
+          </div>
+          <audio controls src="미드나잇 프레넬_320k.mp3"></audio>
+        </div>
+
+        <div class="song-card">
+          <div class="song-info">
+            <h3>사울이 아닌 바울로</h3>
+            <p>변화와 성찰의 여정을 담은 음악</p>
+          </div>
+          <audio controls src="사울이 아닌 바울로.mp3"></audio>
+        </div>
+
+        <div class="song-card">
+          <div class="song-info">
+            <h3>시몬의 노래</h3>
+            <p>고백과 다짐의 선율</p>
+          </div>
+          <audio controls src="시몬의 노래_320k.mp3"></audio>
+        </div>
+
+        <div class="song-card">
+          <div class="song-info">
+            <h3>아페시스: 완전한 선언</h3>
+            <p>자유와 해방의 강력한 메시지</p>
+          </div>
+          <audio controls src="아페시스_ 완전한 선언_320k.mp3"></audio>
+        </div>
+
+        <div class="song-card">
+          <div class="song-info">
+            <h3>왕복 티켓</h3>
+            <p>삶의 여정과 회귀에 대한 단상</p>
+          </div>
+          <audio controls src="왕복 티켓_320k.mp3"></audio>
+        </div>
+
+        <div class="song-card">
+          <div class="song-info">
+            <h3>하프토</h3>
+            <p>정밀한 기획으로 완성된 감각적인 곡</p>
+          </div>
+          <audio controls src="하프토_320k.mp3"></audio>
+        </div>
+
+        <div class="song-card">
+          <div class="song-info">
+            <h3>The Weight of Grace</h3>
+            <p>은혜의 무게와 그 가치에 대한 서사</p>
+          </div>
+          <audio controls src="The Weight of Grace_320k.mp3"></audio>
+        </div>
+
+      </div>
+    </article>
+
+    <footer style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 60px;">
+      © 2026 CHOI HO. ALL RIGHTS RESERVED.
+    </footer>
+  </div>
+
+</body>
+</html>
