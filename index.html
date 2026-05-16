@@ -477,6 +477,18 @@
       resize: vertical;
     }
 
+    /* Cusdis Layout Optimization */
+    #cusdis_thread {
+      width: 100%;
+      max-width: 1200px;
+      margin: 4rem auto 0;
+      padding: 0 24px;
+    }
+
+    [data-theme="light"] #cusdis_thread {
+      filter: none;
+    }
+
     @media (max-width: 900px) {
       /* --- 모바일 가로 밀림 및 텍스트 짤림 강제 수정 --- */
       html, body {
@@ -624,6 +636,10 @@
 
       section {
         padding: 60px 0;
+      }
+
+      #cusdis_thread {
+        padding: 0 20px;
       }
     }
   </style>
@@ -973,18 +989,15 @@
     <section id="comments">
       <div class="container">
         <h2 class="section-title" style="text-align:center;" data-ko="댓글" data-en="Comments">댓글</h2>
-        <div class="card-box" style="padding: 24px;">
-          <div id="disqus_thread"></div>
-          <script>
-              (function() { // DON'T EDIT BELOW THIS LINE
-              var d = document, s = d.createElement('script');
-              s.src = 'https://choiho.disqus.com/embed.js';
-              s.setAttribute('data-timestamp', +new Date());
-              (d.head || d.body).appendChild(s);
-              })();
-          </script>
-          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <div id="cusdis_thread"
+          data-host="https://cusdis.com"
+          data-app-id="2e5e9d0d-da02-4b2d-a704-703929a1d399"
+          data-page-id="index"
+          data-page-url="https://choiho.pages.dev/"
+          data-page-title="최호: 오차 없는 통제력, 데이터로 증명하는 비즈니스"
+          data-theme="auto">
         </div>
+        <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
       </div>
     </section>
 
