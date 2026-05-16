@@ -227,8 +227,9 @@
     }
 
     .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 24px;
     }
 
@@ -238,6 +239,8 @@
       border-radius: 28px;
       padding: 36px;
       transition: 0.3s;
+      width: calc(33.333% - 16px);
+      min-width: 300px;
     }
 
     .info-card:hover {
@@ -371,10 +374,13 @@
 
     @media (max-width: 900px) {
       .hero-grid,
-      .grid-3,
       .timeline-item {
         grid-template-columns: 1fr;
         flex-direction: column;
+      }
+
+      .info-card {
+        width: calc(50% - 12px);
       }
 
       h1 {
@@ -387,6 +393,12 @@
 
       .footer-quote {
         font-size: 30px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .info-card {
+        width: 100%;
       }
     }
   </style>
@@ -537,6 +549,18 @@
           </p>
           <a href="startup/index.html" class="btn btn-primary" style="margin-top: 16px; display: inline-block; padding: 10px 20px; font-size: 14px;">
             백서 읽어보기 →
+          </a>
+        </div>
+
+        <div class="info-card">
+          <div class="emoji">🏃</div>
+          <h3>지속과 절제의 기록</h3>
+          <p>
+            매주 축적되는 러닝 데이터와 체력 관리 통계를 기록합니다. 
+            하프 마라톤 완주를 목표로 삼고 일상의 한계를 극복해 나가는 성실함의 과정을 정량적 수치로 투명하게 공개합니다.
+          </p>
+          <a href="#" class="btn btn-secondary" style="margin-top: 16px; display: inline-block; padding: 10px 20px; font-size: 14px;">
+            기록 확인하기 →
           </a>
         </div>
       </div>
