@@ -293,6 +293,18 @@
             dropCounter = 0;
         }
 
+        function hardDrop() {
+            while (!collide(arena, player)) {
+                player.pos.y++;
+            }
+            player.pos.y--;
+            merge(arena, player);
+            playerReset();
+            arenaSweep();
+            updateScore();
+            dropCounter = 0;
+        }
+
         function playerMove(offset) {
             player.pos.x += offset;
             if (collide(arena, player)) {
@@ -408,6 +420,9 @@
                 event.preventDefault();
             } else if (event.keyCode === 38) {
                 playerRotate(1);
+                event.preventDefault();
+            } else if (event.keyCode === 32) { // Space
+                hardDrop();
                 event.preventDefault();
             }
         });
