@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1단계: 1인 제조 사업자 등록 실무 | 창업 실무 백서</title>
+  <meta name="description" content="1인 제조 창업을 위한 사업자 등록 실무 가이드. 홈택스를 통한 신청 방법, 업종 코드 선택, 필요 서류를 상세히 설명합니다.">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="1인 제조 사업자 등록 실무 가이드">
+  <meta property="og:description" content="사업자 등록, 어디서부터 시작해야 할까요? 1인 제조 창업자를 위한 실무 핵심 요약.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://choiho0619.github.io/choiho/startup/business-registration.html">
+  
+  <link rel="canonical" href="https://choiho0619.github.io/choiho/startup/business-registration.html">
+  <link rel="stylesheet" href="../css/startup-article.css">
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggleBtn = document.getElementById('theme-toggle-btn');
+      const htmlElement = document.documentElement;
+      const currentTheme = localStorage.getItem('theme') || 'dark';
+      htmlElement.setAttribute('data-theme', currentTheme);
+      updateToggleButton(currentTheme);
+
+      themeToggleBtn.addEventListener('click', () => {
+        const targetTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        htmlElement.setAttribute('data-theme', targetTheme);
+        localStorage.setItem('theme', targetTheme);
+        updateToggleButton(targetTheme);
+      });
+
+      function updateToggleButton(theme) {
+        themeToggleBtn.textContent = theme === 'dark' ? '🌙' : '☀️';
+      }
+    });
+  </script>
+</head>
+<body>
+
+  <div class="theme-toggle">
+    <button class="theme-btn" id="theme-toggle-btn" aria-label="테마 변경">🌙</button>
+  </div>
+
+  <div class="container">
+    <header>
+      <a href="index.html" class="btn-back">← 전체 목차로 돌아가기</a>
+      <h1>1단계: 1인 제조<br>사업자 등록 실무</h1>
+      <p>비즈니스의 법적 토대를 마련하는 첫 번째 걸음</p>
+    </header>
+
+    <article>
+      <h2>왜 사업자 등록이 중요한가?</h2>
+      <p>사업자 등록은 단순한 행정 절차를 넘어, 투명한 세무 처리와 공신력 있는 비즈니스 운영의 시작입니다. 특히 3D 프린팅 등 제조 기반 창업의 경우, 적절한 업종 코드를 선택하는 것이 향후 정부 지원 사업이나 세제 혜택을 받는 데 결정적인 역할을 합니다.</p>
+
+      <blockquote>
+        "정확한 업종 선택이 절세와 지원의 시작입니다."
+      </blockquote>
+
+      <h2>필요 서류 및 준비물</h2>
+      <ul>
+        <li>신분증</li>
+        <li>사업장 주소지 (자가 또는 임대차 계약서)</li>
+        <li>공인인증서 (홈택스 신청 시 필수)</li>
+      </ul>
+
+      <h2>업종 코드 선택 팁</h2>
+      <p>1인 제조 창업 시 가장 많이 사용되는 업종 코드는 다음과 같습니다:</p>
+      <pre><code>업태: 제조업
+종목: 기타 플라스틱 제품 제조업 (또는 모형 제작업)
+업종 코드: 252902 (예시)</code></pre>
+      <p>단, 판매 채널에 따라 '전자상거래 소매업(525101)'을 함께 등록하는 것이 일반적입니다.</p>
+
+      <h2>홈택스 신청 단계</h2>
+      <ol>
+        <li>홈택스 접속 및 로그인</li>
+        <li>신청/제출 > 사업자등록신청(개인)</li>
+        <li>인적사항 및 사업장 정보 입력</li>
+        <li>업종 코드 검색 및 추가</li>
+        <li>제출 서류 스캔본 첨부</li>
+      </ol>
+    </article>
+
+    <div class="nav-footer">
+      <a href="index.html" class="btn-back">목차로 돌아가기</a>
+      <a href="bank-and-escrow.html" class="btn-next">
+        2단계: 통장 및 에스크로 읽기 →
+      </a>
+    </div>
+
+    <footer style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 60px;">
+      © 2026 CHOI HO. ALL RIGHTS RESERVED.
+    </footer>
+  </div>
+
+</body>
+</html>

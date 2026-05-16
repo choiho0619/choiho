@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2단계: 사업자 통장 및 구매안전서비스 발급 | 창업 실무 백서</title>
+  <meta name="description" content="이커머스 운영을 위한 사업자 통장 개설과 구매안전서비스(에스크로) 발급 절차를 안내합니다. 통신판매업 신고를 위한 필수 준비 사항을 확인하세요.">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="사업자 통장 및 에스크로 발급 가이드">
+  <meta property="og:description" content="통신판매업 신고의 필수 조건! 구매안전서비스 이용확인증 발급 방법을 알아봅니다.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://choiho0619.github.io/choiho/startup/bank-and-escrow.html">
+  
+  <link rel="canonical" href="https://choiho0619.github.io/choiho/startup/bank-and-escrow.html">
+  <link rel="stylesheet" href="../css/startup-article.css">
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggleBtn = document.getElementById('theme-toggle-btn');
+      const htmlElement = document.documentElement;
+      const currentTheme = localStorage.getItem('theme') || 'dark';
+      htmlElement.setAttribute('data-theme', currentTheme);
+      updateToggleButton(currentTheme);
+
+      themeToggleBtn.addEventListener('click', () => {
+        const targetTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        htmlElement.setAttribute('data-theme', targetTheme);
+        localStorage.setItem('theme', targetTheme);
+        updateToggleButton(targetTheme);
+      });
+
+      function updateToggleButton(theme) {
+        themeToggleBtn.textContent = theme === 'dark' ? '🌙' : '☀️';
+      }
+    });
+  </script>
+</head>
+<body>
+
+  <div class="theme-toggle">
+    <button class="theme-btn" id="theme-toggle-btn" aria-label="테마 변경">🌙</button>
+  </div>
+
+  <div class="container">
+    <header>
+      <a href="index.html" class="btn-back">← 전체 목차로 돌아가기</a>
+      <h1>2단계: 사업자 통장 및<br>구매안전서비스 발급</h1>
+      <p>금융 거래의 신뢰성과 법적 요건 충족</p>
+    </header>
+
+    <article>
+      <h2>왜 별도의 사업자 통장이 필요한가?</h2>
+      <p>개인 통장을 사용해도 무방하지만, 사업자 통장을 개설하면 가계 자금과 사업 자금을 명확히 분리할 수 있습니다. 이는 향후 종합소득세 신고나 비용 증빙 시 매우 편리하며, 국세청 홈택스에 '사업용 계좌'로 등록하여 세무 리스크를 줄일 수 있습니다.</p>
+
+      <blockquote>
+        "자금의 분리가 투명한 경영의 기초입니다."
+      </blockquote>
+
+      <h2>구매안전서비스(에스크로)란?</h2>
+      <p>구매안전서비스는 소비자가 결제한 금액을 제3자(은행 등)가 예치하고 있다가, 배송이 완료된 후 판매자에게 지급하는 제도입니다. 온라인 판매를 위해 '통신판매업 신고'를 하려면 이 서비스의 **이용확인증**이 반드시 필요합니다.</p>
+
+      <h2>발급 절차 (은행 방문 기준)</h2>
+      <ol>
+        <li>**사업자 등록증** 원본, 신분증 지참 후 주거래 은행 방문</li>
+        <li>기업용 계좌 개설 및 기업용 인터넷 뱅킹 신청</li>
+        <li>은행 홈페이지 접속 후 '구매안전서비스(에스크로)' 신청</li>
+        <li>**구매안전서비스 이용확인증** 출력 (PDF 저장 권장)</li>
+      </ol>
+
+      <h3>간편한 대안: 스마트스토어 에스크로</h3>
+      <p>은행 방문이 번거롭다면, 네이버 스마트스토어 가입 후 제공되는 '구매안전서비스 이용확인증'을 활용할 수도 있습니다. 단, 이 경우 해당 플랫폼을 통해서만 인증을 진행하게 됩니다.</p>
+    </article>
+
+    <div class="nav-footer">
+      <a href="business-registration.html" class="btn-back">← 1단계 다시 읽기</a>
+      <a href="smartstore-setup.html" class="btn-next">
+        3단계: 스마트스토어 개설 읽기 →
+      </a>
+    </div>
+
+    <footer style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 60px;">
+      © 2026 CHOI HO. ALL RIGHTS RESERVED.
+    </footer>
+  </div>
+
+</body>
+</html>

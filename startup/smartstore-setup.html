@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3단계: 스마트스토어 개설 및 서류 검증 | 창업 실무 백서</title>
+  <meta name="description" content="네이버 스마트스토어 입점 방법과 통신판매업 신고 절차를 상세히 안내합니다. 정부24를 통한 온라인 신고 팁과 필수 제출 서류 목록을 확인하세요.">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="스마트스토어 개설 및 통신판매업 신고 가이드">
+  <meta property="og:description" content="본격적인 온라인 판매의 시작! 플랫폼 가입부터 법적 신고까지 한 번에 해결하세요.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://choiho0619.github.io/choiho/startup/smartstore-setup.html">
+  
+  <link rel="canonical" href="https://choiho0619.github.io/choiho/startup/smartstore-setup.html">
+  <link rel="stylesheet" href="../css/startup-article.css">
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggleBtn = document.getElementById('theme-toggle-btn');
+      const htmlElement = document.documentElement;
+      const currentTheme = localStorage.getItem('theme') || 'dark';
+      htmlElement.setAttribute('data-theme', currentTheme);
+      updateToggleButton(currentTheme);
+
+      themeToggleBtn.addEventListener('click', () => {
+        const targetTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        htmlElement.setAttribute('data-theme', targetTheme);
+        localStorage.setItem('theme', targetTheme);
+        updateToggleButton(targetTheme);
+      });
+
+      function updateToggleButton(theme) {
+        themeToggleBtn.textContent = theme === 'dark' ? '🌙' : '☀️';
+      }
+    });
+  </script>
+</head>
+<body>
+
+  <div class="theme-toggle">
+    <button class="theme-btn" id="theme-toggle-btn" aria-label="테마 변경">🌙</button>
+  </div>
+
+  <div class="container">
+    <header>
+      <a href="index.html" class="btn-back">← 전체 목차로 돌아가기</a>
+      <h1>3단계: 스마트스토어 개설 및<br>서류 검증</h1>
+      <p>온라인 상점을 열고 판매 자격을 획득하기</p>
+    </header>
+
+    <article>
+      <h2>플랫폼 선택: 왜 네이버 스마트스토어인가?</h2>
+      <p>초기 창업자에게 스마트스토어는 가장 낮은 진입 장벽을 제공합니다. 입점 수수료가 없고, 네이버 검색 엔진과의 강력한 연동 덕분에 초기 유입을 확보하기 유리하기 때문입니다.</p>
+
+      <blockquote>
+        "가장 쉽고 강력한 시작점, 스마트스토어입니다."
+      </blockquote>
+
+      <h2>통신판매업 신고 (필수)</h2>
+      <p>온라인으로 물건을 판매하려면 관할 구청에 '통신판매업'을 신고해야 합니다. 최근에는 **정부24**를 통해 온라인으로 간편하게 신청할 수 있습니다.</p>
+
+      <h3>준비 서류</h3>
+      <ul>
+        <li>사업자 등록증</li>
+        <li>구매안전서비스 이용확인증 (2단계에서 발급)</li>
+        <li>대표자 명의 휴대폰 또는 공동인증서</li>
+      </ul>
+
+      <h2>스마트스토어 입점 단계</h2>
+      <ol>
+        <li>스마트스토어 센터 가입 (사업자 회원 선택)</li>
+        <li>기본 정보 입력 (상호명, 고객센터 번호 등)</li>
+        <li>서류 심사 (사업자 등록증, 통장 사본 등 업로드)</li>
+        <li>심사 완료 후 **통신판매업 신고 번호** 입력</li>
+      </ol>
+
+      <h2>주의사항</h2>
+      <p>상호명은 한 번 정하면 변경이 제한될 수 있으므로 신중하게 결정해야 합니다. 또한, 제조 품목에 따라 추가적인 인증(KC인증 등)이 필요할 수 있으니 미리 확인이 필요합니다.</p>
+    </article>
+
+    <div class="nav-footer">
+      <a href="bank-and-escrow.html" class="btn-back">← 2단계 다시 읽기</a>
+      <a href="product-upload-seo.html" class="btn-next">
+        4단계: 상품 업로드 및 SEO 읽기 →
+      </a>
+    </div>
+
+    <footer style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 60px;">
+      © 2026 CHOI HO. ALL RIGHTS RESERVED.
+    </footer>
+  </div>
+
+</body>
+</html>
