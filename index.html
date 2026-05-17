@@ -827,6 +827,10 @@
             넷마블 IDC 인프라 운영부터 10년 이상의 2층버스 무사고 운행까지, 거대 시스템을 변수 없이 통제해 온 책임감을 1인 비즈니스에 이식합니다. 3D 프린팅 정밀 제조와 AI 워크플로우를 결합하여 과정은 철저하게 통제하고, 결과는 명확한 수익과 데이터로 증명합니다.
           </p>
 
+          <div id="visitor-count-box" style="font-size: 0.85rem; color: #888; margin-bottom: 8px; letter-spacing: 0.05em; text-align: left;">
+            VISITORS: <span id="visitor-count">Loading...</span>
+          </div>
+
           <div class="button-group">
             <a href="https://smartstore.naver.com/createlab_shop" target="_blank" class="btn btn-primary" data-ko="창조Lab 스토어 방문" data-en="Visit CreateLab Store">창조Lab 스토어 방문</a>
             <a href="https://blog.naver.com/yaho0619" target="_blank" class="btn btn-secondary" data-ko="나의 이야기(블로그)" data-en="My Story (Blog)">나의 이야기(블로그)</a>
@@ -1082,12 +1086,24 @@
     </footer>
 
   </div>
-</body>
-</html>
-iv>
-    </footer>
 
-  </div>
+  <script>
+    (function() {
+      fetch("/api/view")
+        .then(res => {
+          if (!res.ok) throw new Error("API 연동 실패");
+          return res.json();
+        })
+        .then(data => {
+          if (data && typeof data.value !== "undefined") {
+            document.getElementById("visitor-count").textContent = data.value.toLocaleString();
+          }
+        })
+        .catch(err => {
+          console.error("방문자 카운트 오류:", err);
+          document.getElementById("visitor-count-box").style.display = "none";
+        });
+    })();
+  </script>
 </body>
 </html>
-tml>
