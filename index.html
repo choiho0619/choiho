@@ -814,8 +814,10 @@
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <div id="visitor-count-box" style="font-size: 0.85rem; color: #888; margin-bottom: 8px; letter-spacing: 0.05em; text-align: left;">
-            VISITORS: <span id="visitor-count">Loading...</span>
+          <div id="visitor-count-box" style="display: inline-flex; align-items: center; gap: 8px; background: var(--card-bg); border: 1px solid var(--border-color); padding: 6px 14px 6px 10px; border-radius: 999px; font-size: 13px; margin-bottom: 20px; backdrop-filter: blur(8px);">
+            <span style="width: 7px; height: 7px; background: var(--highlight); border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 6px var(--highlight);"></span>
+            <span style="color: var(--text-muted); letter-spacing: 0.1em; font-weight: 600;">VISITORS</span>
+            <span id="visitor-count" style="color: var(--highlight); font-weight: 700; font-size: 14px;">—</span>
           </div>
 
           <div class="badge" data-ko="물리적 현장과 디지털 시스템의 교차점" data-en="Intersection of Physical Sites & Digital Systems">
