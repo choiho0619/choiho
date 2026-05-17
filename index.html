@@ -159,16 +159,17 @@
 
     /* Theme Toggle & Game Button Styles */
     .game-menu-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      position: relative;
+      flex-shrink: 0;
     }
 
     .game-dropdown {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
       display: flex;
       flex-direction: column;
       gap: 4px;
-      margin-top: 10px;
       opacity: 0;
       visibility: hidden;
       transform: translateY(-10px);
@@ -179,6 +180,7 @@
       border: 1px solid var(--border-color);
       backdrop-filter: blur(12px);
       min-width: 130px;
+      z-index: 100;
     }
 
     .game-menu-wrapper:hover .game-dropdown {
@@ -573,7 +575,7 @@
         z-index: 1100;
       }
 
-      .theme-toggle, .color-theme-wrapper .theme-btn, .game-btn {
+      .theme-toggle, .color-theme-wrapper .theme-btn, .game-menu-wrapper .theme-btn, .game-btn {
         width: 48px !important;
         height: 48px !important;
         min-width: 48px !important;
@@ -597,7 +599,7 @@
         z-index: 1100;
       }
 
-      .theme-toggle, .color-theme-wrapper, .game-btn {
+      .theme-toggle, .color-theme-wrapper, .game-menu-wrapper, .game-btn {
         top: auto !important;
         right: auto !important;
         transform: none !important;
