@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>수도쿠</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body {
+            min-height: 100%;
+            background: #050505;
+            color: #ffffff;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            touch-action: manipulation;
+        }
+        header {
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            align-items: center;
+            padding: 16px 20px 10px;
+            gap: 12px;
+        }
+        .back-btn {
+            background: rgba(20,20,20,0.9);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #ffffff;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        h1 { font-size: 1.1rem; font-weight: 700; flex: 1; }
+        .timer {
+            font-size: 0.82rem;
+            color: #94a3b8;
+            padding: 4px 12px;
+            background: rgba(20,20,20,0.9);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 999px;
+            font-variant-numeric: tabular-nums;
+        }
+        .difficulty-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .diff-btn {
+            background: rgba(20,20,20,0.9);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+            padding: 5px 14px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+        .diff-btn.active, .diff-btn:hover {
+            border-color: #3b82f6;
+            color: #3b82f6;
+        }
+        .board-wrap {
+            width: min(380px, 96vw);
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            aspect-ratio: 1;
+        }
+        td {
+            border: 1px solid rgba(255,255,255,0.15);
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            font-size: clamp(14px, 4vw, 22px);
+            font-weight: 600;
+            color: #ffffff;
+            transition: background 0.1s;
+            width: 11.11%;
+            aspect-ratio: 1;
+        }
+        td.given { color: #94a3b8; cursor: default; }
+        td.selected { background: rgba(59,130,246,0.25) !important; }
+        td.highlight { background: rgba(59,130,246,0.08); }
+        td.error { color: #ef4444; }
+        td:hover:not(.given) { background: rgba(255,255,255,0.06); }
+
+        /* 3x3 box borders */
+        td:nth-child(3n) { border-right: 2px solid rgba(255,255,255,0.4); }
+        td:nth-child(9) { border-right: 1px solid rgba(255,255,255,0.15); }
+        tr:nth-child(3n) td { border-bottom: 2px solid rgba(255,255,255,0.4); }
+        tr:nth-child(9) td { border-bottom: 1px solid rgba(255,255,255,0.15); }
+
+        .numpad {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            gap: 5px;
+            width: min(380px, 96vw);
+            margin-top: 12px;
+        }
+        .num-btn {
+            background: rgba(20,20,20,0.9);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #ffffff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: clamp(13px, 3.5vw, 18px);
+            font-weight: 600;
+            font-family: inherit;
+            aspect-ratio: 1;
+            display: flex; align-items: center; justify-content: center;
+            transition: border-color 0.15s;
+        }
+        .num-btn:hover { border-color: #3b82f6; }
+        .controls {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            padding-bottom: 24px;
+        }
+        .btn {
+            background: rgba(20,20,20,0.9);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #ffffff;
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        .btn:hover { border-color: #3b82f6; }
+        .btn.check-btn { border-color: rgba(16,185,129,0.4); color: #10b981; }
+        .btn.check-btn:hover { border-color: #10b981; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="back-btn">←</a>
+        <h1>수도쿠</h1>
+        <div class="timer" id="timer">00:00</div>
+    </header>
+
+    <div class="difficulty-row">
+        <button class="diff-btn active" onclick="setDifficulty('easy', this)">쉬움</button>
+        <button class="diff-btn" onclick="setDifficulty('medium', this)">보통</button>
+        <button class="diff-btn" onclick="setDifficulty('hard', this)">어려움</button>
+    </div>
+
+    <div class="board-wrap">
+        <table id="grid"></table>
+    </div>
+
+    <div class="numpad" id="numpad"></div>
+
+    <div class="controls">
+        <button class="btn" onclick="newGame()">새 게임</button>
+        <button class="btn" onclick="clearCell()">지우기</button>
+        <button class="btn check-btn" onclick="checkBoard()">확인</button>
+    </div>
+
+    <script>
+        let solution, puzzle, userGrid, selected, timerInterval, seconds;
+        let difficulty = 'easy';
+        const REMOVE = { easy: 35, medium: 46, hard: 55 };
+
+        // --- Puzzle Generator ---
+        function shuffle(arr) {
+            for (let i = arr.length-1; i > 0; i--) {
+                const j = Math.floor(Math.random()*(i+1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function isValid(grid, r, c, num) {
+            for (let i = 0; i < 9; i++) {
+                if (grid[r][i] === num || grid[i][c] === num) return false;
+            }
+            const br = Math.floor(r/3)*3, bc = Math.floor(c/3)*3;
+            for (let i = br; i < br+3; i++)
+                for (let j = bc; j < bc+3; j++)
+                    if (grid[i][j] === num) return false;
+            return true;
+        }
+
+        function fillGrid(grid) {
+            for (let r = 0; r < 9; r++) {
+                for (let c = 0; c < 9; c++) {
+                    if (grid[r][c] === 0) {
+                        const nums = shuffle([1,2,3,4,5,6,7,8,9]);
+                        for (const n of nums) {
+                            if (isValid(grid, r, c, n)) {
+                                grid[r][c] = n;
+                                if (fillGrid(grid)) return true;
+                                grid[r][c] = 0;
+                            }
+                        }
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        function generatePuzzle(diff) {
+            const sol = Array.from({length:9}, () => Array(9).fill(0));
+            fillGrid(sol);
+            solution = sol.map(r => [...r]);
+
+            const puz = sol.map(r => [...r]);
+            const cells = shuffle([...Array(81).keys()]);
+            let removed = 0;
+            const target = REMOVE[diff];
+            for (const idx of cells) {
+                if (removed >= target) break;
+                const r = Math.floor(idx/9), c = idx%9;
+                puz[r][c] = 0;
+                removed++;
+            }
+            return puz;
+        }
+
+        // --- UI ---
+        function setDifficulty(diff, btn) {
+            difficulty = diff;
+            document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            newGame();
+        }
+
+        function newGame() {
+            puzzle = generatePuzzle(difficulty);
+            userGrid = puzzle.map(r => [...r]);
+            selected = null;
+            resetTimer();
+            startTimer();
+            renderGrid();
+        }
+
+        function renderGrid() {
+            const table = document.getElementById('grid');
+            table.innerHTML = '';
+            for (let r = 0; r < 9; r++) {
+                const tr = document.createElement('tr');
+                for (let c = 0; c < 9; c++) {
+                    const td = document.createElement('td');
+                    td.dataset.r = r; td.dataset.c = c;
+                    if (puzzle[r][c] !== 0) {
+                        td.textContent = puzzle[r][c];
+                        td.classList.add('given');
+                    } else if (userGrid[r][c] !== 0) {
+                        td.textContent = userGrid[r][c];
+                    }
+                    td.addEventListener('click', () => selectCell(r, c));
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+        }
+
+        function selectCell(r, c) {
+            if (puzzle[r][c] !== 0) return;
+            selected = [r, c];
+            updateHighlights();
+        }
+
+        function updateHighlights() {
+            document.querySelectorAll('td').forEach(td => {
+                td.classList.remove('selected', 'highlight');
+            });
+            if (!selected) return;
+            const [sr, sc] = selected;
+            const val = userGrid[sr][sc];
+            document.querySelectorAll('td').forEach(td => {
+                const r = +td.dataset.r, c = +td.dataset.c;
+                const sameBox = Math.floor(r/3)===Math.floor(sr/3) && Math.floor(c/3)===Math.floor(sc/3);
+                if (r === sr && c === sc) td.classList.add('selected');
+                else if (r===sr || c===sc || sameBox) td.classList.add('highlight');
+                else if (val && (td.textContent == val || userGrid[r][c] == val)) td.classList.add('highlight');
+            });
+        }
+
+        function inputNumber(num) {
+            if (!selected) return;
+            const [r, c] = selected;
+            if (puzzle[r][c] !== 0) return;
+            userGrid[r][c] = num;
+            const td = document.querySelector(`td[data-r="${r}"][data-c="${c}"]`);
+            if (td) { td.textContent = num || ''; td.classList.remove('error'); }
+            updateHighlights();
+            if (isSolved()) { stopTimer(); showWin(); }
+        }
+
+        function clearCell() {
+            if (!selected) return;
+            const [r, c] = selected;
+            if (puzzle[r][c] !== 0) return;
+            userGrid[r][c] = 0;
+            const td = document.querySelector(`td[data-r="${r}"][data-c="${c}"]`);
+            if (td) { td.textContent = ''; td.classList.remove('error'); }
+        }
+
+        function checkBoard() {
+            document.querySelectorAll('td').forEach(td => {
+                const r = +td.dataset.r, c = +td.dataset.c;
+                td.classList.remove('error');
+                if (userGrid[r][c] && userGrid[r][c] !== solution[r][c]) {
+                    td.classList.add('error');
+                }
+            });
+        }
+
+        function isSolved() {
+            for (let r = 0; r < 9; r++)
+                for (let c = 0; c < 9; c++)
+                    if (userGrid[r][c] !== solution[r][c]) return false;
+            return true;
+        }
+
+        function showWin() {
+            document.getElementById('timer').textContent = '🎉 완성!';
+        }
+
+        // --- Timer ---
+        function resetTimer() {
+            clearInterval(timerInterval);
+            seconds = 0;
+            document.getElementById('timer').textContent = '00:00';
+        }
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                seconds++;
+                const m = String(Math.floor(seconds/60)).padStart(2,'0');
+                const s = String(seconds%60).padStart(2,'0');
+                document.getElementById('timer').textContent = `${m}:${s}`;
+            }, 1000);
+        }
+        function stopTimer() { clearInterval(timerInterval); }
+
+        // --- Numpad ---
+        function buildNumpad() {
+            const pad = document.getElementById('numpad');
+            for (let i = 1; i <= 9; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'num-btn';
+                btn.textContent = i;
+                btn.addEventListener('click', () => inputNumber(i));
+                pad.appendChild(btn);
+            }
+        }
+
+        // --- Keyboard ---
+        document.addEventListener('keydown', e => {
+            if (!selected) return;
+            const [r, c] = selected;
+            if (e.key >= '1' && e.key <= '9') { inputNumber(+e.key); return; }
+            if (e.key === 'Backspace' || e.key === 'Delete' || e.key === '0') { clearCell(); return; }
+            const moves = { ArrowUp:[-1,0], ArrowDown:[1,0], ArrowLeft:[0,-1], ArrowRight:[0,1] };
+            if (moves[e.key]) {
+                e.preventDefault();
+                const [dr, dc] = moves[e.key];
+                let nr = r+dr, nc = c+dc;
+                while (nr>=0&&nr<9&&nc>=0&&nc<9&&puzzle[nr][nc]!==0) { nr+=dr; nc+=dc; }
+                if (nr>=0&&nr<9&&nc>=0&&nc<9) selectCell(nr, nc);
+            }
+        });
+
+        buildNumpad();
+        newGame();
+    </script>
+</body>
+</html>

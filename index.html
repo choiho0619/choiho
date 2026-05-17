@@ -158,9 +158,50 @@
     }
 
     /* Theme Toggle & Game Button Styles */
-    .game-btn {
+    .game-menu-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .game-dropdown {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 10px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: 0.3s;
+      background: var(--card-bg);
+      padding: 8px;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(12px);
+      min-width: 130px;
+    }
+
+    .game-menu-wrapper:hover .game-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .game-dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 10px;
       text-decoration: none;
-      flex-shrink: 0;
+      color: var(--text-main);
+      font-size: 13px;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+
+    .game-dropdown a:hover {
+      background: rgba(127,127,127,0.12);
     }
 
     .theme-btn {
@@ -804,9 +845,14 @@
         </div>
       </div>
 
-      <a href="tetris.html" class="theme-btn game-btn" title="Control & Order (Mini Game)">
-        🎮
-      </a>
+      <div class="game-menu-wrapper">
+        <button class="theme-btn" aria-label="미니게임">🎮</button>
+        <div class="game-dropdown">
+          <a href="tetris.html">🧱 테트리스</a>
+          <a href="omok.html">⚫ 오목</a>
+          <a href="sudoku.html">🔢 수도쿠</a>
+        </div>
+      </div>
     </div>
 
     <section class="hero">

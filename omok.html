@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>오목</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body {
+            width: 100%; height: 100%;
+            background: #050505;
+            color: #ffffff;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            touch-action: manipulation;
+        }
+        header {
+            width: 100%;
+            max-width: 520px;
+            display: flex;
+            align-items: center;
+            padding: 16px 20px 10px;
+            gap: 12px;
+        }
+        .back-btn {
+            background: rgba(20,20,20,0.9);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #ffffff;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        h1 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            flex: 1;
+        }
+        .status {
+            font-size: 0.82rem;
+            color: #94a3b8;
+            padding: 4px 12px;
+            background: rgba(20,20,20,0.9);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+        canvas {
+            display: block;
+            cursor: crosshair;
+            touch-action: none;
+            border-radius: 4px;
+        }
+        .controls {
+            margin-top: 14px;
+            display: flex;
+            gap: 10px;
+            padding-bottom: 20px;
+        }
+        .btn {
+            background: rgba(20,20,20,0.9);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #ffffff;
+            padding: 8px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        .btn:hover { border-color: #3b82f6; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="back-btn">←</a>
+        <h1>오목</h1>
+        <div class="status" id="status">흑의 차례</div>
+    </header>
+    <canvas id="board"></canvas>
+    <div class="controls">
+        <button class="btn" onclick="newGame()">새 게임</button>
+    </div>
+
+    <script>
+        const BOARD_SIZE = 15;
+        let board, isPlayerTurn, gameOver;
+        let CELL, PAD;
+        const canvas = document.getElementById('board');
+        const ctx = canvas.getContext('2d');
+        const statusEl = document.getElementById('status');
+
+        function resize() {
+            const vw = Math.min(window.innerWidth, 520);
+            const size = vw - 16;
+            PAD = Math.round(size / 18);
+            CELL = (size - PAD * 2) / (BOARD_SIZE - 1);
+            canvas.width = size;
+            canvas.height = size;
+            if (board) drawBoard();
+        }
+
+        function newGame() {
+            board = Array.from({ length: BOARD_SIZE }, () => Array(BOARD_SIZE).fill(0));
+            isPlayerTurn = true;
+            gameOver = false;
+            statusEl.textContent = '흑의 차례';
+            drawBoard();
+        }
+
+        function drawBoard() {
+            const s = canvas.width;
+            ctx.clearRect(0, 0, s, s);
+
+            // Wood background
+            ctx.fillStyle = '#c8a96e';
+            ctx.fillRect(0, 0, s, s);
+            ctx.fillStyle = 'rgba(0,0,0,0.08)';
+            ctx.fillRect(0, 0, s, s);
+
+            // Grid lines
+            ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+            ctx.lineWidth = 0.8;
+            for (let i = 0; i < BOARD_SIZE; i++) {
+                const x = PAD + i * CELL;
+                const y = PAD + i * CELL;
+                ctx.beginPath(); ctx.moveTo(x, PAD); ctx.lineTo(x, PAD + (BOARD_SIZE-1)*CELL); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(PAD, y); ctx.lineTo(PAD + (BOARD_SIZE-1)*CELL, y); ctx.stroke();
+            }
+
+            // Star points
+            ctx.fillStyle = 'rgba(0,0,0,0.55)';
+            for (const r of [3, 7, 11]) {
+                for (const c of [3, 7, 11]) {
+                    ctx.beginPath();
+                    ctx.arc(PAD + c*CELL, PAD + r*CELL, Math.max(2, CELL*0.08), 0, Math.PI*2);
+                    ctx.fill();
+                }
+            }
+
+            // Stones
+            for (let r = 0; r < BOARD_SIZE; r++) {
+                for (let c = 0; c < BOARD_SIZE; c++) {
+                    if (board[r][c]) drawStone(r, c, board[r][c]);
+                }
+            }
+        }
+
+        function drawStone(row, col, player) {
+            const x = PAD + col * CELL;
+            const y = PAD + row * CELL;
+            const r = CELL * 0.43;
+            const grad = ctx.createRadialGradient(x - r*0.3, y - r*0.35, r*0.05, x, y, r);
+            if (player === 1) {
+                grad.addColorStop(0, '#555'); grad.addColorStop(1, '#000');
+            } else {
+                grad.addColorStop(0, '#ffffff'); grad.addColorStop(1, '#c0c0c0');
+            }
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI*2);
+            ctx.fillStyle = grad;
+            ctx.fill();
+        }
+
+        function getCell(px, py) {
+            const col = Math.round((px - PAD) / CELL);
+            const row = Math.round((py - PAD) / CELL);
+            if (row < 0 || row >= BOARD_SIZE || col < 0 || col >= BOARD_SIZE) return null;
+            return [row, col];
+        }
+
+        function checkWin(row, col, player) {
+            const dirs = [[1,0],[0,1],[1,1],[1,-1]];
+            for (const [dr, dc] of dirs) {
+                let cnt = 1;
+                for (let d = 1; d < 5; d++) {
+                    const r = row+dr*d, c = col+dc*d;
+                    if (r<0||r>=BOARD_SIZE||c<0||c>=BOARD_SIZE||board[r][c]!==player) break;
+                    cnt++;
+                }
+                for (let d = 1; d < 5; d++) {
+                    const r = row-dr*d, c = col-dc*d;
+                    if (r<0||r>=BOARD_SIZE||c<0||c>=BOARD_SIZE||board[r][c]!==player) break;
+                    cnt++;
+                }
+                if (cnt >= 5) return true;
+            }
+            return false;
+        }
+
+        function scoreCell(row, col, player) {
+            const dirs = [[1,0],[0,1],[1,1],[1,-1]];
+            let total = 0;
+            for (const [dr, dc] of dirs) {
+                let cnt = 1, open = 0;
+                let r = row+dr, c = col+dc;
+                while (r>=0&&r<BOARD_SIZE&&c>=0&&c<BOARD_SIZE&&board[r][c]===player) { cnt++; r+=dr; c+=dc; }
+                if (r>=0&&r<BOARD_SIZE&&c>=0&&c<BOARD_SIZE&&board[r][c]===0) open++;
+                r = row-dr; c = col-dc;
+                while (r>=0&&r<BOARD_SIZE&&c>=0&&c<BOARD_SIZE&&board[r][c]===player) { cnt++; r-=dr; c-=dc; }
+                if (r>=0&&r<BOARD_SIZE&&c>=0&&c<BOARD_SIZE&&board[r][c]===0) open++;
+                if (cnt>=5)              total += 10000000;
+                else if(cnt===4&&open===2) total += 500000;
+                else if(cnt===4&&open===1) total += 50000;
+                else if(cnt===3&&open===2) total += 10000;
+                else if(cnt===3&&open===1) total += 1000;
+                else if(cnt===2&&open===2) total += 100;
+                else if(cnt===2&&open===1) total += 10;
+            }
+            return total;
+        }
+
+        function getCandidates() {
+            const set = new Set();
+            let any = false;
+            for (let r = 0; r < BOARD_SIZE; r++) {
+                for (let c = 0; c < BOARD_SIZE; c++) {
+                    if (!board[r][c]) continue;
+                    any = true;
+                    for (let dr = -2; dr <= 2; dr++) {
+                        for (let dc = -2; dc <= 2; dc++) {
+                            const nr = r+dr, nc = c+dc;
+                            if (nr>=0&&nr<BOARD_SIZE&&nc>=0&&nc<BOARD_SIZE&&!board[nr][nc])
+                                set.add(nr*BOARD_SIZE+nc);
+                        }
+                    }
+                }
+            }
+            if (!any) return [[7,7]];
+            return [...set].map(v => [Math.floor(v/BOARD_SIZE), v%BOARD_SIZE]);
+        }
+
+        function aiMove() {
+            const cands = getCandidates();
+            let best = -Infinity, move = null;
+            for (const [r, c] of cands) {
+                board[r][c] = 2;
+                const atk = scoreCell(r, c, 2);
+                board[r][c] = 0;
+                board[r][c] = 1;
+                const def = scoreCell(r, c, 1);
+                board[r][c] = 0;
+                const score = atk + def * 0.95;
+                if (score > best) { best = score; move = [r, c]; }
+            }
+            if (!move) return;
+            const [r, c] = move;
+            board[r][c] = 2;
+            drawBoard();
+            if (checkWin(r, c, 2)) { gameOver = true; statusEl.textContent = '백 승리!'; return; }
+            isPlayerTurn = true;
+            statusEl.textContent = '흑의 차례';
+        }
+
+        function handleClick(px, py) {
+            if (!isPlayerTurn || gameOver) return;
+            const cell = getCell(px, py);
+            if (!cell) return;
+            const [r, c] = cell;
+            if (board[r][c]) return;
+            board[r][c] = 1;
+            drawBoard();
+            if (checkWin(r, c, 1)) { gameOver = true; statusEl.textContent = '흑 승리! 🎉'; return; }
+            isPlayerTurn = false;
+            statusEl.textContent = '백의 차례...';
+            setTimeout(aiMove, 250);
+        }
+
+        canvas.addEventListener('click', e => {
+            const rect = canvas.getBoundingClientRect();
+            handleClick(e.clientX - rect.left, e.clientY - rect.top);
+        });
+        canvas.addEventListener('touchend', e => {
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            const t = e.changedTouches[0];
+            handleClick(t.clientX - rect.left, t.clientY - rect.top);
+        }, { passive: false });
+
+        window.addEventListener('resize', resize);
+        resize();
+        newGame();
+    </script>
+</body>
+</html>
