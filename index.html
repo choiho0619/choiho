@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2HE87NL09E"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-2HE87NL09E');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>최호 | 안정적인 궤적, 그리고 정교한 시선</title>
@@ -8,7 +17,7 @@
   <!-- SEO -->
   <meta name="description" content="물리적 현장과 디지털 시스템의 교차점 — IT 인프라, 모빌리티, 3D 프린팅, AI 창작을 하나의 원칙으로 연결한 1인 비즈니스 포트폴리오입니다." />
 
-  <!-- OG (카카오톡, Facebook 등) -->
+  <!-- OG -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://choiho.com/" />
   <meta property="og:title" content="최호 | 안정적인 궤적, 그리고 정교한 시선" />
@@ -23,17 +32,18 @@
   <meta name="twitter:image" content="https://choiho.com/og-profile.jpg" />
 
   <style>
+    /* ===== Design Tokens ===== */
     :root {
       --bg-gradient: linear-gradient(to bottom, #050505, #080808, #000000);
       --text-main: #ffffff;
       --text-secondary: #cbd5e1;
       --text-muted: #94a3b8;
-      --card-bg: rgba(20,20,20,0.9);
+      --card-bg: rgba(20, 20, 20, 0.9);
       --card-bg-solid: #141414;
-      --border-color: rgba(255,255,255,0.1);
+      --border-color: rgba(255, 255, 255, 0.1);
       --highlight: #3b82f6;
       --btn-secondary-bg: transparent;
-      --btn-secondary-border: rgba(255,255,255,0.2);
+      --btn-secondary-border: rgba(255, 255, 255, 0.2);
     }
 
     [data-theme="light"] {
@@ -48,19 +58,25 @@
       --btn-secondary-border: rgba(0, 0, 0, 0.1);
     }
 
-    /* Color Themes (Should override light theme highlight) */
-    [data-color-theme="purple"] { --highlight: #8b5cf6 !important; }
-    [data-color-theme="emerald"] { --highlight: #10b981 !important; }
-    [data-color-theme="red"] { --highlight: #ef4444 !important; }
-    [data-color-theme="orange"] { --highlight: #f59e0b !important; }
-    [data-color-theme="pink"] { --highlight: #ec4899 !important; }
-    [data-color-theme="teal"] { --highlight: #06b6d4 !important; }
-    [data-color-theme="blue"] { --highlight: #3b82f6 !important; }
+    /* Color accent tokens */
+    [data-color-theme="blue"]    { --highlight: #3b82f6; }
+    [data-color-theme="purple"]  { --highlight: #8b5cf6; }
+    [data-color-theme="emerald"] { --highlight: #10b981; }
+    [data-color-theme="red"]     { --highlight: #ef4444; }
+    [data-color-theme="orange"]  { --highlight: #f59e0b; }
+    [data-color-theme="pink"]    { --highlight: #ec4899; }
+    [data-color-theme="teal"]    { --highlight: #06b6d4; }
 
-    * {
+    /* ===== Reset ===== */
+    *, *::before, *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+    }
+
+    /* ===== Base ===== */
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -68,17 +84,11 @@
       background: var(--bg-gradient);
       color: var(--text-main);
       line-height: 1.7;
-      transition: background 0.3s, color 0.3s;
-      margin: 0;
-      padding: 0;
-    }
-
-    #root-wrapper {
-      width: 100%;
       overflow-x: hidden;
-      position: relative;
+      transition: background 0.3s, color 0.3s;
     }
 
+    /* ===== Layout ===== */
     .container {
       width: 100%;
       max-width: 1200px;
@@ -86,14 +96,23 @@
       padding: 0 24px;
     }
 
-    /* Language Switcher */
+    section {
+      padding: 6rem 0;
+    }
+
+    .section-divider {
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* ===== Fixed UI: Language Switcher ===== */
     .lang-switcher {
       position: fixed;
-      top: 24px;
-      left: 24px;
+      top: 20px;
+      left: 20px;
       z-index: 1000;
       display: flex;
-      gap: 12px;
+      align-items: center;
+      gap: 10px;
       font-size: 13px;
       font-weight: 700;
       background: var(--card-bg);
@@ -103,52 +122,82 @@
       backdrop-filter: blur(12px);
     }
 
+    .lang-switcher span {
+      color: var(--border-color);
+    }
+
     .lang-btn {
       cursor: pointer;
       color: var(--text-muted);
-      transition: 0.3s;
+      transition: color 0.2s;
       border: none;
       background: none;
       font-family: inherit;
+      font-size: inherit;
       font-weight: inherit;
+      padding: 0;
     }
 
     .lang-btn.active {
       color: var(--highlight);
     }
 
-    /* Color Theme Dropdown */
-    /* Fixed Actions Container */
+    /* ===== Fixed UI: Actions (right side) ===== */
     .fixed-actions {
       position: fixed;
-      top: 24px;
-      right: 24px;
+      top: 20px;
+      right: 20px;
       z-index: 1000;
       display: flex;
-      gap: 12px;
+      gap: 10px;
       align-items: flex-start;
     }
 
+    .icon-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      backdrop-filter: blur(12px);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .icon-btn:hover {
+      transform: scale(1.1);
+    }
+
+    /* Color theme dropdown */
     .color-theme-wrapper {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
     .color-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-top: 10px;
+      padding: 12px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
       opacity: 0;
       visibility: hidden;
-      transform: translateY(-10px);
-      transition: 0.3s;
-      background: var(--card-bg);
-      padding: 12px;
-      border-radius: 20px;
-      border: 1px solid var(--border-color);
-      backdrop-filter: blur(12px);
+      transform: translateY(-8px);
+      transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
     }
 
     .color-theme-wrapper:hover .color-dropdown {
@@ -158,12 +207,12 @@
     }
 
     .color-dot {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       cursor: pointer;
       border: 2px solid transparent;
-      transition: 0.2s;
+      transition: transform 0.15s;
     }
 
     .color-dot:hover {
@@ -174,7 +223,7 @@
       border-color: var(--text-main);
     }
 
-    /* Theme Toggle & Game Button Styles */
+    /* Game dropdown */
     .game-menu-wrapper {
       position: relative;
       flex-shrink: 0;
@@ -182,22 +231,21 @@
 
     .game-dropdown {
       position: absolute;
-      top: calc(100% + 10px);
+      top: calc(100% + 8px);
       right: 0;
       display: flex;
       flex-direction: column;
       gap: 4px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      transition: 0.3s;
-      background: var(--card-bg);
       padding: 8px;
-      border-radius: 16px;
+      background: var(--card-bg);
       border: 1px solid var(--border-color);
+      border-radius: 16px;
       backdrop-filter: blur(12px);
       min-width: 130px;
-      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
     }
 
     .game-menu-wrapper:hover .game-dropdown {
@@ -220,34 +268,10 @@
     }
 
     .game-dropdown a:hover {
-      background: rgba(127,127,127,0.12);
+      background: rgba(127, 127, 127, 0.12);
     }
 
-    .theme-btn {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      backdrop-filter: blur(12px);
-      transition: 0.3s;
-      padding: 0 !important;
-      margin: 0 !important;
-      line-height: 0 !important; /* Critical: Remove line-height offset */
-      text-align: center;
-      flex-shrink: 0;
-    }
-
-    .theme-btn:hover {
-      transform: scale(1.1);
-    }
-
+    /* ===== Hero ===== */
     .hero {
       padding: 120px 0 100px;
       border-bottom: 1px solid var(--border-color);
@@ -260,28 +284,32 @@
       align-items: center;
     }
 
-    .badge {
-      display: inline-block;
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      padding: 10px 18px;
-      border-radius: 999px;
-      color: var(--text-secondary);
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       margin-bottom: 24px;
       font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .hero-eyebrow-sep {
+      color: var(--text-muted);
+      opacity: 0.5;
+    }
+
+    #visitor-count-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     h1 {
-      font-size: 64px;
-      line-height: 1.1;
+      font-size: 56px;
+      line-height: 1.15;
       font-weight: 900;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       word-break: keep-all;
-      color: var(--text-main);
-    }
-
-    h1 span {
-      color: var(--text-main);
     }
 
     .highlight {
@@ -289,37 +317,40 @@
     }
 
     .hero-text {
-      font-size: 20px;
+      font-size: 18px;
       color: var(--text-secondary);
       margin-bottom: 40px;
+      word-break: keep-all;
     }
 
+    /* ===== Buttons ===== */
     .button-group {
       display: flex;
-      gap: 16px;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
     .btn {
-      padding: 14px 28px;
-      border-radius: 18px;
+      padding: 14px 26px;
+      border-radius: 16px;
       border: none;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
-      transition: 0.3s;
+      font-family: inherit;
+      transition: transform 0.2s, background 0.2s, border-color 0.2s;
       text-decoration: none;
       display: inline-block;
       text-align: center;
     }
 
     .btn-primary {
-      background: #3b82f6;
+      background: var(--highlight);
       color: white;
     }
 
     .btn-primary:hover {
-      background: #60a5fa;
+      filter: brightness(1.15);
     }
 
     .btn-secondary {
@@ -332,6 +363,7 @@
       border-color: var(--text-muted);
     }
 
+    /* ===== Profile Card ===== */
     .profile-image-wrapper {
       display: flex;
       justify-content: center;
@@ -339,194 +371,222 @@
     }
 
     .profile-image {
-      width: 220px;
-      height: 220px;
+      width: 200px;
+      height: 200px;
       object-fit: cover;
       border-radius: 50%;
       border: 4px solid var(--highlight);
-      box-shadow: 0 20px 50px rgba(59,130,246,0.25);
+      box-shadow: 0 16px 48px rgba(59, 130, 246, 0.2);
     }
 
     .card-box {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
-      border-radius: 32px;
-      padding: 36px;
+      border-radius: 28px;
+      padding: 32px;
       backdrop-filter: blur(12px);
     }
 
+    /* ===== Stats Grid ===== */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
+      gap: 14px;
     }
 
     .stat-card {
-      background: rgba(127, 127, 127, 0.05);
+      background: rgba(127, 127, 127, 0.06);
       border: 1px solid var(--border-color);
-      border-radius: 24px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      border-radius: 20px;
+      padding: 20px;
     }
 
-    .stat-title {
+    .stat-label {
       color: var(--text-muted);
-      font-size: 14px;
-      margin-bottom: 10px;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
     }
 
-    .stat-value {
-      font-size: 24px;
-      font-weight: 800;
-      line-height: 1.3;
-    }
-
-    section {
-      padding: 6rem 0;
-      width: 100%;
-    }
-
-    .section-divider {
-      border-top: 1px solid var(--border-color);
-    }
-
-    .section-title {
-      font-size: 48px;
+    .stat-number {
+      font-size: 28px;
       font-weight: 900;
-      margin-bottom: 20px;
       color: var(--highlight);
-      transition: color 0.3s ease-in-out;
+      line-height: 1.1;
+    }
+
+    .stat-unit {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    /* ===== Sections ===== */
+    .section-title {
+      font-size: 42px;
+      font-weight: 900;
+      margin-bottom: 16px;
+      color: var(--highlight);
+      text-align: center;
     }
 
     .section-desc {
       color: var(--text-muted);
-      font-size: 18px;
-      margin-bottom: 50px;
+      font-size: 17px;
+      margin-bottom: 48px;
+      text-align: center;
     }
 
-    .grid-3 {
+    /* ===== Info Cards Grid ===== */
+    .cards-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      max-width: 1000px;
-      margin-left: auto;
-      margin-right: auto;
+      gap: 20px;
     }
 
     .info-card {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
-      border-radius: 28px;
-      padding: 36px;
-      transition: 0.3s;
+      border-radius: 24px;
+      padding: 32px;
       display: flex;
       flex-direction: column;
+      transition: transform 0.25s;
     }
 
     .info-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-4px);
     }
 
     .info-card .btn {
       margin-top: auto;
     }
 
-    .emoji {
-      font-size: 42px;
-      margin-bottom: 18px;
+    .card-icon {
+      font-size: 38px;
+      margin-bottom: 16px;
     }
 
     .info-card h3 {
-      font-size: 28px;
-      margin-bottom: 18px;
+      font-size: 24px;
+      margin-bottom: 14px;
     }
 
     .info-card p {
       color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.75;
     }
 
     .info-card ul {
-      list-style-type: disc;
-      padding-left: 1.5rem;
-      padding-right: 1rem;
-      margin-top: 1rem;
+      list-style: disc;
+      padding-left: 1.4rem;
+      margin-top: 12px;
       color: var(--text-secondary);
-      line-height: 1.6;
+      font-size: 15px;
+      line-height: 1.7;
     }
 
     .info-card li {
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .info-card li::marker {
       color: var(--highlight);
     }
 
-    .timeline {
-      border-top: 1px solid var(--border-color);
-      border-bottom: 1px solid var(--border-color);
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .card-actions .btn {
+      padding: 10px 18px;
+      font-size: 14px;
+      margin-top: 0;
+    }
+
+    /* ===== Timeline ===== */
+    .timeline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
 
     .timeline-item {
       display: flex;
-      gap: 40px;
+      gap: 36px;
       background: var(--card-bg-solid);
       border: 1px solid var(--border-color);
-      border-radius: 28px;
-      padding: 34px;
-      margin-bottom: 24px;
+      border-radius: 24px;
+      padding: 28px 32px;
     }
 
     .year {
-      min-width: 120px;
-      font-size: 28px;
+      min-width: 100px;
+      font-size: 26px;
       font-weight: 900;
       color: var(--highlight);
+      flex-shrink: 0;
     }
 
     .timeline-content h3 {
-      font-size: 28px;
-      margin-bottom: 10px;
+      font-size: 22px;
+      margin-bottom: 8px;
     }
 
     .timeline-content p {
       color: var(--text-secondary);
+      font-size: 15px;
     }
 
+    /* ===== Footer ===== */
     footer {
       text-align: center;
-      padding: 80px 24px 4rem;
+      padding: 72px 24px 48px;
     }
 
     .footer-quote {
-      font-size: 40px;
+      font-size: 36px;
       font-weight: 900;
       color: var(--highlight);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .footer-text {
       color: var(--text-muted);
-      max-width: 700px;
-      margin: 0 auto 40px;
+      max-width: 600px;
+      margin: 0 auto 36px;
     }
 
     .copyright {
       border-top: 1px solid var(--border-color);
-      padding-top: 30px;
+      padding-top: 24px;
       color: var(--text-muted);
-      font-size: 14px;
+      font-size: 13px;
     }
 
+    .copyright a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .copyright a:hover {
+      color: var(--text-secondary);
+    }
+
+    /* ===== Contact Form ===== */
     .contact-form {
       max-width: 600px;
       margin: 0 auto;
     }
 
     .form-group {
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       text-align: left;
     }
 
@@ -535,481 +595,346 @@
       margin-bottom: 8px;
       color: var(--text-secondary);
       font-weight: 600;
-      font-size: 15px;
+      font-size: 14px;
     }
 
     .form-control {
       width: 100%;
-      padding: 14px 18px;
+      padding: 13px 16px;
       border-radius: 12px;
       border: 1px solid var(--border-color);
       background: var(--card-bg-solid);
       color: var(--text-main);
-      font-size: 16px;
-      transition: 0.3s;
+      font-size: 15px;
       font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     .form-control:focus {
       outline: none;
       border-color: var(--highlight);
-      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
     }
 
     select.form-control {
       cursor: pointer;
       appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 18px center;
+      background-position: right 14px center;
       background-size: 16px;
-    }
-
-    [data-theme="light"] select.form-control {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      padding-right: 40px;
     }
 
     textarea.form-control {
-      min-height: 150px;
+      min-height: 140px;
       resize: vertical;
     }
 
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      font-size: 17px;
+    }
+
+    /* ===== Responsive ===== */
     @media (max-width: 900px) {
-      /* --- 모바일 가로 밀림 및 텍스트 짤림 강제 수정 --- */
-      html, body {
-        width: 100% !important;
-        max-width: 100vw !important;
-        overflow-x: hidden !important;
-        box-sizing: border-box !important;
+      /* Hero */
+      .hero {
+        padding: 90px 0 56px;
       }
 
-      /* 상단 버튼 모바일 최적화 및 오버랩 방지 */
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      .hero-text {
+        font-size: 16px;
+        margin-bottom: 28px;
+      }
+
+      .button-group {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .button-group .btn {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      /* Profile card */
+      .profile-image {
+        width: 160px;
+        height: 160px;
+      }
+
+      .card-box {
+        padding: 24px 20px;
+      }
+
+      /* Stats */
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .stat-number {
+        font-size: 22px;
+      }
+
+      /* Sections */
+      section {
+        padding: 4rem 0;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+
+      .section-desc {
+        font-size: 15px;
+        margin-bottom: 28px;
+      }
+
+      /* Cards */
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .info-card {
+        padding: 24px 20px;
+      }
+
+      .info-card h3 {
+        font-size: 20px;
+      }
+
+      /* Timeline */
+      .timeline-item {
+        flex-direction: column;
+        gap: 10px;
+        padding: 22px 20px;
+      }
+
+      .year {
+        font-size: 20px;
+        min-width: auto;
+      }
+
+      .timeline-content h3 {
+        font-size: 18px;
+      }
+
+      /* Footer */
+      .footer-quote {
+        font-size: 24px;
+      }
+
+      /* Fixed UI: scale down to avoid overlap */
       .lang-switcher {
         top: 12px;
         left: 12px;
-        transform: scale(0.85);
-        transform-origin: top left;
-        z-index: 1100;
-      }
-
-      .theme-toggle, .color-theme-wrapper .theme-btn, .game-menu-wrapper .theme-btn, .game-btn {
-        width: 48px !important;
-        height: 48px !important;
-        min-width: 48px !important;
-        min-height: 48px !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        line-height: 0 !important; /* Critical: Remove line-height offset */
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        border-radius: 50% !important;
-        text-align: center !important;
+        font-size: 12px;
+        padding: 6px 12px;
       }
 
       .fixed-actions {
         top: 12px;
         right: 12px;
         gap: 8px;
-        transform: scale(0.85);
-        transform-origin: top right;
-        z-index: 1100;
       }
 
-      .theme-toggle, .color-theme-wrapper, .game-menu-wrapper, .game-btn {
-        top: auto !important;
-        right: auto !important;
-        transform: none !important;
+      .icon-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
       }
+    }
 
-      .hero {
-        padding: 100px 0 40px !important; /* 상단 버튼 공간 확보 */
-      }
-
-      /* 2. 제목의 강제 한 줄(nowrap) 속성 무력화 및 단어 단위 줄바꿈 허용 */
-      h1 span, h2 span, p span {
-        white-space: normal !important;
-        word-break: keep-all !important;
-      }
-
-      /* 3. 모바일 화면에 맞춰 메인 타이틀 글자 크기 축소 */
-      h1 {
-        font-size: 1.8rem !important; 
-        line-height: 1.3 !important;
-        margin-bottom: 16px;
-        word-break: keep-all !important;
-        overflow-wrap: break-word;
-      }
-
-      /* 4. 버튼 및 요소 너비 제한 */
-      div {
-        max-width: 100%;
-      }
-      
-      .btn, a.button, button {
-        padding: 12px 20px !important;
-        font-size: 15px !important;
-        white-space: normal !important;
-        width: 100% !important;
-        display: block !important;
-        max-width: 320px;
-        margin: 0 auto;
-      }
-
-      .badge {
-        font-size: 13px !important;
-        padding: 8px 16px !important;
-        line-height: 1.4 !important;
-      }
-
+    @media (max-width: 480px) {
       .container {
-        padding: 0 20px;
+        padding: 0 16px;
       }
 
-      .hero {
-        padding: 60px 0 40px;
-      }
-
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-        text-align: center;
-      }
-
-      .hero-text {
-        font-size: 15px;
-        margin-bottom: 28px;
-        line-height: 1.6;
-        word-break: normal;
-        overflow-wrap: break-word;
-      }
-
-      .button-group {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .section-title {
+      h1 {
         font-size: 28px;
-        margin-bottom: 16px;
-      }
-
-      .section-desc {
-        font-size: 15px;
-        margin-bottom: 24px;
       }
 
       .stats-grid {
         grid-template-columns: 1fr;
-        gap: 12px;
-      }
-
-      .card-box {
-        padding: 24px 16px;
-        border-radius: 24px;
-      }
-
-      .profile-image {
-        width: 180px;
-        height: 180px;
-      }
-
-      .stat-card {
-        padding: 20px;
-      }
-
-      /* Grid 1-column on mobile */
-      .grid-3 {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-
-      .info-card {
-        padding: 28px 20px;
-      }
-
-      .info-card h3 {
-        font-size: 22px;
-      }
-
-      .info-card p {
-        font-size: 15px;
-      }
-
-      /* Timeline Stacked on mobile */
-      .timeline-item {
-        flex-direction: column;
-        gap: 12px;
-        padding: 24px 20px;
-      }
-
-      .year {
-        font-size: 22px;
-        min-width: auto !important;
-      }
-
-      .timeline-content h3 {
-        font-size: 20px;
-      }
-
-      .timeline-content p {
-        font-size: 15px;
-      }
-
-      .footer-quote {
-        font-size: 24px;
-      }
-
-      section {
-        padding: 4rem 0;
-      }
-
-      #cusdis_thread {
-        padding: 0 20px;
       }
     }
   </style>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const themeToggleBtn = document.getElementById('theme-toggle-btn');
-      const htmlElement = document.documentElement;
-
-      // 로컬 스토리지에서 테마 불러오기
-      const currentTheme = localStorage.getItem('theme') || 'dark';
-      htmlElement.setAttribute('data-theme', currentTheme);
-      updateToggleButton(currentTheme);
-
-      themeToggleBtn.addEventListener('click', () => {
-        const targetTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        htmlElement.setAttribute('data-theme', targetTheme);
-        localStorage.setItem('theme', targetTheme);
-        updateToggleButton(targetTheme);
-      });
-
-      function updateToggleButton(theme) {
-        themeToggleBtn.textContent = theme === 'dark' ? '🌙' : '☀️';
-      }
-    });
-
-    // Language Toggle
-    function setLanguage(lang) {
-      document.querySelectorAll('[data-ko]').forEach(el => {
-        el.textContent = lang === 'ko' ? el.getAttribute('data-ko') : el.getAttribute('data-en');
-      });
-      
-      // Handle input placeholders
-      document.querySelectorAll('input[data-ko-placeholder], textarea[data-ko-placeholder]').forEach(el => {
-        el.placeholder = lang === 'ko' ? el.getAttribute('data-ko-placeholder') : el.getAttribute('data-en-placeholder');
-      });
-
-      // Update Active State
-      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-      document.getElementById(`lang-${lang}`).classList.add('active');
-      localStorage.setItem('preferred-lang', lang);
-    }
-
-    // Color Theme Switcher
-    function setColorTheme(color) {
-      document.documentElement.setAttribute('data-color-theme', color);
-      localStorage.setItem('color-theme', color);
-      
-      // Update Active State
-      document.querySelectorAll('.color-dot').forEach(dot => {
-        dot.classList.remove('active');
-        if (dot.getAttribute('onclick').includes(color)) {
-          dot.classList.add('active');
-        }
-      });
-    }
-
-    // Initialize Language and Color Theme
-    document.addEventListener('DOMContentLoaded', () => {
-      const savedLang = localStorage.getItem('preferred-lang') || 'ko';
-      setLanguage(savedLang);
-      
-      const savedColor = localStorage.getItem('color-theme') || 'blue';
-      setColorTheme(savedColor);
-    });
-  </script>
 </head>
 <body>
-  <div id="root-wrapper">
 
-    <div class="lang-switcher">
-      <button class="lang-btn active" onclick="setLanguage('ko')" id="lang-ko">KOR</button>
-      <span style="color: var(--border-color)">|</span>
-      <button class="lang-btn" onclick="setLanguage('en')" id="lang-en">ENG</button>
-    </div>
+  <!-- Language Switcher -->
+  <div class="lang-switcher">
+    <button class="lang-btn active" id="lang-ko" onclick="setLanguage('ko')">KOR</button>
+    <span>|</span>
+    <button class="lang-btn" id="lang-en" onclick="setLanguage('en')">ENG</button>
+  </div>
 
-    <div class="fixed-actions">
-      <div class="theme-toggle">
-        <button class="theme-btn" id="theme-toggle-btn" aria-label="테마 변경">
-          🌙
-        </button>
-      </div>
+  <!-- Fixed Action Buttons -->
+  <div class="fixed-actions">
+    <button class="icon-btn" id="theme-toggle-btn" aria-label="테마 변경">🌙</button>
 
-      <div class="color-theme-wrapper">
-        <button class="theme-btn" aria-label="색상 테마 변경">🎨</button>
-        <div class="color-dropdown">
-          <div class="color-dot active" style="background: #3b82f6;" onclick="setColorTheme('blue')" title="Blue"></div>
-          <div class="color-dot" style="background: #8b5cf6;" onclick="setColorTheme('purple')" title="Purple"></div>
-          <div class="color-dot" style="background: #10b981;" onclick="setColorTheme('emerald')" title="Emerald"></div>
-          <div class="color-dot" style="background: #ef4444;" onclick="setColorTheme('red')" title="Red"></div>
-          <div class="color-dot" style="background: #f59e0b;" onclick="setColorTheme('orange')" title="Orange"></div>
-          <div class="color-dot" style="background: #ec4899;" onclick="setColorTheme('pink')" title="Pink"></div>
-          <div class="color-dot" style="background: #06b6d4;" onclick="setColorTheme('teal')" title="Teal"></div>
-        </div>
-      </div>
-
-      <div class="game-menu-wrapper">
-        <button class="theme-btn" aria-label="미니게임">🎮</button>
-        <div class="game-dropdown">
-          <a href="tetris.html">🧱 테트리스</a>
-          <a href="omok.html">⚫ 오목</a>
-          <a href="sudoku.html">🔢 수도쿠</a>
-        </div>
+    <div class="color-theme-wrapper">
+      <button class="icon-btn" aria-label="색상 테마 변경">🎨</button>
+      <div class="color-dropdown">
+        <div class="color-dot active" data-color="blue"    style="background:#3b82f6;" title="Blue"></div>
+        <div class="color-dot"        data-color="purple"  style="background:#8b5cf6;" title="Purple"></div>
+        <div class="color-dot"        data-color="emerald" style="background:#10b981;" title="Emerald"></div>
+        <div class="color-dot"        data-color="red"     style="background:#ef4444;" title="Red"></div>
+        <div class="color-dot"        data-color="orange"  style="background:#f59e0b;" title="Orange"></div>
+        <div class="color-dot"        data-color="pink"    style="background:#ec4899;" title="Pink"></div>
+        <div class="color-dot"        data-color="teal"    style="background:#06b6d4;" title="Teal"></div>
       </div>
     </div>
 
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <div style="display: inline-flex; align-items: center; gap: 10px; margin-bottom: 24px; font-size: 14px; color: var(--text-secondary);">
-            <span data-ko="물리적 현장과 디지털 시스템의 교차점" data-en="Intersection of Physical Sites & Digital Systems">물리적 현장과 디지털 시스템의 교차점</span>
-            <span style="color: var(--text-muted); opacity: 0.5;">|</span>
-            <span id="visitor-count-box" style="display: inline-flex; align-items: center; gap: 6px; line-height: 1;">
-<span data-ko="방문자" data-en="VISITORS" style="color: var(--text-muted); letter-spacing: 0.1em; font-weight: 600;">VISITORS</span>
-              <span id="visitor-count" style="color: var(--highlight); font-weight: 700;">—</span>
-            </span>
+    <div class="game-menu-wrapper">
+      <button class="icon-btn" aria-label="미니게임">🎮</button>
+      <div class="game-dropdown">
+        <a href="tetris.html">🧱 테트리스</a>
+        <a href="omok.html">⚫ 오목</a>
+        <a href="sudoku.html">🔢 수도쿠</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-eyebrow">
+          <span data-ko="물리적 현장과 디지털 시스템의 교차점" data-en="Intersection of Physical Sites & Digital Systems">물리적 현장과 디지털 시스템의 교차점</span>
+          <span class="hero-eyebrow-sep">|</span>
+          <span id="visitor-count-box">
+            <span data-ko="방문자" data-en="VISITORS" style="color:var(--text-muted);font-size:12px;letter-spacing:0.08em;font-weight:700;">VISITORS</span>
+            <span id="visitor-count" style="color:var(--highlight);font-weight:700;">—</span>
+          </span>
+        </div>
+
+        <h1 data-ko="오차 없는 통제력,<br><span class='highlight'>데이터로 증명하는 비즈니스</span>" data-en="Zero-Error Control,<br><span class='highlight'>Data-Proven Business</span>">
+          오차 없는 통제력,<br>
+          <span class="highlight">데이터로 증명하는 비즈니스</span>
+        </h1>
+
+        <p class="hero-text" data-ko="넷마블 IDC 인프라 운영부터 10년 이상의 2층버스 무사고 운행까지, 거대 시스템을 변수 없이 통제해 온 책임감을 1인 비즈니스에 이식합니다. 3D 프린팅 정밀 제조와 AI 워크플로우를 결합하여 과정은 철저하게 통제하고, 결과는 명확한 수익과 데이터로 증명합니다." data-en="From Netmarble IDC infrastructure operation to 10+ years of accident-free double-decker bus driving, I transplant the responsibility of controlling massive systems into a solo business. Combining precision 3D printing with AI workflows, I control every process and prove results through clear revenue and data.">
+          넷마블 IDC 인프라 운영부터 10년 이상의 2층버스 무사고 운행까지, 거대 시스템을 변수 없이 통제해 온 책임감을 1인 비즈니스에 이식합니다. 3D 프린팅 정밀 제조와 AI 워크플로우를 결합하여 과정은 철저하게 통제하고, 결과는 명확한 수익과 데이터로 증명합니다.
+        </p>
+
+        <div class="button-group">
+          <a href="https://smartstore.naver.com/createlab_shop" target="_blank" class="btn btn-primary" data-ko="창조Lab 스토어 방문" data-en="Visit CreateLab Store">창조Lab 스토어 방문</a>
+          <a href="https://blog.naver.com/yaho0619" target="_blank" class="btn btn-secondary" data-ko="나의 이야기(블로그)" data-en="My Story (Blog)">나의 이야기(블로그)</a>
+        </div>
+      </div>
+
+      <div class="card-box">
+        <div class="profile-image-wrapper">
+          <img src="profile_photo.jpg" alt="최호 프로필 사진" class="profile-image" fetchpriority="high" decoding="async">
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label" data-ko="버스 운행 경력" data-en="Bus Driving">버스 운행 경력</div>
+            <div class="stat-number">10+</div>
+            <div class="stat-unit" data-ko="년 무사고" data-en="Yrs Accident-Free">년 무사고</div>
           </div>
 
-          <h1 data-ko="오차 없는 통제력, 데이터로 증명하는 비즈니스" data-en="Zero-Error Control, Data-Proven Business">
-            오차 없는 통제력,<br>
-            <span class="highlight">데이터로 증명하는 비즈니스</span>
-          </h1>
+          <div class="stat-card">
+            <div class="stat-label" data-ko="IT 인프라 경력" data-en="IT Infrastructure">IT 인프라 경력</div>
+            <div class="stat-number">7</div>
+            <div class="stat-unit" data-ko="년 (넷마블 IDC)" data-en="Yrs (Netmarble IDC)">년 (넷마블 IDC)</div>
+          </div>
 
-          <p class="hero-text" data-ko="넷마블 IDC 인프라 운영부터 10년 이상의 2층버스 무사고 운행까지, 거대 시스템을 변수 없이 통제해 온 책임감을 1인 비즈니스에 이식합니다. 3D 프린팅 정밀 제조와 AI 워크플로우를 결합하여 과정은 철저하게 통제하고, 결과는 명확한 수익과 데이터로 증명합니다." data-en="From Netmarble IDC infrastructure operation to 10+ years of accident-free double-decker bus driving, I transplant the responsibility of controlling massive systems into a solo business. By combining precision 3D printing manufacturing with AI workflows, I strictly control processes and prove results through clear revenue and data.">
-            넷마블 IDC 인프라 운영부터 10년 이상의 2층버스 무사고 운행까지, 거대 시스템을 변수 없이 통제해 온 책임감을 1인 비즈니스에 이식합니다. 3D 프린팅 정밀 제조와 AI 워크플로우를 결합하여 과정은 철저하게 통제하고, 결과는 명확한 수익과 데이터로 증명합니다.
+          <div class="stat-card">
+            <div class="stat-label" data-ko="3D 프린팅 정밀도" data-en="3D Print Precision">3D 프린팅 정밀도</div>
+            <div class="stat-number">0.1<span style="font-size:16px;">mm</span></div>
+            <div class="stat-unit" data-ko="공정 오차 이내" data-en="Process Tolerance">공정 오차 이내</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label" data-ko="AI 활용 도구" data-en="AI Tools">AI 활용 도구</div>
+            <div class="stat-number" style="font-size:16px;color:var(--text-main);">GPT · Claude<br>Gemini · Suno</div>
+            <div class="stat-unit" data-ko="워크플로우 구축" data-en="Workflow Built">워크플로우 구축</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Values ===== -->
+  <section class="section-divider">
+    <div class="container">
+      <h2 class="section-title" data-ko="나를 움직이는 가치" data-en="Values That Drive Me">나를 움직이는 가치</h2>
+      <p class="section-desc" data-ko="단순한 취미나 기록이 아닌, 신념과 메시지를 담아내는 삶의 방향성입니다." data-en="More than hobbies or records — life directions that embody beliefs and messages.">
+        단순한 취미나 기록이 아닌, 신념과 메시지를 담아내는 삶의 방향성입니다.
+      </p>
+
+      <div class="cards-grid">
+        <div class="info-card">
+          <div class="card-icon">🚌</div>
+          <h3 data-ko="본업과 책임감" data-en="Profession & Responsibility">본업과 책임감</h3>
+          <p data-ko="10년 이상의 무사고 2층버스 운행은 사회적 책임의 완수이자, 어떤 상황에서도 원칙을 타협하지 않는 성실함의 증거입니다. 현장에서 검증된 안전 관리 능력은 모든 비즈니스의 탄탄한 기반이 됩니다." data-en="Over 10 years of accident-free double-decker bus operation is proof of fulfilling social responsibility and integrity that never compromises on principles. Field-proven safety management is the solid foundation of all businesses.">
+            10년 이상의 무사고 2층버스 운행은 사회적 책임의 완수이자, 어떤 상황에서도 원칙을 타협하지 않는 성실함의 증거입니다. 현장에서 검증된 안전 관리 능력은 모든 비즈니스의 탄탄한 기반이 됩니다.
           </p>
+        </div>
 
-          <div class="button-group">
-            <a href="https://smartstore.naver.com/createlab_shop" target="_blank" class="btn btn-primary" data-ko="창조Lab 스토어 방문" data-en="Visit CreateLab Store">창조Lab 스토어 방문</a>
-            <a href="https://blog.naver.com/yaho0619" target="_blank" class="btn btn-secondary" data-ko="나의 이야기(블로그)" data-en="My Story (Blog)">나의 이야기(블로그)</a>
+        <div class="info-card">
+          <div class="card-icon">🤖</div>
+          <h3 data-ko="창작과 분석의 기록" data-en="Records of Creation & Analysis">창작과 분석의 기록</h3>
+          <p data-ko="'루카 노트' 및 '루카 스튜디오' 채널의 모든 콘텐츠는 철저한 기획과 AI 도구의 결합으로 완성됩니다. 방대한 정보 속에서 핵심을 추출하고, 영상과 오디오를 체계적으로 통제하여 질서 있는 창작물을 만들어냅니다." data-en="All content on 'Luca Note' and 'Luca Studio' channels is completed through thorough planning combined with AI tools. I extract core insights from vast information and systematically control video and audio to create orderly works.">
+            '루카 노트' 및 '루카 스튜디오' 채널의 모든 콘텐츠는 철저한 기획과 AI 도구의 결합으로 완성됩니다. 방대한 정보 속에서 핵심을 추출하고, 영상과 오디오를 체계적으로 통제하여 질서 있는 창작물을 만들어냅니다.
+          </p>
+          <div class="card-actions">
+            <a href="https://www.youtube.com/@루카노트" target="_blank" class="btn btn-secondary" data-ko="루카 노트 →" data-en="Luca Note →">루카 노트 →</a>
+            <a href="https://www.youtube.com/@루카스튜디오" target="_blank" class="btn btn-secondary" data-ko="루카 스튜디오 →" data-en="Luca Studio →">루카 스튜디오 →</a>
+            <a href="song/index.html" class="btn btn-primary" data-ko="자작곡 듣기 🎵" data-en="Original Songs 🎵">자작곡 듣기 🎵</a>
           </div>
         </div>
 
-        <div class="card-box">
-          <div class="profile-image-wrapper">
-            <img src="profile_photo.jpg" alt="최호 프로필 사진" class="profile-image">
+        <div class="info-card">
+          <div class="card-icon">🖨️</div>
+          <h3 data-ko="비즈니스와 정밀함" data-en="Business & Precision">비즈니스와 정밀함</h3>
+          <p data-ko="스마트스토어 창조Lab은 뱀부랩 3D 프린터의 정밀도를 상업적 가치로 치환하는 공간입니다. 0.1mm 단위의 공정 오차를 제어하여 사용자 맞춤형 제품을 설계하고 생산하는 1인 제조 파이프라인을 운영합니다." data-en="Smart Store 'CreateLab' converts the precision of Bambu Lab 3D printers into commercial value. I operate a one-person manufacturing pipeline, designing and producing customized products with 0.1mm process tolerance.">
+            스마트스토어 창조Lab은 뱀부랩 3D 프린터의 정밀도를 상업적 가치로 치환하는 공간입니다. 0.1mm 단위의 공정 오차를 제어하여 사용자 맞춤형 제품을 설계하고 생산하는 1인 제조 파이프라인을 운영합니다.
+          </p>
+          <div class="card-actions">
+            <a href="https://smartstore.naver.com/createlab_shop" target="_blank" class="btn btn-secondary" data-ko="제품 확인하기 →" data-en="Check Products →">제품 확인하기 →</a>
           </div>
-          <div class="stats-grid">
-            <div class="stat-card">
-              <div class="stat-title" data-ko="버스운행 경력" data-en="Bus Driving Exp.">버스운행 경력</div>
-              <div class="stat-value" style="font-size: 20px;" data-ko="10년 이상 무사고" data-en="10+ Yrs Accident-Free">10년 이상 무사고</div>
-            </div>
+        </div>
 
-            <div class="stat-card">
-              <div class="stat-title" data-ko="A.I 활용" data-en="A.I Utilization">A.I 활용</div>
-              <div class="stat-value" style="font-size: 16px;">
-                ChatGPT, Claude<br>
-                Gemini<br>
-                Suno AI
-              </div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-title" data-ko="비즈니스" data-en="Business">비즈니스</div>
-              <div class="stat-value" data-ko="3D 프린팅" data-en="3D Printing">3D 프린팅</div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-title" data-ko="자기 관리" data-en="Self-Management">자기 관리</div>
-              <div class="stat-value" style="font-size: 18px;" data-ko="러닝 / 자전거 국토종주" data-en="Running / Cycling Tour">
-                러닝<br>
-                자전거 국토종주
-              </div>
-            </div>
-
+        <div class="info-card">
+          <div class="card-icon">🚀</div>
+          <h3 data-ko="창업 실무 백서" data-en="Startup Practice Whitepaper">창업 실무 백서</h3>
+          <p data-ko="막연한 이론이 아닌, 1인 제조 및 이커머스 비즈니스를 직접 구축하며 얻은 실무 데이터를 공개합니다. 사업자 등록의 법적 기준부터 검색 최적화(SEO)를 통한 상품 노출 노하우까지, 검증된 로드맵을 제공합니다." data-en="I disclose practical data gained from directly building one-person manufacturing and e-commerce businesses, from legal registration standards to SEO know-how for product exposure.">
+            막연한 이론이 아닌, 1인 제조 및 이커머스 비즈니스를 직접 구축하며 얻은 실무 데이터를 공개합니다. 사업자 등록의 법적 기준부터 검색 최적화(SEO)를 통한 상품 노출 노하우까지, 검증된 로드맵을 제공합니다.
+          </p>
+          <div class="card-actions">
+            <a href="startup/index.html" class="btn btn-primary" data-ko="백서 읽어보기 →" data-en="Read Whitepaper →">백서 읽어보기 →</a>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section-divider">
-      <div class="container">
-        <h2 class="section-title" style="text-align:center;" data-ko="나를 움직이는 가치" data-en="Values That Drive Me">나를 움직이는 가치</h2>
+  <!-- ===== Timeline ===== -->
+  <section class="section-divider">
+    <div class="container">
+      <h2 class="section-title" data-ko="삶의 여정" data-en="Life Journey">삶의 여정</h2>
+      <p class="section-desc" data-ko="기술, 현장, 창업, 창작 — 서로 다른 듯 보이지만 하나의 원칙으로 연결된 여정입니다." data-en="Technology, field work, entrepreneurship, creation — seemingly different, yet connected by a single principle.">
+        기술, 현장, 창업, 창작 — 서로 다른 듯 보이지만 하나의 원칙으로 연결된 여정입니다.
+      </p>
 
-        <p class="section-desc" style="text-align:center;" data-ko="단순한 취미나 기록이 아닌, 신념과 메시지를 담아내는 삶의 방향성입니다." data-en="More than just hobbies or records, these are life directions that embody beliefs and messages.">
-          단순한 취미나 기록이 아닌, 신념과 메시지를 담아내는 삶의 방향성입니다.
-        </p>
-
-        <div class="grid-3" style="max-width: 100%;">
-          <div class="info-card">
-            <div class="emoji">🚌</div>
-            <h3 data-ko="본업과 책임감" data-en="Profession & Responsibility">본업과 책임감</h3>
-            <p data-ko="10년 이상의 무사고 2층버스 운행은 사회적 책임의 완수이자, 어떤 상황에서도 원칙을 타협하지 않는 성실함의 증거입니다. 현장에서 검증된 안전 관리 능력은 모든 비즈니스의 탄탄한 기반이 됩니다." data-en="Over 10 years of accident-free double-decker bus operation is proof of fulfilling social responsibility and integrity that never compromises on principles. Field-proven safety management is the solid foundation of all businesses.">
-              10년 이상의 무사고 2층버스 운행은 사회적 책임의 완수이자, 어떤 상황에서도 원칙을 타협하지 않는 성실함의 증거입니다. 현장에서 검증된 안전 관리 능력은 모든 비즈니스의 탄탄한 기반이 됩니다.
-            </p>
-          </div>
-
-          <div class="info-card">
-            <div class="emoji">🤖</div>
-            <h3 data-ko="창작과 분석의 기록" data-en="Records of Creation & Analysis">창작과 분석의 기록</h3>
-            <p data-ko="'루카 노트' 및 '루카 스튜디오' 채널의 모든 콘텐츠는 철저한 기획과 AI 도구의 결합으로 완성됩니다. 방대한 정보 속에서 핵심을 추출하고, 영상과 오디오를 체계적으로 통제하여 질서 있는 창작물을 만들어냅니다." data-en="All content on 'Luca Note' and 'Luca Studio' channels is completed through a combination of thorough planning and AI tools. I extract core insights from vast information and systematically control video and audio to create orderly works.">
-              '루카 노트' 및 '루카 스튜디오' 채널의 모든 콘텐츠는 철저한 기획과 AI 도구의 결합으로 완성됩니다. 
-              방대한 정보 속에서 핵심을 추출하고, 영상과 오디오를 체계적으로 통제하여 질서 있는 창작물을 만들어냅니다.
-            </p>
-            <div class="button-group" style="margin-top: 16px;">
-              <a href="https://www.youtube.com/@루카노트" target="_blank" class="btn btn-secondary" style="padding: 10px 20px; font-size: 14px;" data-ko="루카 노트 →" data-en="Luca Note →">
-                루카 노트 →
-              </a>
-              <a href="https://www.youtube.com/@루카스튜디오" target="_blank" class="btn btn-secondary" style="padding: 10px 20px; font-size: 14px;" data-ko="루카 스튜디오 →" data-en="Luca Studio →">
-                루카 스튜디오 →
-              </a>
-              <a href="song/index.html" class="btn btn-primary" style="padding: 10px 20px; font-size: 14px;" data-ko="자작곡 듣기 🎵" data-en="Listen to Original Songs 🎵">
-                자작곡 듣기 🎵
-              </a>
-            </div>
-          </div>
-
-          <div class="info-card">
-            <div class="emoji">🖨️</div>
-            <h3 data-ko="비즈니스와 정밀함" data-en="Business & Precision">비즈니스와 정밀함</h3>
-            <p data-ko="스마트스토어 창조Lab은 뱀부랩 3D 프린터의 정밀도를 상업적 가치로 치환하는 공간입니다. 0.1mm 단위의 공정 오차를 제어하여 사용자 맞춤형 제품을 설계하고 생산하는 1인 제조 파이프라인을 운영합니다." data-en="Smart Store 'CreateLab' is a space that converts the precision of Bambu Lab 3D printers into commercial value. I operate a one-person manufacturing pipeline, designing and producing customized products by controlling process errors to 0.1mm.">
-              스마트스토어 창조Lab은 뱀부랩 3D 프린터의 정밀도를 상업적 가치로 치환하는 공간입니다. 0.1mm 단위의 공정 오차를 제어하여 사용자 맞춤형 제품을 설계하고 생산하는 1인 제조 파이프라인을 운영합니다.
-            </p>
-            <a href="https://smartstore.naver.com/createlab_shop" target="_blank" class="btn btn-secondary" style="margin-top: 16px; display: inline-block; padding: 10px 20px; font-size: 14px;" data-ko="제품 확인하기 →" data-en="Check Products →">
-              제품 확인하기 →
-            </a>
-          </div>
-
-          <div class="info-card">
-            <div class="emoji">🚀</div>
-            <h3 data-ko="창업 실무 백서" data-en="Startup Practice Whitepaper">창업 실무 백서</h3>
-            <p data-ko="막연한 이론이 아닌, 1인 제조 및 이커머스 비즈니스를 직접 구축하며 얻은 실무 데이터를 공개합니다. 사업자 등록의 법적 기준부터 검색 최적화(SEO)를 통한 상품 노출 노하우까지, 검증된 로드맵을 제공합니다." data-en="I disclose practical data gained from directly building one-person manufacturing and e-commerce businesses. I provide a proven roadmap, from legal standards for business registration to SEO know-how for product exposure.">
-              막연한 이론이 아닌, 1인 제조 및 이커머스 비즈니스를 직접 구축하며 얻은 실무 데이터를 공개합니다. 사업자 등록의 법적 기준부터 검색 최적화(SEO)를 통한 상품 노출 노하우까지, 검증된 로드맵을 제공합니다.
-            </p>
-            <a href="startup/index.html" class="btn btn-primary" style="margin-top: 16px; display: inline-block; padding: 10px 20px; font-size: 14px;" data-ko="백서 읽어보기 →" data-en="Read Whitepaper →">
-              백서 읽어보기 →
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="timeline section-divider">
-      <div class="container">
-        <h2 class="section-title" style="text-align:center;" data-ko="삶의 여정" data-en="Life Journey">
-          삶의 여정
-        </h2>
-
-        <p class="section-desc" style="text-align:center;" data-ko="기술, 현장, 창업, 창작 — 서로 다른 듯 보이지만 하나의 원칙으로 연결된 여정입니다." data-en="Technology, field work, entrepreneurship, creation — seemingly different, yet connected by a single principle.">
-          기술, 현장, 창업, 창작 — 서로 다른 듯 보이지만 하나의 원칙으로 연결된 여정입니다.
-        </p>
-
+      <div class="timeline-list">
         <div class="timeline-item">
           <div class="year">2007</div>
           <div class="timeline-content">
@@ -1022,7 +947,7 @@
           <div class="year">2014</div>
           <div class="timeline-content">
             <h3 data-ko="2층버스 운행 및 대형 모빌리티 안전 관리" data-en="Double-Decker Bus Operation & Mobility Safety">2층버스 운행 및 대형 모빌리티 안전 관리</h3>
-            <p data-ko="시흥교통 광역 노선에서 2층버스를 운행하며 현장의 수많은 변수를 제어하고 있습니다. 10년 이상의 무사고 기록은 단순한 운전 경력을 넘어, 매뉴얼에 입각한 철저한 위기 관리 능력과 지속적인 집중력을 유지해 온 결과입니다." data-en="Operating double-decker buses on Siheung Transport's regional routes, controlling numerous field variables. Over 10 years of accident-free record is the result of thorough risk management based on manuals and sustained concentration.">시흥교통 광역 노선에서 2층버스를 운행하며 현장의 수많은 변수를 제어하고 있습니다. 10년 이상의 무사고 기록은 단순한 운전 경력을 넘어, 매뉴얼에 입각한 철저한 위기 관리 능력과 지속적인 집중력을 유지해 온 결과입니다.</p>
+            <p data-ko="시흥교통 광역 노선에서 2층버스를 운행하며 현장의 수많은 변수를 제어하고 있습니다. 10년 이상의 무사고 기록은 단순한 운전 경력을 넘어, 매뉴얼에 입각한 철저한 위기 관리 능력과 지속적인 집중력을 유지해 온 결과입니다." data-en="Operating double-decker buses on Siheung Transport's regional routes, controlling numerous field variables. 10+ years of accident-free record is the result of thorough risk management and sustained concentration.">시흥교통 광역 노선에서 2층버스를 운행하며 현장의 수많은 변수를 제어하고 있습니다. 10년 이상의 무사고 기록은 단순한 운전 경력을 넘어, 매뉴얼에 입각한 철저한 위기 관리 능력과 지속적인 집중력을 유지해 온 결과입니다.</p>
           </div>
         </div>
 
@@ -1043,147 +968,200 @@
         </div>
 
         <div class="timeline-item">
-          <div class="year" data-ko="Discipline" data-en="Discipline">Discipline</div>
+          <div class="year" data-ko="매일" data-en="Daily">매일</div>
           <div class="timeline-content">
             <h3 data-ko="일상의 규율" data-en="Daily Discipline">일상의 규율</h3>
-            <p data-ko="미니벨로 자전거 국토종주와 페이스를 유지하는 10km 러닝으로 단련하는 일상의 규율을 통해 자아를 통제합니다." data-en="Self-control through daily discipline, including cross-country bike tours on a mini-velo and maintaining pace in 10km runs.">미니벨로 자전거 국토종주와 페이스를 유지하는 10km 러닝으로 단련하는 일상의 규율을 통해 자아를 통제합니다.</p>
+            <p data-ko="미니벨로 자전거 국토종주와 페이스를 유지하는 10km 러닝으로 단련하는 일상의 규율을 통해 자아를 통제합니다." data-en="Self-control through daily discipline — cross-country bike tours on a mini-velo and maintaining pace in 10km runs.">미니벨로 자전거 국토종주와 페이스를 유지하는 10km 러닝으로 단련하는 일상의 규율을 통해 자아를 통제합니다.</p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="skills" class="section-divider">
-      <div class="container">
-        <h2 class="section-title" style="text-align:center;" data-ko="보유 역량 및 자격" data-en="Skills & Certifications">보유 역량 및 자격</h2>
-        <p class="section-desc" style="text-align:center;" data-ko="현장과 디지털을 넘나들며 검증된 기술들, 자격증으로 증명된 실행력입니다." data-en="Proven skills across field and digital domains, backed by certified credentials.">
-          현장과 디지털을 넘나들며 검증된 기술들, 자격증으로 증명된 실행력입니다.
-        </p>
-        <div class="grid-3" style="max-width: 100%;">
-          <div class="info-card">
-            <h3 data-ko="전문 기술" data-en="Professional Skills">전문 기술</h3>
-            <ul>
-              <li data-ko="대형 버스 정밀 운전" data-en="Precision Large Bus Driving">대형 버스 정밀 운전</li>
-              <li data-ko="디지털 오디오 믹싱 (Behringer X32)" data-en="Digital Audio Mixing (Behringer X32)">디지털 오디오 믹싱 (Behringer X32)</li>
-              <li data-ko="3D 디자인 (Fusion 360)" data-en="3D Design (Fusion 360)">3D 디자인 (Fusion 360)</li>
-              <li data-ko="A.I 워크플로우 (ChatGPT, Claude, Gemini, Suno AI)" data-en="A.I Workflow (ChatGPT, Claude, Gemini, Suno AI)">A.I 워크플로우 (ChatGPT, Claude, Gemini, Suno AI)</li>
-              <li data-ko="응급처치 및 심폐소생술" data-en="First Aid & CPR">응급처치 및 심폐소생술</li>
-            </ul>
-          </div>
-          <div class="info-card">
-            <h3 data-ko="국가 자격" data-en="National Certifications">국가 자격</h3>
-            <ul>
-              <li data-ko="굴삭기 운전 기능사" data-en="Excavator Operator">굴삭기 운전 기능사</li>
-              <li data-ko="지게차 운전 기능사" data-en="Forklift Operator">지게차 운전 기능사</li>
-              <li data-ko="대형 운전 면허" data-en="Large Vehicle License">대형 운전 면허</li>
-              <li data-ko="사무자동화 / 워드 1급" data-en="Office Automation / Word Processing (Grade 1)">사무자동화 / 워드 1급</li>
-            </ul>
-          </div>
-          <div class="info-card">
-            <h3 data-ko="핵심 역량" data-en="Core Competencies">핵심 역량</h3>
-            <ul>
-              <li data-ko="10년 이상 무사고 2층버스 운행" data-en="10+ Years Accident-Free Bus Operation">10년 이상 무사고 2층버스 운행</li>
-              <li data-ko="A.I 활용 효율적 콘텐츠 기획" data-en="Efficient Content Planning using AI">A.I 활용 효율적 콘텐츠 기획</li>
-              <li data-ko="프로젝트 관리 및 공정 제어" data-en="Project Management & Process Control">프로젝트 관리 및 공정 제어</li>
-              <li data-ko="자전거 국토종주 기반의 인내력" data-en="Endurance from Cross-Country Bike Tours">자전거 국토종주 기반의 인내력</li>
-            </ul>
-          </div>
-          <div class="info-card">
-            <h3 data-ko="비즈니스 및 운영" data-en="Business & Operations">비즈니스 및 운영</h3>
-            <ul>
-              <li data-ko="네이버 스마트스토어 스페이스 기획 및 관리" data-en="Naver Smart Store Planning & Management">네이버 스마트스토어 스페이스 기획 및 관리</li>
-              <li data-ko="데이터 기반 상품 키워드 및 SEO 최적화 분석" data-en="Data-Driven Keyword & SEO Analysis">데이터 기반 상품 키워드 및 SEO 최적화 분석</li>
-              <li data-ko="1인 제조 비즈니스 공정 원가 및 수익 정산" data-en="Solo Manufacturing Cost & Profit Settlement">1인 제조 비즈니스 공정 원가 및 수익 정산</li>
-              <li data-ko="멀티 채널 연계 디지털 마케팅 프로세스 실행" data-en="Multi-Channel Digital Marketing Execution">멀티 채널 연계 디지털 마케팅 프로세스 실행</li>
-            </ul>
-          </div>
+  <!-- ===== Skills ===== -->
+  <section id="skills" class="section-divider">
+    <div class="container">
+      <h2 class="section-title" data-ko="보유 역량 및 자격" data-en="Skills & Certifications">보유 역량 및 자격</h2>
+      <p class="section-desc" data-ko="현장과 디지털을 넘나들며 검증된 기술들, 자격증으로 증명된 실행력입니다." data-en="Proven skills across field and digital domains, backed by certified credentials.">
+        현장과 디지털을 넘나들며 검증된 기술들, 자격증으로 증명된 실행력입니다.
+      </p>
+      <div class="cards-grid">
+        <div class="info-card">
+          <h3 data-ko="전문 기술" data-en="Professional Skills">전문 기술</h3>
+          <ul>
+            <li data-ko="대형 버스 정밀 운전" data-en="Precision Large Bus Driving">대형 버스 정밀 운전</li>
+            <li data-ko="디지털 오디오 믹싱 (Behringer X32)" data-en="Digital Audio Mixing (Behringer X32)">디지털 오디오 믹싱 (Behringer X32)</li>
+            <li data-ko="3D 디자인 (Fusion 360)" data-en="3D Design (Fusion 360)">3D 디자인 (Fusion 360)</li>
+            <li data-ko="A.I 워크플로우 (ChatGPT, Claude, Gemini, Suno AI)" data-en="A.I Workflow (ChatGPT, Claude, Gemini, Suno AI)">A.I 워크플로우 (ChatGPT, Claude, Gemini, Suno AI)</li>
+            <li data-ko="응급처치 및 심폐소생술" data-en="First Aid & CPR">응급처치 및 심폐소생술</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3 data-ko="국가 자격" data-en="National Certifications">국가 자격</h3>
+          <ul>
+            <li data-ko="굴삭기 운전 기능사" data-en="Excavator Operator">굴삭기 운전 기능사</li>
+            <li data-ko="지게차 운전 기능사" data-en="Forklift Operator">지게차 운전 기능사</li>
+            <li data-ko="대형 운전 면허" data-en="Large Vehicle License">대형 운전 면허</li>
+            <li data-ko="사무자동화 / 워드 1급" data-en="Office Automation / Word Processing (Grade 1)">사무자동화 / 워드 1급</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3 data-ko="핵심 역량" data-en="Core Competencies">핵심 역량</h3>
+          <ul>
+            <li data-ko="10년 이상 무사고 2층버스 운행" data-en="10+ Years Accident-Free Bus Operation">10년 이상 무사고 2층버스 운행</li>
+            <li data-ko="A.I 활용 효율적 콘텐츠 기획" data-en="Efficient Content Planning using AI">A.I 활용 효율적 콘텐츠 기획</li>
+            <li data-ko="프로젝트 관리 및 공정 제어" data-en="Project Management & Process Control">프로젝트 관리 및 공정 제어</li>
+            <li data-ko="자전거 국토종주 기반의 인내력" data-en="Endurance from Cross-Country Bike Tours">자전거 국토종주 기반의 인내력</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3 data-ko="비즈니스 및 운영" data-en="Business & Operations">비즈니스 및 운영</h3>
+          <ul>
+            <li data-ko="네이버 스마트스토어 스페이스 기획 및 관리" data-en="Naver Smart Store Planning & Management">네이버 스마트스토어 스페이스 기획 및 관리</li>
+            <li data-ko="데이터 기반 상품 키워드 및 SEO 최적화 분석" data-en="Data-Driven Keyword & SEO Analysis">데이터 기반 상품 키워드 및 SEO 최적화 분석</li>
+            <li data-ko="1인 제조 비즈니스 공정 원가 및 수익 정산" data-en="Solo Manufacturing Cost & Profit Settlement">1인 제조 비즈니스 공정 원가 및 수익 정산</li>
+            <li data-ko="멀티 채널 연계 디지털 마케팅 프로세스 실행" data-en="Multi-Channel Digital Marketing Execution">멀티 채널 연계 디지털 마케팅 프로세스 실행</li>
+          </ul>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="contact" class="section-divider">
-      <div class="container">
-        <h2 class="section-title" style="text-align:center;" data-ko="제휴 및 문의" data-en="Partnership & Inquiries">제휴 및 문의</h2>
-        <p class="section-desc" style="text-align:center;" data-ko="협업 제안이나 궁금하신 점이 있다면 아래 폼을 통해 남겨주세요." data-en="Please leave a message below for collaboration proposals or any questions.">
-          협업 제안이나 궁금하신 점이 있다면 아래 폼을 통해 남겨주세요.
-        </p>
-
-        <div class="card-box contact-form">
-          <form action="https://formspree.io/f/mzdonqqw" method="POST">
-            <div class="form-group">
-              <label for="name" data-ko="성함 / 업체명" data-en="Name / Company">성함 / 업체명</label>
-              <input type="text" id="name" name="name" class="form-control" placeholder="성함 또는 업체명을 입력해주세요" required>
-            </div>
-
-            <div class="form-group">
-              <label for="email" data-ko="이메일 주소" data-en="Email Address">이메일 주소</label>
-              <input type="email" id="email" name="_replyto" class="form-control" placeholder="example@email.com" required>
-            </div>
-
-            <div class="form-group">
-              <label for="subject" data-ko="문의 유형" data-en="Inquiry Type">문의 유형</label>
-              <select id="subject" name="subject" class="form-control">
-                <option value="제휴 문의" data-ko="제휴 문의" data-en="Partnership">제휴 문의</option>
-                <option value="3D 프린팅 의뢰" data-ko="3D 프린팅 의뢰" data-en="3D Printing">3D 프린팅 의뢰</option>
-                <option value="콘텐츠 협업" data-ko="콘텐츠 협업" data-en="Content Collaboration">콘텐츠 협업</option>
-                <option value="기타 문의" data-ko="기타 문의" data-en="Others">기타 문의</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="message" data-ko="문의 내용" data-en="Message">문의 내용</label>
-              <textarea id="message" name="message" class="form-control" placeholder="상세한 내용을 입력해주세요" required></textarea>
-            </div>
-
-            <input type="text" name="_gotcha" style="display:none">
-
-            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 18px; font-size: 18px;" data-ko="문의 보내기" data-en="Send Message">문의 보내기</button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <footer class="section-divider">
-      <div class="footer-quote" data-ko="“기록은 결국 방향을 남긴다.”" data-en="“Records ultimately leave a direction.”">
-        “기록은 결국 방향을 남긴다.”
-      </div>
-
-      <p class="footer-text" data-ko="성실함과 체계적인 질서로 구축된 삶의 궤적을 기록합니다." data-en="Recording life trajectories built with integrity and systematic order.">
-        성실함과 체계적인 질서로 구축된 삶의 궤적을 기록합니다.
+  <!-- ===== Contact ===== -->
+  <section id="contact" class="section-divider">
+    <div class="container">
+      <h2 class="section-title" data-ko="제휴 및 문의" data-en="Partnership & Inquiries">제휴 및 문의</h2>
+      <p class="section-desc" data-ko="협업 제안이나 궁금하신 점이 있다면 아래 폼을 통해 남겨주세요." data-en="Please leave a message below for collaboration proposals or any questions.">
+        협업 제안이나 궁금하신 점이 있다면 아래 폼을 통해 남겨주세요.
       </p>
 
-      <div class="copyright">
-        © 2024 CHOI HO. ALL RIGHTS RESERVED.
-        <span style="margin: 0 8px; opacity: 0.3;">|</span>
-        <a href="privacy.html" style="color: var(--text-muted); text-decoration: none; font-size: 12px;">개인정보처리방침</a>
-      </div>
-    </footer>
+      <div class="card-box contact-form">
+        <form action="https://formspree.io/f/mzdonqqw" method="POST">
+          <div class="form-group">
+            <label for="name" data-ko="성함 / 업체명" data-en="Name / Company">성함 / 업체명</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="성함 또는 업체명을 입력해주세요" required>
+          </div>
 
-  </div>
+          <div class="form-group">
+            <label for="email" data-ko="이메일 주소" data-en="Email Address">이메일 주소</label>
+            <input type="email" id="email" name="_replyto" class="form-control" placeholder="example@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="subject" data-ko="문의 유형" data-en="Inquiry Type">문의 유형</label>
+            <select id="subject" name="subject" class="form-control">
+              <option value="제휴 문의" data-ko="제휴 문의" data-en="Partnership">제휴 문의</option>
+              <option value="3D 프린팅 의뢰" data-ko="3D 프린팅 의뢰" data-en="3D Printing">3D 프린팅 의뢰</option>
+              <option value="콘텐츠 협업" data-ko="콘텐츠 협업" data-en="Content Collaboration">콘텐츠 협업</option>
+              <option value="기타 문의" data-ko="기타 문의" data-en="Others">기타 문의</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message" data-ko="문의 내용" data-en="Message">문의 내용</label>
+            <textarea id="message" name="message" class="form-control" placeholder="상세한 내용을 입력해주세요" required></textarea>
+          </div>
+
+          <input type="text" name="_gotcha" style="display:none">
+
+          <button type="submit" class="btn btn-primary submit-btn" data-ko="문의 보내기" data-en="Send Message">문의 보내기</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="section-divider">
+    <div class="footer-quote" data-ko=""기록은 결국 방향을 남긴다."" data-en=""Records ultimately leave a direction."">
+      "기록은 결국 방향을 남긴다."
+    </div>
+    <p class="footer-text" data-ko="성실함과 체계적인 질서로 구축된 삶의 궤적을 기록합니다." data-en="Recording life trajectories built with integrity and systematic order.">
+      성실함과 체계적인 질서로 구축된 삶의 궤적을 기록합니다.
+    </p>
+    <div class="copyright">
+      © 2024 CHOI HO. ALL RIGHTS RESERVED.
+      <span style="margin:0 8px;opacity:0.3;">|</span>
+      <a href="privacy.html">개인정보처리방침</a>
+    </div>
+  </footer>
 
   <script>
-    (function() {
-      var KEY = "visitor_counted";
+    document.addEventListener('DOMContentLoaded', () => {
+      const html = document.documentElement;
+
+      // --- Theme ---
+      const themeBtn = document.getElementById('theme-toggle-btn');
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      html.setAttribute('data-theme', savedTheme);
+      themeBtn.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+
+      themeBtn.addEventListener('click', () => {
+        const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        themeBtn.textContent = next === 'dark' ? '🌙' : '☀️';
+      });
+
+      // --- Color Theme ---
+      function setColorTheme(color) {
+        html.setAttribute('data-color-theme', color);
+        localStorage.setItem('color-theme', color);
+        document.querySelectorAll('.color-dot').forEach(dot => {
+          dot.classList.toggle('active', dot.dataset.color === color);
+        });
+      }
+
+      document.querySelectorAll('.color-dot').forEach(dot => {
+        dot.addEventListener('click', () => setColorTheme(dot.dataset.color));
+      });
+
+      setColorTheme(localStorage.getItem('color-theme') || 'blue');
+
+      // --- Language ---
+      function setLanguage(lang) {
+        document.querySelectorAll('[data-ko]').forEach(el => {
+          const text = lang === 'ko' ? el.getAttribute('data-ko') : el.getAttribute('data-en');
+          if (text) el.innerHTML = text;
+        });
+        document.querySelectorAll('input[data-ko-placeholder], textarea[data-ko-placeholder]').forEach(el => {
+          el.placeholder = lang === 'ko' ? el.getAttribute('data-ko-placeholder') : el.getAttribute('data-en-placeholder');
+        });
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        const activeBtn = document.getElementById(`lang-${lang}`);
+        if (activeBtn) activeBtn.classList.add('active');
+        localStorage.setItem('preferred-lang', lang);
+      }
+
+      window.setLanguage = setLanguage;
+      setLanguage(localStorage.getItem('preferred-lang') || 'ko');
+    });
+  </script>
+
+  <script defer>
+    (function () {
+      var KEY = 'visitor_counted';
       var EXPIRE = 24 * 60 * 60 * 1000;
       var last = localStorage.getItem(KEY);
       var isNew = !last || (Date.now() - parseInt(last, 10)) > EXPIRE;
-      var endpoint = isNew ? "/api/view" : "/api/view?readonly=true";
+      var endpoint = isNew ? '/api/view' : '/api/view?readonly=true';
 
       fetch(endpoint)
-        .then(res => {
-          if (!res.ok) throw new Error("API 연동 실패");
+        .then(function (res) {
+          if (!res.ok) throw new Error('fail');
           return res.json();
         })
-        .then(data => {
-          if (data && typeof data.value !== "undefined") {
-            document.getElementById("visitor-count").textContent = data.value.toLocaleString();
+        .then(function (data) {
+          if (data && typeof data.value !== 'undefined') {
+            document.getElementById('visitor-count').textContent = data.value.toLocaleString();
             if (isNew) localStorage.setItem(KEY, Date.now().toString());
           }
         })
-        .catch(err => {
-          console.error("방문자 카운트 오류:", err);
-          document.getElementById("visitor-count-box").style.display = "none";
+        .catch(function () {
+          var box = document.getElementById('visitor-count-box');
+          if (box) box.style.display = 'none';
         });
     })();
   </script>
+
 </body>
 </html>
