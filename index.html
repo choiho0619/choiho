@@ -57,6 +57,37 @@
     [data-color-theme="teal"] { --highlight: #06b6d4 !important; }
     [data-color-theme="blue"] { --highlight: #3b82f6 !important; }
 
+    /* Skin Styles */
+    [data-skin="minimal"] {
+      --bg-gradient: #0f172a;
+      --card-bg: #1e293b;
+      --card-bg-solid: #1e293b;
+      --border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    [data-theme="light"][data-skin="minimal"] {
+      --bg-gradient: #f1f5f9;
+      --card-bg: #ffffff;
+      --card-bg-solid: #ffffff;
+      --border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    [data-skin="minimal"] .container,
+    [data-skin="minimal"] .card,
+    [data-skin="minimal"] .timeline-content,
+    [data-skin="minimal"] .project-card,
+    [data-skin="minimal"] .skill-tag,
+    [data-skin="minimal"] .lang-switcher,
+    [data-skin="minimal"] .theme-btn,
+    [data-skin="minimal"] .color-dropdown,
+    [data-skin="minimal"] .game-dropdown,
+    [data-skin="minimal"] .skin-dropdown,
+    [data-skin="minimal"] .badge {
+      border-radius: 8px !important;
+      backdrop-filter: none !important;
+      box-shadow: none !important;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -155,6 +186,58 @@
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
+    }
+
+    /* Skin Switcher Styles */
+    .skin-wrapper {
+      position: relative;
+    }
+
+    .skin-dropdown {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: 0.3s;
+      background: var(--card-bg);
+      padding: 8px;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(12px);
+      min-width: 120px;
+      z-index: 100;
+    }
+
+    .skin-wrapper:hover .skin-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .skin-item {
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: 0.2s;
+      white-space: nowrap;
+      text-align: left;
+      color: var(--text-secondary);
+    }
+
+    .skin-item:hover {
+      background: var(--border-color);
+      color: var(--highlight);
+    }
+
+    .skin-item.active {
+      background: var(--highlight);
+      color: white;
     }
 
     .color-dot {
@@ -773,13 +856,24 @@
   </style>
 
   <script>
+    // Theme and Skin Initialization (Immediate)
+    (function() {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      
+      const savedColor = localStorage.getItem('color-theme') || 'blue';
+      document.documentElement.setAttribute('data-color-theme', savedColor);
+      
+      const savedSkin = localStorage.getItem('theme-skin') || 'default';
+      document.documentElement.setAttribute('data-skin', savedSkin);
+    })();
+
     document.addEventListener('DOMContentLoaded', () => {
       const themeToggleBtn = document.getElementById('theme-toggle-btn');
       const htmlElement = document.documentElement;
 
       // 로컬 스토리지에서 테마 불러오기
-      const currentTheme = localStorage.getItem('theme') || 'dark';
-      htmlElement.setAttribute('data-theme', currentTheme);
+      const currentTheme = htmlElement.getAttribute('data-theme');
       updateToggleButton(currentTheme);
 
       themeToggleBtn.addEventListener('click', () => {
@@ -825,13 +919,30 @@
       });
     }
 
-    // Initialize Language and Color Theme
+    // Skin Switcher
+    function setSkin(skin) {
+      document.documentElement.setAttribute('data-skin', skin);
+      localStorage.setItem('theme-skin', skin);
+      
+      // Update Active State
+      document.querySelectorAll('.skin-item').forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('onclick').includes(`'${skin}'`)) {
+          item.classList.add('active');
+        }
+      });
+    }
+
+    // Initialize Language, Color, and Skin UI
     document.addEventListener('DOMContentLoaded', () => {
       const savedLang = localStorage.getItem('preferred-lang') || 'ko';
       setLanguage(savedLang);
-      
+
       const savedColor = localStorage.getItem('color-theme') || 'blue';
       setColorTheme(savedColor);
+
+      const savedSkin = localStorage.getItem('theme-skin') || 'default';
+      setSkin(savedSkin);
     });
   </script>
 </head>
@@ -845,6 +956,14 @@
     </div>
 
     <div class="fixed-actions">
+      <div class="skin-wrapper">
+        <button class="theme-btn" aria-label="스킨 변경">🖥️</button>
+        <div class="skin-dropdown">
+          <div class="skin-item active" onclick="setSkin('default')">기본 스킨</div>
+          <div class="skin-item" onclick="setSkin('minimal')">미니멀 스킨</div>
+        </div>
+      </div>
+
       <div class="theme-toggle">
         <button class="theme-btn" id="theme-toggle-btn" aria-label="테마 변경">
           🌙
