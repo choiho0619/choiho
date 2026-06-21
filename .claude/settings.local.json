@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "WebSearch",
+      "WebFetch(domain:www.whois.com)",
+      "WebFetch(domain:who.is)",
+      "WebFetch(domain:lookup.icann.org)",
+      "Bash(whois choiho.com)",
+      "Bash(nslookup choiho.com)",
+      "Bash(dig choiho.com A)",
+      "Bash(curl *)",
+      "Bash(grep -n \"div { max-width\\\\|\\\\.btn, a\\\\.button\\\\|DOMContentLoaded\\\\|onclick.*setColor\\\\|scale\\(0.85\\\\|!important\" /home/user/choiho/index.html)",
+      "Bash(git -C /home/user/choiho status)",
+      "Bash(git -C /home/user/choiho diff)",
+      "Bash(git -C /home/user/choiho add song/index.html)",
+      "Bash(git -C /home/user/choiho commit -m ' *)",
+      "Bash(git *)"
+    ]
+  }
+}
