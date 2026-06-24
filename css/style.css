@@ -71,6 +71,7 @@ section { padding: 6rem 0; }
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 .nav-logo {
@@ -79,12 +80,17 @@ section { padding: 6rem 0; }
   color: var(--text-main);
   text-decoration: none;
   letter-spacing: -0.03em;
+  display: inline-flex;
+  align-items: center;
 }
 .nav-logo span {
   color: var(--highlight);
 }
 
 .nav-menu {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 32px;
