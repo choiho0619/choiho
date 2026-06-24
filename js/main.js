@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const gameHeights = {
     tetris: '710px',
-    omok: '500px',
+    omok: '540px',
     sudoku: '540px'
   };
 
