@@ -1,0 +1,29 @@
+# 대용량 백업 파일
+backup.zip
+*.zip
+*.tar.gz
+
+# 임시 업로드 서버
+_upload_server.js
+
+# OS 생성 파일
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 에디터 설정
+.idea/
+*.suo
+*.user
+
+# 로그
+*.log
+npm-debug.log*
+
+# node_modules (혹시 나중에 npm 쓸 때)
+node_modules/
+
+# 환경변수
+.env
+.env.local
+.env.*.local
