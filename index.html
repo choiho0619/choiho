@@ -1,1167 +1,784 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2HE87NL09E"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-2HE87NL09E');
-  </script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>최호 | 안정적인 궤적, 그리고 정교한 시선</title>
-
-  <!-- SEO -->
-  <meta name="description" content="물리적 현장과 디지털 시스템의 교차점 — IT 인프라, 모빌리티, 3D 프린팅, AI 창작을 하나의 원칙으로 연결한 1인 비즈니스 포트폴리오입니다." />
-
-  <!-- OG -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://choiho.com/" />
-  <meta property="og:title" content="최호 | 안정적인 궤적, 그리고 정교한 시선" />
-  <meta property="og:description" content="물리적 현장과 디지털 시스템의 교차점 — IT 인프라, 모빌리티, 3D 프린팅, AI 창작을 하나의 원칙으로 연결한 1인 비즈니스 포트폴리오입니다." />
-  <meta property="og:image" content="https://choiho.com/og-profile.jpg" />
-  <meta property="og:locale" content="ko_KR" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="최호 | 안정적인 궤적, 그리고 정교한 시선" />
-  <meta name="twitter:description" content="물리적 현장과 디지털 시스템의 교차점 — IT 인프라, 모빌리티, 3D 프린팅, AI 창작을 하나의 원칙으로 연결한 1인 비즈니스 포트폴리오입니다." />
-  <meta name="twitter:image" content="https://choiho.com/og-profile.jpg" />
-
-  <style>
-    /* ===== Design Tokens ===== */
-    :root {
-      --bg-gradient: linear-gradient(to bottom, #050505, #080808, #000000);
-      --text-main: #ffffff;
-      --text-secondary: #cbd5e1;
-      --text-muted: #94a3b8;
-      --card-bg: rgba(20, 20, 20, 0.9);
-      --card-bg-solid: #141414;
-      --border-color: rgba(255, 255, 255, 0.1);
-      --highlight: #3b82f6;
-      --btn-secondary-bg: transparent;
-      --btn-secondary-border: rgba(255, 255, 255, 0.2);
-    }
-
-    [data-theme="light"] {
-      --bg-gradient: linear-gradient(to bottom, #f8fafc, #f1f5f9, #e2e8f0);
-      --text-main: #0f172a;
-      --text-secondary: #334155;
-      --text-muted: #475569;
-      --card-bg: rgba(255, 255, 255, 0.8);
-      --card-bg-solid: #ffffff;
-      --border-color: rgba(0, 0, 0, 0.1);
-      --btn-secondary-bg: #ffffff;
-      --btn-secondary-border: rgba(0, 0, 0, 0.1);
-    }
-
-    /* Color accent tokens */
-    [data-color-theme="blue"]    { --highlight: #3b82f6; }
-    [data-color-theme="purple"]  { --highlight: #8b5cf6; }
-    [data-color-theme="emerald"] { --highlight: #10b981; }
-    [data-color-theme="red"]     { --highlight: #ef4444; }
-    [data-color-theme="orange"]  { --highlight: #f59e0b; }
-    [data-color-theme="pink"]    { --highlight: #ec4899; }
-    [data-color-theme="teal"]    { --highlight: #06b6d4; }
-
-    /* ===== Reset ===== */
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    /* ===== Base ===== */
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-      background: var(--bg-gradient);
-      color: var(--text-main);
-      line-height: 1.7;
-      overflow-x: hidden;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    /* ===== Layout ===== */
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    section {
-      padding: 6rem 0;
-    }
-
-    .section-divider {
-      border-top: 1px solid var(--border-color);
-    }
-
-    /* ===== Fixed UI: Language Switcher ===== */
-    .lang-switcher {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      font-weight: 700;
-      background: var(--card-bg);
-      padding: 8px 16px;
-      border-radius: 999px;
-      border: 1px solid var(--border-color);
-      backdrop-filter: blur(12px);
-    }
-
-    .lang-switcher span {
-      color: var(--border-color);
-    }
-
-    .lang-btn {
-      cursor: pointer;
-      color: var(--text-muted);
-      transition: color 0.2s;
-      border: none;
-      background: none;
-      font-family: inherit;
-      font-size: inherit;
-      font-weight: inherit;
-      padding: 0;
-    }
-
-    .lang-btn.active {
-      color: var(--highlight);
-    }
-
-    /* ===== Fixed UI: Actions (right side) ===== */
-    .fixed-actions {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-    }
-
-    .icon-btn {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      backdrop-filter: blur(12px);
-      transition: transform 0.2s;
-      flex-shrink: 0;
-    }
-
-    .icon-btn:hover {
-      transform: scale(1.1);
-    }
-
-    /* Color theme dropdown */
-    .color-theme-wrapper {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .color-dropdown {
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding: 12px;
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
-      backdrop-filter: blur(12px);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-8px);
-      transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
-    }
-
-    .color-theme-wrapper:hover .color-dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .color-dot {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      cursor: pointer;
-      border: 2px solid transparent;
-      transition: transform 0.15s;
-    }
-
-    .color-dot:hover {
-      transform: scale(1.2);
-    }
-
-    .color-dot.active {
-      border-color: var(--text-main);
-    }
-
-    /* Game dropdown */
-    .game-menu-wrapper {
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .game-dropdown {
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      padding: 8px;
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      backdrop-filter: blur(12px);
-      min-width: 130px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-8px);
-      transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
-    }
-
-    .game-menu-wrapper:hover .game-dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .game-dropdown a {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 10px;
-      text-decoration: none;
-      color: var(--text-main);
-      font-size: 13px;
-      transition: background 0.15s;
-      white-space: nowrap;
-    }
-
-    .game-dropdown a:hover {
-      background: rgba(127, 127, 127, 0.12);
-    }
-
-    /* ===== Hero ===== */
-    .hero {
-      padding: 120px 0 100px;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 24px;
-      font-size: 14px;
-      color: var(--text-secondary);
-    }
-
-    .hero-eyebrow-sep {
-      color: var(--text-muted);
-      opacity: 0.5;
-    }
-
-    #visitor-count-box {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    h1 {
-      font-size: 56px;
-      line-height: 1.15;
-      font-weight: 900;
-      margin-bottom: 24px;
-      word-break: keep-all;
-    }
-
-    .highlight {
-      color: var(--highlight);
-    }
-
-    .hero-text {
-      font-size: 18px;
-      color: var(--text-secondary);
-      margin-bottom: 40px;
-      word-break: keep-all;
-    }
-
-    /* ===== Buttons ===== */
-    .button-group {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 14px 26px;
-      border-radius: 16px;
-      border: none;
-      cursor: pointer;
-      font-size: 15px;
-      font-weight: 700;
-      font-family: inherit;
-      transition: transform 0.2s, background 0.2s, border-color 0.2s;
-      text-decoration: none;
-      display: inline-block;
-      text-align: center;
-    }
-
-    .btn-primary {
-      background: var(--highlight);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      filter: brightness(1.15);
-    }
-
-    .btn-secondary {
-      background: var(--btn-secondary-bg);
-      color: var(--text-main);
-      border: 1px solid var(--btn-secondary-border);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--text-muted);
-    }
-
-    /* ===== Profile Card ===== */
-    .profile-image-wrapper {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 28px;
-    }
-
-    .profile-image {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid var(--highlight);
-      box-shadow: 0 16px 48px rgba(59, 130, 246, 0.2);
-    }
-
-    .card-box {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 28px;
-      padding: 32px;
-      backdrop-filter: blur(12px);
-    }
-
-    /* ===== Stats Grid ===== */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    .stat-card {
-      background: rgba(127, 127, 127, 0.06);
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
-      padding: 20px;
-    }
-
-    .stat-label {
-      color: var(--text-muted);
-      font-size: 12px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .stat-number {
-      font-size: 28px;
-      font-weight: 900;
-      color: var(--highlight);
-      line-height: 1.1;
-    }
-
-    .stat-unit {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      margin-top: 4px;
-    }
-
-    /* ===== Sections ===== */
-    .section-title {
-      font-size: 42px;
-      font-weight: 900;
-      margin-bottom: 16px;
-      color: var(--highlight);
-      text-align: center;
-    }
-
-    .section-desc {
-      color: var(--text-muted);
-      font-size: 17px;
-      margin-bottom: 48px;
-      text-align: center;
-    }
-
-    /* ===== Info Cards Grid ===== */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
-    .info-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 24px;
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.25s;
-    }
-
-    .info-card:hover {
-      transform: translateY(-4px);
-    }
-
-    .info-card .btn {
-      margin-top: auto;
-    }
-
-    .card-icon {
-      font-size: 38px;
-      margin-bottom: 16px;
-    }
-
-    .info-card h3 {
-      font-size: 24px;
-      margin-bottom: 14px;
-    }
-
-    .info-card p {
-      color: var(--text-secondary);
-      font-size: 15px;
-      line-height: 1.75;
-    }
-
-    .info-card ul {
-      list-style: disc;
-      padding-left: 1.4rem;
-      margin-top: 12px;
-      color: var(--text-secondary);
-      font-size: 15px;
-      line-height: 1.7;
-    }
-
-    .info-card li {
-      margin-bottom: 6px;
-    }
-
-    .info-card li::marker {
-      color: var(--highlight);
-    }
-
-    .card-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .card-actions .btn {
-      padding: 10px 18px;
-      font-size: 14px;
-      margin-top: 0;
-    }
-
-    /* ===== Timeline ===== */
-    .timeline-list {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .timeline-item {
-      display: flex;
-      gap: 36px;
-      background: var(--card-bg-solid);
-      border: 1px solid var(--border-color);
-      border-radius: 24px;
-      padding: 28px 32px;
-    }
-
-    .year {
-      min-width: 100px;
-      font-size: 26px;
-      font-weight: 900;
-      color: var(--highlight);
-      flex-shrink: 0;
-    }
-
-    .timeline-content h3 {
-      font-size: 22px;
-      margin-bottom: 8px;
-    }
-
-    .timeline-content p {
-      color: var(--text-secondary);
-      font-size: 15px;
-    }
-
-    /* ===== Footer ===== */
-    footer {
-      text-align: center;
-      padding: 72px 24px 48px;
-    }
-
-    .footer-quote {
-      font-size: 36px;
-      font-weight: 900;
-      color: var(--highlight);
-      margin-bottom: 20px;
-    }
-
-    .footer-text {
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto 36px;
-    }
-
-    .copyright {
-      border-top: 1px solid var(--border-color);
-      padding-top: 24px;
-      color: var(--text-muted);
-      font-size: 13px;
-    }
-
-    .copyright a {
-      color: var(--text-muted);
-      text-decoration: none;
-    }
-
-    .copyright a:hover {
-      color: var(--text-secondary);
-    }
-
-    /* ===== Contact Form ===== */
-    .contact-form {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-      text-align: left;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--text-secondary);
-      font-weight: 600;
-      font-size: 14px;
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 13px 16px;
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      background: var(--card-bg-solid);
-      color: var(--text-main);
-      font-size: 15px;
-      font-family: inherit;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .form-control:focus {
-      outline: none;
-      border-color: var(--highlight);
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
-    }
-
-    select.form-control {
-      cursor: pointer;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 14px center;
-      background-size: 16px;
-      padding-right: 40px;
-    }
-
-    textarea.form-control {
-      min-height: 140px;
-      resize: vertical;
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 16px;
-      font-size: 17px;
-    }
-
-    /* ===== Responsive ===== */
-    @media (max-width: 900px) {
-      /* Hero */
-      .hero {
-        padding: 90px 0 56px;
-      }
-
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 36px;
-        text-align: center;
-      }
-
-      h1 {
-        font-size: 36px;
-      }
-
-      .hero-text {
-        font-size: 16px;
-        margin-bottom: 28px;
-      }
-
-      .button-group {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .button-group .btn {
-        width: 100%;
-        max-width: 300px;
-      }
-
-      /* Profile card */
-      .profile-image {
-        width: 160px;
-        height: 160px;
-      }
-
-      .card-box {
-        padding: 24px 20px;
-      }
-
-      /* Stats */
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
-
-      .stat-number {
-        font-size: 22px;
-      }
-
-      /* Sections */
-      section {
-        padding: 4rem 0;
-      }
-
-      .section-title {
-        font-size: 28px;
-      }
-
-      .section-desc {
-        font-size: 15px;
-        margin-bottom: 28px;
-      }
-
-      /* Cards */
-      .cards-grid {
-        grid-template-columns: 1fr;
-        gap: 14px;
-      }
-
-      .info-card {
-        padding: 24px 20px;
-      }
-
-      .info-card h3 {
-        font-size: 20px;
-      }
-
-      /* Timeline */
-      .timeline-item {
-        flex-direction: column;
-        gap: 10px;
-        padding: 22px 20px;
-      }
-
-      .year {
-        font-size: 20px;
-        min-width: auto;
-      }
-
-      .timeline-content h3 {
-        font-size: 18px;
-      }
-
-      /* Footer */
-      .footer-quote {
-        font-size: 24px;
-      }
-
-      /* Fixed UI: scale down to avoid overlap */
-      .lang-switcher {
-        top: 12px;
-        left: 12px;
-        font-size: 12px;
-        padding: 6px 12px;
-      }
-
-      .fixed-actions {
-        top: 12px;
-        right: 12px;
-        gap: 8px;
-      }
-
-      .icon-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 16px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 0 16px;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2HE87NL09E"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-2HE87NL09E');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>최호 | 버스 기사가 만든 AI 자동화 비즈니스</title>
+<!-- SEO -->
+<meta name="description" content="버스 기사로 10년, IT 인프라 엔지니어로 7년. 지금은 AI 툴로 혼자 콘텐츠 플랫폼을 돌립니다. 1인 비즈니스 포트폴리오." />
+<!-- OG -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://choiho.com/" />
+<meta property="og:title" content="최호 | 버스 기사가 만든 AI 자동화 비즈니스" />
+<meta property="og:description" content="버스 기사로 10년, IT 인프라 엔지니어로 7년. 지금은 AI 툴로 혼자 콘텐츠 플랫폼을 돌립니다." />
+<meta property="og:image" content="https://choiho.com/og-profile.jpg" />
+<meta property="og:locale" content="ko_KR" />
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="최호 | 버스 기사가 만든 AI 자동화 비즈니스" />
+<meta name="twitter:description" content="버스 기사로 10년, IT 인프라 엔지니어로 7년. 지금은 AI 툴로 혼자 콘텐츠 플랫폼을 돌립니다." />
+<meta name="twitter:image" content="https://choiho.com/og-profile.jpg" />
+
+<style>
+/* ===== Design Tokens ===== */
+:root {
+  --bg-gradient: linear-gradient(to bottom, #050505, #080808, #000000);
+  --text-main: #ffffff;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --card-bg: rgba(20, 20, 20, 0.9);
+  --card-bg-solid: #141414;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --highlight: #3b82f6;
+  --btn-secondary-bg: transparent;
+  --btn-secondary-border: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="light"] {
+  --bg-gradient: linear-gradient(to bottom, #f8fafc, #f1f5f9, #e2e8f0);
+  --text-main: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #475569;
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --card-bg-solid: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --btn-secondary-bg: #ffffff;
+  --btn-secondary-border: rgba(0, 0, 0, 0.15);
+}
+
+[data-color-theme="blue"]    { --highlight: #3b82f6; }
+[data-color-theme="purple"]  { --highlight: #8b5cf6; }
+[data-color-theme="emerald"] { --highlight: #10b981; }
+[data-color-theme="red"]     { --highlight: #ef4444; }
+[data-color-theme="orange"]  { --highlight: #f59e0b; }
+[data-color-theme="pink"]    { --highlight: #ec4899; }
+[data-color-theme="teal"]    { --highlight: #06b6d4; }
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  line-height: 1.7;
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section { padding: 6rem 0; }
+.section-divider { border-top: 1px solid var(--border-color); }
+
+/* ===== Fixed UI ===== */
+.lang-switcher {
+  position: fixed;
+  top: 20px; left: 20px;
+  z-index: 1000;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; font-weight: 700;
+  background: var(--card-bg);
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(12px);
+}
+.lang-switcher span { color: var(--border-color); }
+.lang-btn {
+  cursor: pointer; color: var(--text-muted);
+  transition: color 0.2s; border: none; background: none;
+  font-family: inherit; font-size: inherit; font-weight: inherit; padding: 0;
+}
+.lang-btn.active { color: var(--highlight); }
+
+.fixed-actions {
+  position: fixed; top: 20px; right: 20px;
+  z-index: 1000; display: flex; gap: 10px; align-items: flex-start;
+}
+.icon-btn {
+  background: var(--card-bg); border: 1px solid var(--border-color);
+  color: var(--text-main); width: 44px; height: 44px; border-radius: 50%;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 18px; backdrop-filter: blur(12px); transition: transform 0.2s; flex-shrink: 0;
+}
+.icon-btn:hover { transform: scale(1.1); }
+
+.color-theme-wrapper { position: relative; display: flex; flex-direction: column; align-items: center; }
+.color-dropdown {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  display: flex; flex-direction: column; gap: 10px; padding: 12px;
+  background: var(--card-bg); border: 1px solid var(--border-color);
+  border-radius: 20px; backdrop-filter: blur(12px);
+  opacity: 0; visibility: hidden; transform: translateY(-8px);
+  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+}
+.color-theme-wrapper:hover .color-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.color-dot {
+  width: 22px; height: 22px; border-radius: 50%; cursor: pointer;
+  border: 2px solid transparent; transition: transform 0.15s;
+}
+.color-dot:hover { transform: scale(1.2); }
+.color-dot.active { border-color: var(--text-main); }
+
+.game-menu-wrapper { position: relative; flex-shrink: 0; }
+.game-dropdown {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  display: flex; flex-direction: column; gap: 4px; padding: 8px;
+  background: var(--card-bg); border: 1px solid var(--border-color);
+  border-radius: 16px; backdrop-filter: blur(12px); min-width: 130px;
+  opacity: 0; visibility: hidden; transform: translateY(-8px);
+  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+}
+.game-menu-wrapper:hover .game-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.game-dropdown a {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; border-radius: 10px;
+  text-decoration: none; color: var(--text-main); font-size: 13px;
+  transition: background 0.15s; white-space: nowrap;
+}
+.game-dropdown a:hover { background: rgba(127,127,127,0.12); }
+
+/* ===== Hero ===== */
+.hero { padding: 120px 0 100px; border-bottom: 1px solid var(--border-color); }
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-bottom: 24px; font-size: 14px; color: var(--text-secondary);
+}
+.hero-eyebrow-sep { color: var(--text-muted); opacity: 0.5; }
+#visitor-count-box { display: inline-flex; align-items: center; gap: 6px; }
+
+/* 헤드라인 임팩트 강화 */
+h1 {
+  font-size: 58px;
+  line-height: 1.12;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+  word-break: keep-all;
+}
+.highlight { color: var(--highlight); }
+
+.hero-text {
+  font-size: 17px; line-height: 1.85;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+  word-break: keep-all;
+}
+
+/* ===== Buttons — 위계 분리 ===== */
+.button-group { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn {
+  padding: 14px 28px; border-radius: 16px; border: none;
+  cursor: pointer; font-size: 15px; font-weight: 700;
+  font-family: inherit; transition: transform 0.2s, filter 0.2s, border-color 0.2s;
+  text-decoration: none; display: inline-block; text-align: center;
+}
+/* Primary: 색상 채움 — 메인 액션 */
+.btn-primary {
+  background: var(--highlight);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(59,130,246,0.25);
+}
+.btn-primary:hover { filter: brightness(1.15); transform: translateY(-1px); }
+
+/* Secondary: 아웃라인 — 보조 액션 */
+.btn-secondary {
+  background: var(--btn-secondary-bg);
+  color: var(--text-main);
+  border: 1px solid var(--btn-secondary-border);
+}
+.btn-secondary:hover { border-color: var(--text-muted); }
+
+/* ===== Profile Card ===== */
+.profile-image-wrapper { display: flex; justify-content: center; margin-bottom: 28px; }
+.profile-image {
+  width: 200px; height: 200px; object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--highlight);
+  box-shadow: 0 16px 48px rgba(59,130,246,0.2);
+}
+.card-box {
+  background: var(--card-bg); border: 1px solid var(--border-color);
+  border-radius: 28px; padding: 32px; backdrop-filter: blur(12px);
+}
+
+/* ===== Stats Grid ===== */
+.stats-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+.stat-card {
+  background: rgba(127,127,127,0.06);
+  border: 1px solid var(--border-color);
+  border-radius: 20px; padding: 20px;
+}
+.stat-label { color: var(--text-muted); font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px; }
+.stat-number { font-size: 28px; font-weight: 900; color: var(--highlight); line-height: 1.1; }
+.stat-unit { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-top: 4px; }
+
+/* ===== Sections ===== */
+.section-title { font-size: 42px; font-weight: 900; margin-bottom: 16px; color: var(--highlight); text-align: center; }
+.section-desc { color: var(--text-muted); font-size: 17px; margin-bottom: 48px; text-align: center; }
+
+/* ===== Info Cards ===== */
+.cards-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+.info-card {
+  background: var(--card-bg); border: 1px solid var(--border-color);
+  border-radius: 24px; padding: 32px;
+  display: flex; flex-direction: column;
+  transition: transform 0.25s;
+}
+.info-card:hover { transform: translateY(-4px); }
+.info-card .btn { margin-top: auto; }
+.card-icon { font-size: 38px; margin-bottom: 16px; }
+.info-card h3 { font-size: 22px; margin-bottom: 12px; }
+.info-card p { color: var(--text-secondary); font-size: 15px; line-height: 1.8; }
+.info-card ul {
+  list-style: disc; padding-left: 1.4rem; margin-top: 12px;
+  color: var(--text-secondary); font-size: 15px; line-height: 1.7;
+}
+.info-card li { margin-bottom: 6px; }
+.info-card li::marker { color: var(--highlight); }
+.card-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.card-actions .btn { padding: 10px 18px; font-size: 14px; margin-top: 0; }
+
+/* ===== Timeline ===== */
+.timeline-list { display: flex; flex-direction: column; gap: 20px; }
+.timeline-item {
+  display: flex; gap: 36px;
+  background: var(--card-bg-solid);
+  border: 1px solid var(--border-color);
+  border-radius: 24px; padding: 28px 32px;
+  position: relative;
+}
+/* 2024 항목 강조 */
+.timeline-item.featured {
+  border-color: var(--highlight);
+  box-shadow: 0 0 0 1px var(--highlight), 0 8px 32px rgba(59,130,246,0.12);
+}
+.timeline-badge {
+  position: absolute; top: -12px; left: 32px;
+  background: var(--highlight); color: #fff;
+  font-size: 11px; font-weight: 700;
+  padding: 3px 12px; border-radius: 999px;
+  letter-spacing: 0.06em;
+}
+.year {
+  min-width: 100px; font-size: 26px; font-weight: 900;
+  color: var(--highlight); flex-shrink: 0;
+}
+.timeline-content h3 { font-size: 20px; margin-bottom: 8px; }
+.timeline-content p { color: var(--text-secondary); font-size: 15px; line-height: 1.8; }
+
+/* ===== Contact Form ===== */
+.contact-form { max-width: 600px; margin: 0 auto; }
+.form-group { margin-bottom: 20px; text-align: left; }
+.form-group label { display: block; margin-bottom: 8px; color: var(--text-secondary); font-weight: 600; font-size: 14px; }
+.form-control {
+  width: 100%; padding: 13px 16px;
+  border-radius: 12px; border: 1px solid var(--border-color);
+  background: var(--card-bg-solid); color: var(--text-main);
+  font-size: 15px; font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-control:focus {
+  outline: none; border-color: var(--highlight);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+}
+select.form-control {
+  cursor: pointer; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center; background-size: 16px; padding-right: 40px;
+}
+textarea.form-control { min-height: 140px; resize: vertical; }
+.submit-btn { width: 100%; padding: 16px; font-size: 17px; }
+
+/* ===== Footer ===== */
+footer { text-align: center; padding: 72px 24px 48px; }
+.footer-quote { font-size: 36px; font-weight: 900; color: var(--highlight); margin-bottom: 20px; }
+.footer-text { color: var(--text-muted); max-width: 600px; margin: 0 auto 36px; }
+.footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 36px; }
+.footer-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+.footer-links a:hover { color: var(--highlight); }
+.copyright { border-top: 1px solid var(--border-color); padding-top: 24px; color: var(--text-muted); font-size: 13px; }
+.copyright a { color: var(--text-muted); text-decoration: none; }
+.copyright a:hover { color: var(--text-secondary); }
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .hero { padding: 90px 0 56px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 36px; text-align: center; }
+  h1 { font-size: 36px; }
+  .hero-text { font-size: 16px; margin-bottom: 28px; }
+  .button-group { flex-direction: column; align-items: center; }
+  .button-group .btn { width: 100%; max-width: 300px; }
+  .profile-image { width: 160px; height: 160px; }
+  .card-box { padding: 24px 20px; }
+  .stats-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
+  .stat-number { font-size: 22px; }
+  section { padding: 4rem 0; }
+  .section-title { font-size: 28px; }
+  .section-desc { font-size: 15px; margin-bottom: 28px; }
+  .cards-grid { grid-template-columns: 1fr; gap: 14px; }
+  .info-card { padding: 24px 20px; }
+  .info-card h3 { font-size: 19px; }
+  .timeline-item { flex-direction: column; gap: 10px; padding: 22px 20px; }
+  .year { font-size: 20px; min-width: auto; }
+  .timeline-content h3 { font-size: 17px; }
+  .footer-quote { font-size: 24px; }
+  .lang-switcher { top: 12px; left: 12px; font-size: 12px; padding: 6px 12px; }
+  .fixed-actions { top: 12px; right: 12px; gap: 8px; }
+  .icon-btn { width: 40px; height: 40px; font-size: 16px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  h1 { font-size: 28px; }
+  .stats-grid { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
 
-  <!-- Language Switcher -->
-  <div class="lang-switcher">
-    <button class="lang-btn active" id="lang-ko" onclick="setLanguage('ko')">KOR</button>
-    <span>|</span>
-    <button class="lang-btn" id="lang-en" onclick="setLanguage('en')">ENG</button>
-  </div>
+<!-- Language Switcher -->
+<div class="lang-switcher">
+  <button class="lang-btn active" id="lang-ko" onclick="setLanguage('ko')">KOR</button>
+  <span>|</span>
+  <button class="lang-btn" id="lang-en" onclick="setLanguage('en')">ENG</button>
+</div>
 
-  <!-- Fixed Action Buttons -->
-  <div class="fixed-actions">
-    <button class="icon-btn" id="theme-toggle-btn" aria-label="테마 변경">🌙</button>
-
-    <div class="color-theme-wrapper">
-      <button class="icon-btn" aria-label="색상 테마 변경">🎨</button>
-      <div class="color-dropdown">
-        <div class="color-dot active" data-color="blue"    style="background:#3b82f6;" title="Blue"></div>
-        <div class="color-dot"        data-color="purple"  style="background:#8b5cf6;" title="Purple"></div>
-        <div class="color-dot"        data-color="emerald" style="background:#10b981;" title="Emerald"></div>
-        <div class="color-dot"        data-color="red"     style="background:#ef4444;" title="Red"></div>
-        <div class="color-dot"        data-color="orange"  style="background:#f59e0b;" title="Orange"></div>
-        <div class="color-dot"        data-color="pink"    style="background:#ec4899;" title="Pink"></div>
-        <div class="color-dot"        data-color="teal"    style="background:#06b6d4;" title="Teal"></div>
-      </div>
-    </div>
-
-    <div class="game-menu-wrapper">
-      <button class="icon-btn" aria-label="미니게임">🎮</button>
-      <div class="game-dropdown">
-        <a href="tetris.html">🧱 테트리스</a>
-        <a href="omok.html">⚫ 오목</a>
-        <a href="sudoku.html">🔢 수도쿠</a>
-      </div>
+<!-- Fixed Action Buttons -->
+<div class="fixed-actions">
+  <button class="icon-btn" id="theme-toggle-btn" aria-label="테마 변경">🌙</button>
+  <div class="color-theme-wrapper">
+    <button class="icon-btn" aria-label="색상 테마 변경">🎨</button>
+    <div class="color-dropdown">
+      <div class="color-dot active" data-color="blue"    style="background:#3b82f6;" title="Blue"></div>
+      <div class="color-dot"        data-color="purple"  style="background:#8b5cf6;" title="Purple"></div>
+      <div class="color-dot"        data-color="emerald" style="background:#10b981;" title="Emerald"></div>
+      <div class="color-dot"        data-color="red"     style="background:#ef4444;" title="Red"></div>
+      <div class="color-dot"        data-color="orange"  style="background:#f59e0b;" title="Orange"></div>
+      <div class="color-dot"        data-color="pink"    style="background:#ec4899;" title="Pink"></div>
+      <div class="color-dot"        data-color="teal"    style="background:#06b6d4;" title="Teal"></div>
     </div>
   </div>
-
-  <!-- ===== Hero ===== -->
-  <section class="hero">
-    <div class="container hero-grid">
-      <div>
-        <div class="hero-eyebrow">
-          <span data-ko="물리적 현장과 디지털 시스템의 교차점" data-en="Intersection of Physical Sites & Digital Systems">물리적 현장과 디지털 시스템의 교차점</span>
-          <span class="hero-eyebrow-sep">|</span>
-          <span id="visitor-count-box">
-            <span data-ko="방문자" data-en="VISITORS" style="color:var(--text-muted);font-size:12px;letter-spacing:0.08em;font-weight:700;">VISITORS</span>
-            <span id="visitor-count" style="color:var(--highlight);font-weight:700;">—</span>
-          </span>
-        </div>
-
-        <h1 data-ko="오차 없는 통제력,<br><span class='highlight'>데이터로 증명하는 비즈니스</span>" data-en="Zero-Error Control,<br><span class='highlight'>Data-Proven Business</span>">
-          오차 없는 통제력,<br>
-          <span class="highlight">데이터로 증명하는 비즈니스</span>
-        </h1>
-
-        <p class="hero-text" data-ko="넷마블 IDC 인프라 운영부터 10년 이상의 2층버스 무사고 운행까지, 거대 시스템을 변수 없이 통제해 온 책임감을 1인 비즈니스에 이식합니다. 3D 프린팅 정밀 제조와 AI 워크플로우를 결합하여 과정은 철저하게 통제하고, 결과는 명확한 수익과 데이터로 증명합니다." data-en="From Netmarble IDC infrastructure operation to 10+ years of accident-free double-decker bus driving, I transplant the responsibility of controlling massive systems into a solo business. Combining precision 3D printing with AI workflows, I control every process and prove results through clear revenue and data.">
-          넷마블 IDC 인프라 운영부터 10년 이상의 2층버스 무사고 운행까지, 거대 시스템을 변수 없이 통제해 온 책임감을 1인 비즈니스에 이식합니다. 3D 프린팅 정밀 제조와 AI 워크플로우를 결합하여 과정은 철저하게 통제하고, 결과는 명확한 수익과 데이터로 증명합니다.
-        </p>
-
-        <div class="button-group">
-          <a href="https://smartstore.naver.com/createlab_shop" target="_blank" class="btn btn-primary" data-ko="창조Lab 스토어 방문" data-en="Visit CreateLab Store">창조Lab 스토어 방문</a>
-          <a href="https://blog.naver.com/yaho0619" target="_blank" class="btn btn-secondary" data-ko="나의 이야기(블로그)" data-en="My Story (Blog)">나의 이야기(블로그)</a>
-        </div>
-      </div>
-
-      <div class="card-box">
-        <div class="profile-image-wrapper">
-          <img src="profile_photo.jpg" alt="최호 프로필 사진" class="profile-image" fetchpriority="high" decoding="async">
-        </div>
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-label" data-ko="버스 운행 경력" data-en="Bus Driving">버스 운행 경력</div>
-            <div class="stat-number">10+</div>
-            <div class="stat-unit" data-ko="년 무사고" data-en="Yrs Accident-Free">년 무사고</div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-label" data-ko="IT 인프라 경력" data-en="IT Infrastructure">IT 인프라 경력</div>
-            <div class="stat-number">7</div>
-            <div class="stat-unit" data-ko="년 (넷마블 IDC)" data-en="Yrs (Netmarble IDC)">년 (넷마블 IDC)</div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-label" data-ko="3D 프린팅 정밀도" data-en="3D Print Precision">3D 프린팅 정밀도</div>
-            <div class="stat-number">0.1<span style="font-size:16px;">mm</span></div>
-            <div class="stat-unit" data-ko="공정 오차 이내" data-en="Process Tolerance">공정 오차 이내</div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-label" data-ko="AI 활용 도구" data-en="AI Tools">AI 활용 도구</div>
-            <div class="stat-number" style="font-size:16px;color:var(--text-main);">GPT · Claude<br>Gemini · Suno</div>
-            <div class="stat-unit" data-ko="워크플로우 구축" data-en="Workflow Built">워크플로우 구축</div>
-          </div>
-        </div>
-      </div>
+  <div class="game-menu-wrapper">
+    <button class="icon-btn" aria-label="미니게임">🎮</button>
+    <div class="game-dropdown">
+      <a href="tetris.html">🧱 테트리스</a>
+      <a href="omok.html">⚫ 오목</a>
+      <a href="sudoku.html">🔢 수도쿠</a>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- ===== Values ===== -->
-  <section class="section-divider">
-    <div class="container">
-      <h2 class="section-title" data-ko="나를 움직이는 가치" data-en="Values That Drive Me">나를 움직이는 가치</h2>
-      <p class="section-desc" data-ko="단순한 취미나 기록이 아닌, 신념과 메시지를 담아내는 삶의 방향성입니다." data-en="More than hobbies or records — life directions that embody beliefs and messages.">
-        단순한 취미나 기록이 아닌, 신념과 메시지를 담아내는 삶의 방향성입니다.
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-eyebrow">
+        <span data-ko="버스 기사가 만든 AI 자동화 비즈니스" data-en="AI Automation Business Built by a Bus Driver">버스 기사가 만든 AI 자동화 비즈니스</span>
+        <span class="hero-eyebrow-sep">|</span>
+        <span id="visitor-count-box">
+          <span data-ko="방문자" data-en="VISITORS" style="color:var(--text-muted);font-size:12px;letter-spacing:0.08em;font-weight:700;">VISITORS</span>
+          <span id="visitor-count" style="color:var(--highlight);font-weight:700;">—</span>
+        </span>
+      </div>
+
+      <h1 data-ko="운전대도 잡고,<br><span class='highlight'>서버도 잡습니다</span>"
+          data-en="I drive buses.<br><span class='highlight'>I also run servers.</span>">
+        운전대도 잡고,<br>
+        <span class="highlight">서버도 잡습니다</span>
+      </h1>
+
+      <p class="hero-text"
+         data-ko="버스 기사로 10년, IT 인프라 엔지니어로 7년.<br>지금은 AI 툴로 혼자 콘텐츠 플랫폼을 돌립니다.<br>이게 가능하다는 걸 직접 증명하는 중입니다."
+         data-en="10 years as a bus driver. 7 years in IT infrastructure.<br>Now running a content platform solo with AI tools.<br>Proving it's possible — one system at a time.">
+        버스 기사로 10년, IT 인프라 엔지니어로 7년.<br>
+        지금은 AI 툴로 혼자 콘텐츠 플랫폼을 돌립니다.<br>
+        이게 가능하다는 걸 직접 증명하는 중입니다.
       </p>
 
-      <div class="cards-grid">
-        <div class="info-card">
-          <div class="card-icon">🚌</div>
-          <h3 data-ko="본업과 책임감" data-en="Profession & Responsibility">본업과 책임감</h3>
-          <p data-ko="10년 이상의 무사고 2층버스 운행은 사회적 책임의 완수이자, 어떤 상황에서도 원칙을 타협하지 않는 성실함의 증거입니다. 현장에서 검증된 안전 관리 능력은 모든 비즈니스의 탄탄한 기반이 됩니다." data-en="Over 10 years of accident-free double-decker bus operation is proof of fulfilling social responsibility and integrity that never compromises on principles. Field-proven safety management is the solid foundation of all businesses.">
-            10년 이상의 무사고 2층버스 운행은 사회적 책임의 완수이자, 어떤 상황에서도 원칙을 타협하지 않는 성실함의 증거입니다. 현장에서 검증된 안전 관리 능력은 모든 비즈니스의 탄탄한 기반이 됩니다.
-          </p>
-        </div>
+      <div class="button-group">
+        <!-- Primary CTA: 솔리드 -->
+        <a href="https://smartstore.naver.com/createlab_shop" target="_blank"
+           class="btn btn-primary"
+           data-ko="창조Lab 스토어 방문" data-en="Visit CreateLab Store">창조Lab 스토어 방문</a>
+        <!-- Secondary CTA: 아웃라인 -->
+        <a href="https://blog.naver.com/yaho0619" target="_blank"
+           class="btn btn-secondary"
+           data-ko="나의 이야기(블로그)" data-en="My Story (Blog)">나의 이야기(블로그)</a>
+      </div>
+    </div>
 
-        <div class="info-card">
-          <div class="card-icon">🤖</div>
-          <h3 data-ko="창작과 분석의 기록" data-en="Records of Creation & Analysis">창작과 분석의 기록</h3>
-          <p data-ko="'루카 노트' 및 '루카 스튜디오' 채널의 모든 콘텐츠는 철저한 기획과 AI 도구의 결합으로 완성됩니다. 방대한 정보 속에서 핵심을 추출하고, 영상과 오디오를 체계적으로 통제하여 질서 있는 창작물을 만들어냅니다." data-en="All content on 'Luca Note' and 'Luca Studio' channels is completed through thorough planning combined with AI tools. I extract core insights from vast information and systematically control video and audio to create orderly works.">
-            '루카 노트' 및 '루카 스튜디오' 채널의 모든 콘텐츠는 철저한 기획과 AI 도구의 결합으로 완성됩니다. 방대한 정보 속에서 핵심을 추출하고, 영상과 오디오를 체계적으로 통제하여 질서 있는 창작물을 만들어냅니다.
-          </p>
-          <div class="card-actions">
-            <a href="https://www.youtube.com/@루카노트" target="_blank" class="btn btn-secondary" data-ko="루카 노트 →" data-en="Luca Note →">루카 노트 →</a>
-            <a href="https://www.youtube.com/@루카스튜디오" target="_blank" class="btn btn-secondary" data-ko="루카 스튜디오 →" data-en="Luca Studio →">루카 스튜디오 →</a>
-            <a href="song/index.html" class="btn btn-primary" data-ko="자작곡 듣기 🎵" data-en="Original Songs 🎵">자작곡 듣기 🎵</a>
-          </div>
+    <div class="card-box">
+      <div class="profile-image-wrapper">
+        <img src="profile_photo.jpg" alt="최호 프로필 사진" class="profile-image" fetchpriority="high" decoding="async">
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label" data-ko="버스 운행 경력" data-en="Bus Driving">버스 운행 경력</div>
+          <div class="stat-number">10+</div>
+          <div class="stat-unit" data-ko="년 무사고" data-en="Yrs Accident-Free">년 무사고</div>
         </div>
-
-        <div class="info-card">
-          <div class="card-icon">🖨️</div>
-          <h3 data-ko="비즈니스와 정밀함" data-en="Business & Precision">비즈니스와 정밀함</h3>
-          <p data-ko="스마트스토어 창조Lab은 뱀부랩 3D 프린터의 정밀도를 상업적 가치로 치환하는 공간입니다. 0.1mm 단위의 공정 오차를 제어하여 사용자 맞춤형 제품을 설계하고 생산하는 1인 제조 파이프라인을 운영합니다." data-en="Smart Store 'CreateLab' converts the precision of Bambu Lab 3D printers into commercial value. I operate a one-person manufacturing pipeline, designing and producing customized products with 0.1mm process tolerance.">
-            스마트스토어 창조Lab은 뱀부랩 3D 프린터의 정밀도를 상업적 가치로 치환하는 공간입니다. 0.1mm 단위의 공정 오차를 제어하여 사용자 맞춤형 제품을 설계하고 생산하는 1인 제조 파이프라인을 운영합니다.
-          </p>
-          <div class="card-actions">
-            <a href="https://smartstore.naver.com/createlab_shop" target="_blank" class="btn btn-secondary" data-ko="제품 확인하기 →" data-en="Check Products →">제품 확인하기 →</a>
-          </div>
+        <div class="stat-card">
+          <div class="stat-label" data-ko="IT 인프라 경력" data-en="IT Infrastructure">IT 인프라 경력</div>
+          <div class="stat-number">7</div>
+          <div class="stat-unit" data-ko="년 (넷마블 IDC)" data-en="Yrs (Netmarble IDC)">년 (넷마블 IDC)</div>
         </div>
-
-        <div class="info-card">
-          <div class="card-icon">🚀</div>
-          <h3 data-ko="창업 실무 백서" data-en="Startup Practice Whitepaper">창업 실무 백서</h3>
-          <p data-ko="막연한 이론이 아닌, 1인 제조 및 이커머스 비즈니스를 직접 구축하며 얻은 실무 데이터를 공개합니다. 사업자 등록의 법적 기준부터 검색 최적화(SEO)를 통한 상품 노출 노하우까지, 검증된 로드맵을 제공합니다." data-en="I disclose practical data gained from directly building one-person manufacturing and e-commerce businesses, from legal registration standards to SEO know-how for product exposure.">
-            막연한 이론이 아닌, 1인 제조 및 이커머스 비즈니스를 직접 구축하며 얻은 실무 데이터를 공개합니다. 사업자 등록의 법적 기준부터 검색 최적화(SEO)를 통한 상품 노출 노하우까지, 검증된 로드맵을 제공합니다.
-          </p>
-          <div class="card-actions">
-            <a href="startup/index.html" class="btn btn-primary" data-ko="백서 읽어보기 →" data-en="Read Whitepaper →">백서 읽어보기 →</a>
-          </div>
+        <div class="stat-card">
+          <div class="stat-label" data-ko="3D 프린팅 정밀도" data-en="3D Print Precision">3D 프린팅 정밀도</div>
+          <div class="stat-number">0.1<span style="font-size:16px;">mm</span></div>
+          <div class="stat-unit" data-ko="공정 오차 이내" data-en="Process Tolerance">공정 오차 이내</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label" data-ko="AI 활용 도구" data-en="AI Tools">AI 활용 도구</div>
+          <div class="stat-number" style="font-size:16px;color:var(--text-main);">GPT · Claude<br>Gemini · Suno</div>
+          <div class="stat-unit" data-ko="워크플로우 구축" data-en="Workflow Built">워크플로우 구축</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ===== Timeline ===== -->
-  <section class="section-divider">
-    <div class="container">
-      <h2 class="section-title" data-ko="삶의 여정" data-en="Life Journey">삶의 여정</h2>
-      <p class="section-desc" data-ko="기술, 현장, 창업, 창작 — 서로 다른 듯 보이지만 하나의 원칙으로 연결된 여정입니다." data-en="Technology, field work, entrepreneurship, creation — seemingly different, yet connected by a single principle.">
-        기술, 현장, 창업, 창작 — 서로 다른 듯 보이지만 하나의 원칙으로 연결된 여정입니다.
-      </p>
-
-      <div class="timeline-list">
-        <div class="timeline-item">
-          <div class="year">2007</div>
-          <div class="timeline-content">
-            <h3 data-ko="IT 인프라 및 IDC 서버 운영 관리" data-en="IT Infrastructure & IDC Server Operation">IT 인프라 및 IDC 서버 운영 관리</h3>
-            <p data-ko="넷마블에 입사하여 7년간 사내 PC 유지보수 관리, IDC 센터 서버 모니터링 및 서버 설치/구축 작업을 수행했습니다. 시스템의 안정성을 무결점으로 유지하며 체계적인 기술 인프라 제어 능력을 확립한 시기입니다." data-en="Joined Netmarble and performed in-house PC maintenance, IDC server monitoring, and server installation for 7 years. Established systematic infrastructure control with zero-defect stability.">넷마블에 입사하여 7년간 사내 PC 유지보수 관리, IDC 센터 서버 모니터링 및 서버 설치/구축 작업을 수행했습니다. 시스템의 안정성을 무결점으로 유지하며 체계적인 기술 인프라 제어 능력을 확립한 시기입니다.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="year">2014</div>
-          <div class="timeline-content">
-            <h3 data-ko="2층버스 운행 및 대형 모빌리티 안전 관리" data-en="Double-Decker Bus Operation & Mobility Safety">2층버스 운행 및 대형 모빌리티 안전 관리</h3>
-            <p data-ko="시흥교통 광역 노선에서 2층버스를 운행하며 현장의 수많은 변수를 제어하고 있습니다. 10년 이상의 무사고 기록은 단순한 운전 경력을 넘어, 매뉴얼에 입각한 철저한 위기 관리 능력과 지속적인 집중력을 유지해 온 결과입니다." data-en="Operating double-decker buses on Siheung Transport's regional routes, controlling numerous field variables. 10+ years of accident-free record is the result of thorough risk management and sustained concentration.">시흥교통 광역 노선에서 2층버스를 운행하며 현장의 수많은 변수를 제어하고 있습니다. 10년 이상의 무사고 기록은 단순한 운전 경력을 넘어, 매뉴얼에 입각한 철저한 위기 관리 능력과 지속적인 집중력을 유지해 온 결과입니다.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="year">2019</div>
-          <div class="timeline-content">
-            <h3 data-ko="창조Lab 비즈니스 런칭" data-en="Launched CreateLab Business">창조Lab 비즈니스 런칭</h3>
-            <p data-ko="뱀부랩 3D 프린터를 활용한 정밀 제조 솔루션을 구축하고 스마트스토어를 통해 맞춤형 제품을 공급합니다." data-en="Established precision manufacturing solutions using Bambu Lab 3D printers and supplied customized products via Smart Store.">뱀부랩 3D 프린터를 활용한 정밀 제조 솔루션을 구축하고 스마트스토어를 통해 맞춤형 제품을 공급합니다.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="year">2024</div>
-          <div class="timeline-content">
-            <h3 data-ko="A.I 기반 창작 채널 '루카 노트'" data-en="AI-Based Creative Channel 'Luca Note'">A.I 기반 창작 채널 "루카 노트"</h3>
-            <p data-ko="2024년부터 본격적으로 시작된 유튜브 채널로, ChatGPT, Claude, Gemini를 활용한 데이터 분석과 Suno AI 기반 오디오 창작으로 지식 콘텐츠의 질서를 만듭니다." data-en="A YouTube channel started in earnest in 2024, creating order in knowledge content through data analysis using ChatGPT, Claude, Gemini, and audio creation via Suno AI.">2024년부터 본격적으로 시작된 유튜브 채널로, ChatGPT, Claude, Gemini를 활용한 데이터 분석과 Suno AI 기반 오디오 창작으로 지식 콘텐츠의 질서를 만듭니다.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="year" data-ko="매일" data-en="Daily">매일</div>
-          <div class="timeline-content">
-            <h3 data-ko="일상의 규율" data-en="Daily Discipline">일상의 규율</h3>
-            <p data-ko="미니벨로 자전거 국토종주와 페이스를 유지하는 10km 러닝으로 단련하는 일상의 규율을 통해 자아를 통제합니다." data-en="Self-control through daily discipline — cross-country bike tours on a mini-velo and maintaining pace in 10km runs.">미니벨로 자전거 국토종주와 페이스를 유지하는 10km 러닝으로 단련하는 일상의 규율을 통해 자아를 통제합니다.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Skills ===== -->
-  <section id="skills" class="section-divider">
-    <div class="container">
-      <h2 class="section-title" data-ko="보유 역량 및 자격" data-en="Skills & Certifications">보유 역량 및 자격</h2>
-      <p class="section-desc" data-ko="현장과 디지털을 넘나들며 검증된 기술들, 자격증으로 증명된 실행력입니다." data-en="Proven skills across field and digital domains, backed by certified credentials.">
-        현장과 디지털을 넘나들며 검증된 기술들, 자격증으로 증명된 실행력입니다.
-      </p>
-      <div class="cards-grid">
-        <div class="info-card">
-          <h3 data-ko="전문 기술" data-en="Professional Skills">전문 기술</h3>
-          <ul>
-            <li data-ko="대형 버스 정밀 운전" data-en="Precision Large Bus Driving">대형 버스 정밀 운전</li>
-            <li data-ko="디지털 오디오 믹싱 (Behringer X32)" data-en="Digital Audio Mixing (Behringer X32)">디지털 오디오 믹싱 (Behringer X32)</li>
-            <li data-ko="3D 디자인 (Fusion 360)" data-en="3D Design (Fusion 360)">3D 디자인 (Fusion 360)</li>
-            <li data-ko="A.I 워크플로우 (ChatGPT, Claude, Gemini, Suno AI)" data-en="A.I Workflow (ChatGPT, Claude, Gemini, Suno AI)">A.I 워크플로우 (ChatGPT, Claude, Gemini, Suno AI)</li>
-            <li data-ko="응급처치 및 심폐소생술" data-en="First Aid & CPR">응급처치 및 심폐소생술</li>
-          </ul>
-        </div>
-        <div class="info-card">
-          <h3 data-ko="국가 자격" data-en="National Certifications">국가 자격</h3>
-          <ul>
-            <li data-ko="굴삭기 운전 기능사" data-en="Excavator Operator">굴삭기 운전 기능사</li>
-            <li data-ko="지게차 운전 기능사" data-en="Forklift Operator">지게차 운전 기능사</li>
-            <li data-ko="대형 운전 면허" data-en="Large Vehicle License">대형 운전 면허</li>
-            <li data-ko="사무자동화 / 워드 1급" data-en="Office Automation / Word Processing (Grade 1)">사무자동화 / 워드 1급</li>
-          </ul>
-        </div>
-        <div class="info-card">
-          <h3 data-ko="핵심 역량" data-en="Core Competencies">핵심 역량</h3>
-          <ul>
-            <li data-ko="10년 이상 무사고 2층버스 운행" data-en="10+ Years Accident-Free Bus Operation">10년 이상 무사고 2층버스 운행</li>
-            <li data-ko="A.I 활용 효율적 콘텐츠 기획" data-en="Efficient Content Planning using AI">A.I 활용 효율적 콘텐츠 기획</li>
-            <li data-ko="프로젝트 관리 및 공정 제어" data-en="Project Management & Process Control">프로젝트 관리 및 공정 제어</li>
-            <li data-ko="자전거 국토종주 기반의 인내력" data-en="Endurance from Cross-Country Bike Tours">자전거 국토종주 기반의 인내력</li>
-          </ul>
-        </div>
-        <div class="info-card">
-          <h3 data-ko="비즈니스 및 운영" data-en="Business & Operations">비즈니스 및 운영</h3>
-          <ul>
-            <li data-ko="네이버 스마트스토어 스페이스 기획 및 관리" data-en="Naver Smart Store Planning & Management">네이버 스마트스토어 스페이스 기획 및 관리</li>
-            <li data-ko="데이터 기반 상품 키워드 및 SEO 최적화 분석" data-en="Data-Driven Keyword & SEO Analysis">데이터 기반 상품 키워드 및 SEO 최적화 분석</li>
-            <li data-ko="1인 제조 비즈니스 공정 원가 및 수익 정산" data-en="Solo Manufacturing Cost & Profit Settlement">1인 제조 비즈니스 공정 원가 및 수익 정산</li>
-            <li data-ko="멀티 채널 연계 디지털 마케팅 프로세스 실행" data-en="Multi-Channel Digital Marketing Execution">멀티 채널 연계 디지털 마케팅 프로세스 실행</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Contact ===== -->
-  <section id="contact" class="section-divider">
-    <div class="container">
-      <h2 class="section-title" data-ko="제휴 및 문의" data-en="Partnership & Inquiries">제휴 및 문의</h2>
-      <p class="section-desc" data-ko="협업 제안이나 궁금하신 점이 있다면 아래 폼을 통해 남겨주세요." data-en="Please leave a message below for collaboration proposals or any questions.">
-        협업 제안이나 궁금하신 점이 있다면 아래 폼을 통해 남겨주세요.
-      </p>
-
-      <div class="card-box contact-form">
-        <form action="https://formspree.io/f/mzdonqqw" method="POST">
-          <div class="form-group">
-            <label for="name" data-ko="성함 / 업체명" data-en="Name / Company">성함 / 업체명</label>
-            <input type="text" id="name" name="name" class="form-control" placeholder="성함 또는 업체명을 입력해주세요" required>
-          </div>
-
-          <div class="form-group">
-            <label for="email" data-ko="이메일 주소" data-en="Email Address">이메일 주소</label>
-            <input type="email" id="email" name="_replyto" class="form-control" placeholder="example@email.com" required>
-          </div>
-
-          <div class="form-group">
-            <label for="subject" data-ko="문의 유형" data-en="Inquiry Type">문의 유형</label>
-            <select id="subject" name="subject" class="form-control">
-              <option value="제휴 문의" data-ko="제휴 문의" data-en="Partnership">제휴 문의</option>
-              <option value="3D 프린팅 의뢰" data-ko="3D 프린팅 의뢰" data-en="3D Printing">3D 프린팅 의뢰</option>
-              <option value="콘텐츠 협업" data-ko="콘텐츠 협업" data-en="Content Collaboration">콘텐츠 협업</option>
-              <option value="기타 문의" data-ko="기타 문의" data-en="Others">기타 문의</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="message" data-ko="문의 내용" data-en="Message">문의 내용</label>
-            <textarea id="message" name="message" class="form-control" placeholder="상세한 내용을 입력해주세요" required></textarea>
-          </div>
-
-          <input type="text" name="_gotcha" style="display:none">
-
-          <button type="submit" class="btn btn-primary submit-btn" data-ko="문의 보내기" data-en="Send Message">문의 보내기</button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Footer ===== -->
-  <footer class="section-divider">
-    <div class="footer-quote" data-ko=""기록은 결국 방향을 남긴다."" data-en=""Records ultimately leave a direction."">
-      "기록은 결국 방향을 남긴다."
-    </div>
-    <p class="footer-text" data-ko="성실함과 체계적인 질서로 구축된 삶의 궤적을 기록합니다." data-en="Recording life trajectories built with integrity and systematic order.">
-      성실함과 체계적인 질서로 구축된 삶의 궤적을 기록합니다.
+<!-- ===== Values ===== -->
+<section class="section-divider">
+  <div class="container">
+    <h2 class="section-title" data-ko="나를 움직이는 가치" data-en="Values That Drive Me">나를 움직이는 가치</h2>
+    <p class="section-desc"
+       data-ko="취미도, 기록도 아닙니다. 신념이 방향을 만들고, 방향이 시스템을 만듭니다."
+       data-en="Not hobbies. Not records. Beliefs make direction. Direction makes systems.">
+      취미도, 기록도 아닙니다. 신념이 방향을 만들고, 방향이 시스템을 만듭니다.
     </p>
-    <div class="copyright">
-      © 2024 CHOI HO. ALL RIGHTS RESERVED.
-      <span style="margin:0 8px;opacity:0.3;">|</span>
-      <a href="privacy.html">개인정보처리방침</a>
+    <div class="cards-grid">
+
+      <div class="info-card">
+        <div class="card-icon">🚌</div>
+        <h3 data-ko="본업과 책임감" data-en="Profession & Responsibility">본업과 책임감</h3>
+        <p data-ko="버스 핸들을 잡으면 승객 수십 명의 안전이 내 손에 달립니다. 10년 동안 무사고로 운행한 건 특별한 재능이 아니라, 매일 같은 기준을 지킨 결과입니다. 그 습관이 비즈니스에도 그대로 옮겨왔습니다."
+            data-en="When I hold the wheel, the safety of dozens of passengers is in my hands. 10 years accident-free isn't talent — it's showing up with the same standard every single day. That habit carried over to business.">
+          버스 핸들을 잡으면 승객 수십 명의 안전이 내 손에 달립니다. 10년 동안 무사고로 운행한 건 특별한 재능이 아니라, 매일 같은 기준을 지킨 결과입니다. 그 습관이 비즈니스에도 그대로 옮겨왔습니다.
+        </p>
+      </div>
+
+      <div class="info-card">
+        <div class="card-icon">🤖</div>
+        <h3 data-ko="창작과 분석의 기록" data-en="Creation & Analysis">창작과 분석의 기록</h3>
+        <p data-ko="루카피드는 뉴스를 자동으로 수집하고, AI가 대본을 쓰고, 영상이 혼자 유튜브에 올라갑니다. 제가 자는 동안에도요. 이 시스템을 혼자 만들었고, 지금도 고치고 있습니다."
+            data-en="Lucafeed automatically gathers news, AI writes the scripts, and videos upload to YouTube on their own. Even while I sleep. I built this system alone. Still improving it.">
+          루카피드는 뉴스를 자동으로 수집하고, AI가 대본을 쓰고, 영상이 혼자 유튜브에 올라갑니다. 제가 자는 동안에도요. 이 시스템을 혼자 만들었고, 지금도 고치고 있습니다.
+        </p>
+        <div class="card-actions">
+          <a href="https://www.youtube.com/@루카노트" target="_blank" class="btn btn-secondary"
+             data-ko="루카 노트 →" data-en="Luca Note →">루카 노트 →</a>
+          <a href="https://www.youtube.com/@루카스튜디오" target="_blank" class="btn btn-secondary"
+             data-ko="루카 스튜디오 →" data-en="Luca Studio →">루카 스튜디오 →</a>
+          <a href="song/index.html" class="btn btn-primary"
+             data-ko="자작곡 듣기 🎵" data-en="Original Songs 🎵">자작곡 듣기 🎵</a>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="card-icon">🖨️</div>
+        <h3 data-ko="비즈니스와 정밀함" data-en="Business & Precision">비즈니스와 정밀함</h3>
+        <p data-ko="3D 프린터로 제품을 만들 때 0.1mm 오차가 납품 성패를 가릅니다. 버스 운행이나 서버 운영이나 결국 같은 원칙입니다. 기준을 정하고, 그 기준을 지키는 것."
+            data-en="When making products with a 3D printer, a 0.1mm error decides whether it ships or not. Driving a bus, running a server — same principle. Set a standard. Keep it.">
+          3D 프린터로 제품을 만들 때 0.1mm 오차가 납품 성패를 가릅니다. 버스 운행이나 서버 운영이나 결국 같은 원칙입니다. 기준을 정하고, 그 기준을 지키는 것.
+        </p>
+        <div class="card-actions">
+          <a href="https://smartstore.naver.com/createlab_shop" target="_blank"
+             class="btn btn-secondary"
+             data-ko="제품 확인하기 →" data-en="Check Products →">제품 확인하기 →</a>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="card-icon">🚀</div>
+        <h3 data-ko="창업 실무 백서" data-en="Startup Practice Whitepaper">창업 실무 백서</h3>
+        <p data-ko="사업자 내는 법, 스마트스토어 세팅, SEO로 제품 노출시키는 법. 전부 직접 해봤고, 잘된 것과 안 된 것 모두 기록해뒀습니다. 그게 이 백서입니다."
+            data-en="How to register a business, set up a Smart Store, get products found via SEO. I've done all of it. What worked and what didn't — both are recorded. That's what this whitepaper is.">
+          사업자 내는 법, 스마트스토어 세팅, SEO로 제품 노출시키는 법. 전부 직접 해봤고, 잘된 것과 안 된 것 모두 기록해뒀습니다. 그게 이 백서입니다.
+        </p>
+        <div class="card-actions">
+          <a href="startup/index.html" class="btn btn-primary"
+             data-ko="백서 읽어보기 →" data-en="Read Whitepaper →">백서 읽어보기 →</a>
+        </div>
+      </div>
+
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const html = document.documentElement;
+<!-- ===== Timeline ===== -->
+<section class="section-divider">
+  <div class="container">
+    <h2 class="section-title" data-ko="삶의 여정" data-en="Life Journey">삶의 여정</h2>
+    <p class="section-desc"
+       data-ko="서버실, 버스, 3D 프린터, AI — 겉으로 달라 보여도 하나의 원칙으로 이어집니다."
+       data-en="Server room, bus, 3D printer, AI — different surfaces, one principle.">
+      서버실, 버스, 3D 프린터, AI — 겉으로 달라 보여도 하나의 원칙으로 이어집니다.
+    </p>
+    <div class="timeline-list">
 
-      // --- Theme ---
-      const themeBtn = document.getElementById('theme-toggle-btn');
-      const savedTheme = localStorage.getItem('theme') || 'dark';
-      html.setAttribute('data-theme', savedTheme);
-      themeBtn.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+      <div class="timeline-item">
+        <div class="year">2007</div>
+        <div class="timeline-content">
+          <h3 data-ko="IT 인프라 및 IDC 서버 운영 관리" data-en="IT Infrastructure & IDC Server Operation">IT 인프라 및 IDC 서버 운영 관리</h3>
+          <p data-ko="넷마블 IDC에서 서버가 죽으면 새벽이든 주말이든 뛰어갔습니다. 7년 동안 그랬고, 덕분에 시스템이 왜 망가지는지 몸으로 배웠습니다."
+             data-en="When a server died at Netmarble IDC, I ran in — midnight or weekend, didn't matter. 7 years of that. Learned what breaks systems by living it.">
+            넷마블 IDC에서 서버가 죽으면 새벽이든 주말이든 뛰어갔습니다. 7년 동안 그랬고, 덕분에 시스템이 왜 망가지는지 몸으로 배웠습니다.
+          </p>
+        </div>
+      </div>
 
-      themeBtn.addEventListener('click', () => {
-        const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        html.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-        themeBtn.textContent = next === 'dark' ? '🌙' : '☀️';
-      });
+      <div class="timeline-item">
+        <div class="year">2014</div>
+        <div class="timeline-content">
+          <h3 data-ko="2층버스 운행 및 대형 모빌리티 안전 관리" data-en="Double-Decker Bus Operation & Mobility Safety">2층버스 운행 및 대형 모빌리티 안전 관리</h3>
+          <p data-ko="시흥~광역 노선, 하루 두 번씩 10년. 10년 무사고는 제가 특별해서가 아닙니다. 매일 똑같이 했기 때문입니다."
+             data-en="Siheung to metro, twice a day for 10 years. 10 years accident-free isn't because I'm special. It's because I did the same thing every day.">
+            시흥~광역 노선, 하루 두 번씩 10년. 10년 무사고는 제가 특별해서가 아닙니다. 매일 똑같이 했기 때문입니다.
+          </p>
+        </div>
+      </div>
 
-      // --- Color Theme ---
-      function setColorTheme(color) {
-        html.setAttribute('data-color-theme', color);
-        localStorage.setItem('color-theme', color);
-        document.querySelectorAll('.color-dot').forEach(dot => {
-          dot.classList.toggle('active', dot.dataset.color === color);
-        });
-      }
+      <div class="timeline-item">
+        <div class="year">2019</div>
+        <div class="timeline-content">
+          <h3 data-ko="창조Lab 비즈니스 런칭" data-en="Launched CreateLab Business">창조Lab 비즈니스 런칭</h3>
+          <p data-ko="3D 프린터 한 대로 시작했습니다. 설계하고, 출력하고, 팔았습니다. 지금도 같은 방식으로 운영 중입니다."
+             data-en="Started with one 3D printer. Design, print, sell. Still running the same way.">
+            3D 프린터 한 대로 시작했습니다. 설계하고, 출력하고, 팔았습니다. 지금도 같은 방식으로 운영 중입니다.
+          </p>
+        </div>
+      </div>
 
-      document.querySelectorAll('.color-dot').forEach(dot => {
-        dot.addEventListener('click', () => setColorTheme(dot.dataset.color));
-      });
+      <!-- 2024 강조 항목 -->
+      <div class="timeline-item featured">
+        <div class="timeline-badge" data-ko="진행 중" data-en="ONGOING">진행 중</div>
+        <div class="year">2024</div>
+        <div class="timeline-content">
+          <h3 data-ko="AI 기반 콘텐츠 플랫폼 '루카피드'" data-en="AI-Based Content Platform 'Lucafeed'">AI 기반 콘텐츠 플랫폼 '루카피드'</h3>
+          <p data-ko="ChatGPT, Claude, Suno AI를 묶어서 혼자 유튜브 채널을 운영합니다. 영상 기획부터 음악까지 AI가 보조하고, 판단은 제가 합니다."
+             data-en="Running a YouTube channel solo, tying together ChatGPT, Claude, and Suno AI. AI assists from planning to music. I make the calls.">
+            ChatGPT, Claude, Suno AI를 묶어서 혼자 유튜브 채널을 운영합니다. 영상 기획부터 음악까지 AI가 보조하고, 판단은 제가 합니다.
+          </p>
+        </div>
+      </div>
 
-      setColorTheme(localStorage.getItem('color-theme') || 'blue');
+      <div class="timeline-item">
+        <div class="year" data-ko="매일" data-en="Daily">매일</div>
+        <div class="timeline-content">
+          <h3 data-ko="일상의 규율" data-en="Daily Discipline">일상의 규율</h3>
+          <p data-ko="매일 10km 뜁니다. 특별한 이유는 없습니다. 하면 되니까 합니다."
+             data-en="10km every day. No special reason. I do it because I can.">
+            매일 10km 뜁니다. 특별한 이유는 없습니다. 하면 되니까 합니다.
+          </p>
+        </div>
+      </div>
 
-      // --- Language ---
-      function setLanguage(lang) {
-        document.querySelectorAll('[data-ko]').forEach(el => {
-          const text = lang === 'ko' ? el.getAttribute('data-ko') : el.getAttribute('data-en');
-          if (text) el.innerHTML = text;
-        });
-        document.querySelectorAll('input[data-ko-placeholder], textarea[data-ko-placeholder]').forEach(el => {
-          el.placeholder = lang === 'ko' ? el.getAttribute('data-ko-placeholder') : el.getAttribute('data-en-placeholder');
-        });
-        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-        const activeBtn = document.getElementById(`lang-${lang}`);
-        if (activeBtn) activeBtn.classList.add('active');
-        localStorage.setItem('preferred-lang', lang);
-      }
+    </div>
+  </div>
+</section>
 
-      window.setLanguage = setLanguage;
-      setLanguage(localStorage.getItem('preferred-lang') || 'ko');
+<!-- ===== Skills ===== -->
+<section id="skills" class="section-divider">
+  <div class="container">
+    <h2 class="section-title" data-ko="보유 역량 및 자격" data-en="Skills & Certifications">보유 역량 및 자격</h2>
+    <p class="section-desc"
+       data-ko="현장에서 쓴 기술, 시험으로 딴 자격증. 전부 실제로 써먹고 있습니다."
+       data-en="Skills used in the field, certifications earned by exam. All actively in use.">
+      현장에서 쓴 기술, 시험으로 딴 자격증. 전부 실제로 써먹고 있습니다.
+    </p>
+    <div class="cards-grid">
+      <div class="info-card">
+        <h3 data-ko="전문 기술" data-en="Professional Skills">전문 기술</h3>
+        <ul>
+          <li data-ko="대형 버스 정밀 운전" data-en="Precision Large Bus Driving">대형 버스 정밀 운전</li>
+          <li data-ko="디지털 오디오 믹싱 (Behringer X32)" data-en="Digital Audio Mixing (Behringer X32)">디지털 오디오 믹싱 (Behringer X32)</li>
+          <li data-ko="3D 디자인 (Fusion 360)" data-en="3D Design (Fusion 360)">3D 디자인 (Fusion 360)</li>
+          <li data-ko="A.I 워크플로우 (ChatGPT, Claude, Gemini, Suno AI)" data-en="A.I Workflow (ChatGPT, Claude, Gemini, Suno AI)">A.I 워크플로우 (ChatGPT, Claude, Gemini, Suno AI)</li>
+          <li data-ko="응급처치 및 심폐소생술" data-en="First Aid & CPR">응급처치 및 심폐소생술</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3 data-ko="국가 자격" data-en="National Certifications">국가 자격</h3>
+        <ul>
+          <li data-ko="굴삭기 운전 기능사" data-en="Excavator Operator License">굴삭기 운전 기능사</li>
+          <li data-ko="지게차 운전 기능사" data-en="Forklift Operator License">지게차 운전 기능사</li>
+          <li data-ko="대형 운전 면허" data-en="Large Vehicle License">대형 운전 면허</li>
+          <li data-ko="사무자동화 / 워드 1급" data-en="Office Automation / Word Level 1">사무자동화 / 워드 1급</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3 data-ko="핵심 역량" data-en="Core Competencies">핵심 역량</h3>
+        <ul>
+          <li data-ko="10년 이상 무사고 2층버스 운행" data-en="10+ Years Accident-Free Bus Operation">10년 이상 무사고 2층버스 운행</li>
+          <li data-ko="A.I 활용 효율적 콘텐츠 기획" data-en="AI-Powered Content Planning">A.I 활용 효율적 콘텐츠 기획</li>
+          <li data-ko="프로젝트 관리 및 공정 제어" data-en="Project Management & Process Control">프로젝트 관리 및 공정 제어</li>
+          <li data-ko="자전거 국토종주 기반의 인내력" data-en="Endurance from Cross-Country Cycling">자전거 국토종주 기반의 인내력</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3 data-ko="비즈니스 및 운영" data-en="Business & Operations">비즈니스 및 운영</h3>
+        <ul>
+          <li data-ko="네이버 스마트스토어 스페이스 기획 및 관리" data-en="Naver Smart Store Space Planning & Management">네이버 스마트스토어 스페이스 기획 및 관리</li>
+          <li data-ko="데이터 기반 상품 키워드 및 SEO 최적화 분석" data-en="Data-Driven Product Keyword & SEO Analysis">데이터 기반 상품 키워드 및 SEO 최적화 분석</li>
+          <li data-ko="1인 제조 비즈니스 공정 원가 및 수익 정산" data-en="Solo Manufacturing Cost & Revenue Accounting">1인 제조 비즈니스 공정 원가 및 수익 정산</li>
+          <li data-ko="멀티 채널 연계 디지털 마케팅 프로세스 실행" data-en="Multi-Channel Digital Marketing Process Execution">멀티 채널 연계 디지털 마케팅 프로세스 실행</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Contact ===== -->
+<section class="section-divider">
+  <div class="container">
+    <h2 class="section-title" data-ko="제휴 및 문의" data-en="Inquiry & Collaboration">제휴 및 문의</h2>
+    <p class="section-desc"
+       data-ko="협업 제안이나 궁금하신 점이 있으면 남겨주세요. 직접 확인하고 답변드립니다."
+       data-en="Leave a message for collaboration or questions. I'll check and reply personally.">
+      협업 제안이나 궁금하신 점이 있으면 남겨주세요. 직접 확인하고 답변드립니다.
+    </p>
+    <form class="contact-form" id="contact-form">
+      <div class="form-group">
+        <label for="name" data-ko="성함 / 업체명" data-en="Name / Company">성함 / 업체명</label>
+        <input type="text" id="name" name="name" class="form-control" required />
+      </div>
+      <div class="form-group">
+        <label for="email" data-ko="이메일 주소" data-en="Email Address">이메일 주소</label>
+        <input type="email" id="email" name="email" class="form-control" required />
+      </div>
+      <div class="form-group">
+        <label for="inquiry-type" data-ko="문의 유형" data-en="Inquiry Type">문의 유형</label>
+        <select id="inquiry-type" name="inquiry-type" class="form-control">
+          <option data-ko="제휴 문의" data-en="Partnership">제휴 문의</option>
+          <option data-ko="3D 프린팅 의뢰" data-en="3D Printing Order">3D 프린팅 의뢰</option>
+          <option data-ko="콘텐츠 협업" data-en="Content Collaboration">콘텐츠 협업</option>
+          <option data-ko="기타 문의" data-en="Other">기타 문의</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message" data-ko="문의 내용" data-en="Message">문의 내용</label>
+        <textarea id="message" name="message" class="form-control" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary submit-btn" data-ko="문의 보내기" data-en="Send Message">문의 보내기</button>
+    </form>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="footer-quote" data-ko='"기록은 결국 방향을 남긴다."' data-en='"Records leave direction."'>"기록은 결국 방향을 남긴다."</div>
+  <p class="footer-text"
+     data-ko="꾸준히 하면 쌓입니다. 그 기록이 여기 있습니다."
+     data-en="Consistency compounds. The record is here.">
+    꾸준히 하면 쌓입니다. 그 기록이 여기 있습니다.
+  </p>
+  <div class="footer-links">
+    <a href="privacy.html" data-ko="개인정보처리방침" data-en="Privacy Policy">개인정보처리방침</a>
+    <a href="https://blog.naver.com/yaho0619" target="_blank" data-ko="블로그" data-en="Blog">블로그</a>
+    <a href="startup/index.html" data-ko="창조Lab" data-en="CreateLab">창조Lab</a>
+  </div>
+  <div class="copyright">
+    © 2024 CHOI HO. ALL RIGHTS RESERVED.
+  </div>
+</footer>
+
+<script>
+/* ===== Theme Toggle ===== */
+const themeBtn = document.getElementById('theme-toggle-btn');
+let isDark = true;
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) { isDark = savedTheme === 'dark'; applyTheme(); }
+
+themeBtn.addEventListener('click', () => { isDark = !isDark; applyTheme(); localStorage.setItem('theme', isDark ? 'dark' : 'light'); });
+
+function applyTheme() {
+  document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  themeBtn.textContent = isDark ? '🌙' : '☀️';
+}
+
+/* ===== Color Theme ===== */
+const savedColor = localStorage.getItem('colorTheme') || 'blue';
+document.body.setAttribute('data-color-theme', savedColor);
+document.querySelectorAll('.color-dot').forEach(dot => {
+  if (dot.dataset.color === savedColor) dot.classList.add('active');
+  dot.addEventListener('click', () => {
+    document.body.setAttribute('data-color-theme', dot.dataset.color);
+    localStorage.setItem('colorTheme', dot.dataset.color);
+    document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+    dot.classList.add('active');
+  });
+});
+
+/* ===== Language ===== */
+function setLanguage(lang) {
+  document.querySelectorAll('[data-ko]').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (!val) return;
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = val;
+    else el.innerHTML = val;
+  });
+  document.getElementById('lang-ko').classList.toggle('active', lang === 'ko');
+  document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+  localStorage.setItem('lang', lang);
+}
+const savedLang = localStorage.getItem('lang') || 'ko';
+if (savedLang === 'en') setLanguage('en');
+
+/* ===== Visitor Counter ===== */
+async function loadVisitorCount() {
+  try {
+    const res = await fetch('/api/visitor');
+    if (!res.ok) return;
+    const data = await res.json();
+    document.getElementById('visitor-count').textContent = data.count?.toLocaleString() ?? '—';
+  } catch {}
+}
+loadVisitorCount();
+
+/* ===== Contact Form ===== */
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('.submit-btn');
+  const lang = localStorage.getItem('lang') || 'ko';
+  btn.textContent = lang === 'ko' ? '전송 중...' : 'Sending...';
+  btn.disabled = true;
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: this.name.value,
+        email: this.email.value,
+        type: this['inquiry-type'].value,
+        message: this.message.value
+      })
     });
-  </script>
-
-  <script defer>
-    (function () {
-      var KEY = 'visitor_counted';
-      var EXPIRE = 24 * 60 * 60 * 1000;
-      var last = localStorage.getItem(KEY);
-      var isNew = !last || (Date.now() - parseInt(last, 10)) > EXPIRE;
-      var endpoint = isNew ? '/api/view' : '/api/view?readonly=true';
-
-      fetch(endpoint)
-        .then(function (res) {
-          if (!res.ok) throw new Error('fail');
-          return res.json();
-        })
-        .then(function (data) {
-          if (data && typeof data.value !== 'undefined') {
-            document.getElementById('visitor-count').textContent = data.value.toLocaleString();
-            if (isNew) localStorage.setItem(KEY, Date.now().toString());
-          }
-        })
-        .catch(function () {
-          var box = document.getElementById('visitor-count-box');
-          if (box) box.style.display = 'none';
-        });
-    })();
-  </script>
-
+    if (res.ok) {
+      btn.textContent = lang === 'ko' ? '✓ 전송 완료' : '✓ Sent';
+      this.reset();
+    } else throw new Error();
+  } catch {
+    btn.textContent = lang === 'ko' ? '다시 시도해주세요' : 'Try Again';
+    btn.disabled = false;
+  }
+});
+</script>
 </body>
 </html>
