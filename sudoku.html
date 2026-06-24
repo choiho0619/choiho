@@ -148,6 +148,9 @@
         .btn:hover { border-color: #3b82f6; }
         .btn.check-btn { border-color: rgba(16,185,129,0.4); color: #10b981; }
         .btn.check-btn:hover { border-color: #10b981; }
+        body.in-iframe header {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -176,6 +179,9 @@
     </div>
 
     <script>
+        if (window.self !== window.top) {
+            document.body.classList.add('in-iframe');
+        }
         let solution, puzzle, userGrid, selected, timerInterval, seconds;
         let difficulty = 'easy';
         const REMOVE = { easy: 35, medium: 46, hard: 55 };

@@ -177,6 +177,9 @@
                 font-size: 1.5rem;
             }
         }
+        body.in-iframe .back-link {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -204,6 +207,9 @@
     </div>
 
     <script>
+        if (window.self !== window.top) {
+            document.body.classList.add('in-iframe');
+        }
         const canvas = document.getElementById('tetris');
         const context = canvas.getContext('2d');
         const scoreElement = document.getElementById('score');

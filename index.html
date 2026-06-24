@@ -59,9 +59,9 @@
         <div class="game-menu-wrapper">
           <button class="icon-btn" aria-label="미니게임">🎮</button>
           <div class="game-dropdown">
-            <a href="tetris.html">🧱 테트리스</a>
-            <a href="omok.html">⚫ 오목</a>
-            <a href="sudoku.html">🔢 수도쿠</a>
+            <a href="index.html?game=tetris" class="game-link" data-game="tetris">🧱 테트리스</a>
+            <a href="index.html?game=omok" class="game-link" data-game="omok">⚫ 오목</a>
+            <a href="index.html?game=sudoku" class="game-link" data-game="sudoku">🔢 수도쿠</a>
           </div>
         </div>
 
@@ -116,30 +116,44 @@
         </div>
       </div>
 
-      <div class="card-box">
-        <div class="profile-image-wrapper">
-          <img src="profile_photo.jpg" alt="최호 프로필 사진" class="profile-image" fetchpriority="high" decoding="async">
+      <div class="card-box" id="profile-card-box" style="position: relative; overflow: hidden; min-height: 480px;">
+        <!-- Profile View -->
+        <div id="profile-view" style="display: block;">
+          <div class="profile-image-wrapper">
+            <img src="profile_photo.jpg" alt="최호 프로필 사진" class="profile-image" fetchpriority="high" decoding="async">
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-label" data-ko="버스 운행 경력" data-en="Bus Driving">버스 운행 경력</div>
+              <div class="stat-number">10+</div>
+              <div class="stat-unit" data-ko="년 무사고" data-en="Yrs Accident-Free">년 무사고</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label" data-ko="IT 인프라 경력" data-en="IT Infrastructure">IT 인프라 경력</div>
+              <div class="stat-number">7</div>
+              <div class="stat-unit" data-ko="년 (넷마블 IDC)" data-en="Yrs (Netmarble IDC)">년 (넷마블 IDC)</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label" data-ko="3D 프린팅 정밀도" data-en="3D Print Precision">3D 프린팅 정밀도</div>
+              <div class="stat-number">0.1<span style="font-size:16px;">mm</span></div>
+              <div class="stat-unit" data-ko="공정 오차 이내" data-en="Process Tolerance">공정 오차 이내</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label" data-ko="AI 활용 도구" data-en="AI Tools">AI 활용 도구</div>
+              <div class="stat-number" style="font-size:16px;color:var(--text-main);">GPT · Claude<br>Gemini · Suno</div>
+              <div class="stat-unit" data-ko="워크플로우 구축" data-en="Workflow Built">워크플로우 구축</div>
+            </div>
+          </div>
         </div>
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-label" data-ko="버스 운행 경력" data-en="Bus Driving">버스 운행 경력</div>
-            <div class="stat-number">10+</div>
-            <div class="stat-unit" data-ko="년 무사고" data-en="Yrs Accident-Free">년 무사고</div>
+
+        <!-- Game Embed View -->
+        <div id="game-view" style="display: none; width: 100%; height: 100%; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+            <h3 id="game-title" style="margin: 0; font-size: 16px; font-weight: 700; color: var(--highlight);">🎮 게임 중</h3>
+            <button id="close-game-btn" class="btn btn-secondary" style="padding: 4px 10px; font-size: 12px; border-radius: 8px; margin: 0;">프로필 보기 ↩</button>
           </div>
-          <div class="stat-card">
-            <div class="stat-label" data-ko="IT 인프라 경력" data-en="IT Infrastructure">IT 인프라 경력</div>
-            <div class="stat-number">7</div>
-            <div class="stat-unit" data-ko="년 (넷마블 IDC)" data-en="Yrs (Netmarble IDC)">년 (넷마블 IDC)</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label" data-ko="3D 프린팅 정밀도" data-en="3D Print Precision">3D 프린팅 정밀도</div>
-            <div class="stat-number">0.1<span style="font-size:16px;">mm</span></div>
-            <div class="stat-unit" data-ko="공정 오차 이내" data-en="Process Tolerance">공정 오차 이내</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label" data-ko="AI 활용 도구" data-en="AI Tools">AI 활용 도구</div>
-            <div class="stat-number" style="font-size:16px;color:var(--text-main);">GPT · Claude<br>Gemini · Suno</div>
-            <div class="stat-unit" data-ko="워크플로우 구축" data-en="Workflow Built">워크플로우 구축</div>
+          <div style="flex-grow: 1; position: relative; width: 100%; height: 420px; border-radius: 12px; overflow: hidden; background: #050505;">
+            <iframe id="game-iframe" src="" style="width: 100%; height: 100%; border: none; overflow: hidden;" scrolling="no"></iframe>
           </div>
         </div>
       </div>
@@ -277,6 +291,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=1.0.1"></script>
 </body>
 </html>

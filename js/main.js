@@ -148,4 +148,77 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  /* ===== Game Embed Logic ===== */
+  const profileView = document.getElementById('profile-view');
+  const gameView = document.getElementById('game-view');
+  const gameIframe = document.getElementById('game-iframe');
+  const gameTitle = document.getElementById('game-title');
+  const closeGameBtn = document.getElementById('close-game-btn');
+
+  const gameTitles = {
+    tetris: '🧱 테트리스',
+    omok: '⚫ 오목',
+    sudoku: '🔢 수도쿠'
+  };
+
+  function startEmbeddedGame(gameId) {
+    if (!profileView || !gameView || !gameIframe || !gameTitle) return;
+
+    // Show game view, hide profile view
+    profileView.style.display = 'none';
+    gameView.style.display = 'flex';
+
+    // Set game title
+    gameTitle.textContent = gameTitles[gameId] || '🎮 미니게임';
+
+    // Load game URL in iframe
+    gameIframe.src = `${gameId}.html`;
+  }
+
+  function closeEmbeddedGame() {
+    if (!profileView || !gameView || !gameIframe) return;
+
+    // Show profile view, hide game view
+    profileView.style.display = 'block';
+    gameView.style.display = 'none';
+
+    // Reset iframe src
+    gameIframe.src = '';
+
+    // Clear query param
+    const url = new URL(window.location);
+    url.searchParams.delete('game');
+    window.history.replaceState({}, '', url);
+  }
+
+  if (closeGameBtn) {
+    closeGameBtn.addEventListener('click', closeEmbeddedGame);
+  }
+
+  // Intercept click on game dropdown links
+  const gameLinks = document.querySelectorAll('.game-link');
+  gameLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const gameId = link.getAttribute('data-game');
+      
+      // If we are on index.html, load game inline
+      if (profileView && gameView) {
+        e.preventDefault();
+        startEmbeddedGame(gameId);
+        
+        // Update URL query param without reloading
+        const url = new URL(window.location);
+        url.searchParams.set('game', gameId);
+        window.history.pushState({}, '', url);
+      }
+    });
+  });
+
+  // Check URL query parameters on load
+  const urlParams = new URLSearchParams(window.location.search);
+  const gameParam = urlParams.get('game');
+  if (gameParam && gameTitles[gameParam]) {
+    startEmbeddedGame(gameParam);
+  }
 });

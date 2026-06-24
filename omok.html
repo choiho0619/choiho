@@ -84,6 +84,9 @@
             transition: border-color 0.2s;
         }
         .btn:hover { border-color: #3b82f6; }
+        body.in-iframe header {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -98,6 +101,9 @@
     </div>
 
     <script>
+        if (window.self !== window.top) {
+            document.body.classList.add('in-iframe');
+        }
         const BOARD_SIZE = 15;
         let board, isPlayerTurn, gameOver;
         let CELL, PAD;
