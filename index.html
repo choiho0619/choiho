@@ -744,10 +744,18 @@ if (savedLang === 'en') setLanguage('en');
 /* ===== Visitor Counter ===== */
 async function loadVisitorCount() {
   try {
-    const res = await fetch('/api/visitor');
+    const KEY = 'visitor_counted';
+    const EXPIRE = 24 * 60 * 60 * 1000;
+    const last = localStorage.getItem(KEY);
+    const isNew = !last || (Date.now() - parseInt(last, 10)) > EXPIRE;
+    const endpoint = isNew ? '/api/view' : '/api/view?readonly=true';
+    const res = await fetch(endpoint);
     if (!res.ok) return;
     const data = await res.json();
-    document.getElementById('visitor-count').textContent = data.count?.toLocaleString() ?? '—';
+    if (typeof data.value !== 'undefined') {
+      document.getElementById('visitor-count').textContent = data.value.toLocaleString();
+      if (isNew) localStorage.setItem(KEY, Date.now().toString());
+    }
   } catch {}
 }
 loadVisitorCount();
