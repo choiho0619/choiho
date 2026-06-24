@@ -162,6 +162,12 @@ document.addEventListener('DOMContentLoaded', () => {
     sudoku: '🔢 수도쿠'
   };
 
+  const gameHeights = {
+    tetris: '710px',
+    omok: '500px',
+    sudoku: '540px'
+  };
+
   function startEmbeddedGame(gameId) {
     if (!profileView || !gameView || !gameIframe || !gameTitle) return;
 
@@ -171,6 +177,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Set game title
     gameTitle.textContent = gameTitles[gameId] || '🎮 미니게임';
+
+    // Adjust container height dynamically
+    const container = gameIframe.parentElement;
+    if (container) {
+      container.style.height = gameHeights[gameId] || '450px';
+    }
 
     // Load game URL in iframe
     gameIframe.src = `${gameId}.html`;
