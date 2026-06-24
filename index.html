@@ -411,7 +411,8 @@ footer { text-align: center; padding: 72px 24px 48px; }
         직접 보여드립니다.
       </p>
 
-      <div class="button-group">
+
+      <div class="button-group" style="display:grid; grid-template-columns: auto auto; gap: 12px; align-items: start;">
         <!-- Primary CTA: 솔리드 -->
         <a href="https://smartstore.naver.com/createlab_shop" target="_blank"
            class="btn btn-primary"
@@ -420,9 +421,10 @@ footer { text-align: center; padding: 72px 24px 48px; }
         <a href="https://blog.naver.com/yaho0619" target="_blank"
            class="btn btn-secondary"
            data-ko="나의 이야기(블로그)" data-en="My Story (Blog)">나의 이야기(블로그)</a>
-        <!-- 루카피드 -->
+        <!-- 루카피드: 스토어 버튼 아래, 같은 너비 -->
         <a href="https://lucafeed.com/" target="_blank"
            class="btn btn-secondary"
+           style="grid-column: 1;"
            data-ko="루카피드 →" data-en="Lucafeed →">루카피드 →</a>
       </div>
     </div>
