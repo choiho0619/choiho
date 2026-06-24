@@ -79,9 +79,6 @@ section { padding: 6rem 0; }
   color: var(--text-main);
   text-decoration: none;
   letter-spacing: -0.03em;
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
 .nav-logo span {
   color: var(--highlight);
