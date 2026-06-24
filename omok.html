@@ -14,11 +14,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>오목</title>
     <style>
+        :root {
+            --bg-color: #0d1a2e;
+            --text-color: #f1f5f9;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --highlight: #06b6d4;
+        }
+        [data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #0a1628;
+            --border-color: rgba(10, 22, 40, 0.1);
+            --highlight: #0891b2;
+        }
+
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html, body {
             width: 100%; height: 100%;
-            background: #050505;
-            color: #ffffff;
+            background: var(--bg-color);
+            color: var(--text-color);
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
             display: flex;
             flex-direction: column;
@@ -35,9 +48,9 @@
             gap: 12px;
         }
         .back-btn {
-            background: rgba(20,20,20,0.9);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #ffffff;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
             width: 36px; height: 36px;
             border-radius: 50%;
             cursor: pointer;
@@ -45,7 +58,9 @@
             font-size: 16px;
             text-decoration: none;
             flex-shrink: 0;
+            transition: border-color 0.2s;
         }
+        .back-btn:hover { border-color: var(--highlight); }
         h1 {
             font-size: 1.1rem;
             font-weight: 700;
@@ -53,10 +68,10 @@
         }
         .status {
             font-size: 0.82rem;
-            color: #94a3b8;
+            color: var(--text-color);
             padding: 4px 12px;
-            background: rgba(20,20,20,0.9);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
             border-radius: 999px;
             white-space: nowrap;
         }
@@ -73,9 +88,9 @@
             padding-bottom: 20px;
         }
         .btn {
-            background: rgba(20,20,20,0.9);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #ffffff;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
             padding: 8px 22px;
             border-radius: 8px;
             cursor: pointer;
@@ -83,11 +98,19 @@
             font-family: inherit;
             transition: border-color 0.2s;
         }
-        .btn:hover { border-color: #3b82f6; }
+        .btn:hover { border-color: var(--highlight); }
         body.in-iframe header {
             display: none !important;
         }
     </style>
+    <script>
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            document.body.setAttribute('data-theme', theme);
+        }
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        applyTheme(savedTheme);
+    </script>
 </head>
 <body>
     <header>

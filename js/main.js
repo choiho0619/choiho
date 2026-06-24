@@ -9,6 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (themeBtn) {
       themeBtn.textContent = theme === 'dark' ? '🌙' : '☀️';
     }
+    
+    // Sync theme with embedded iframe if it exists
+    const gameIframe = document.getElementById('game-iframe');
+    if (gameIframe && gameIframe.contentWindow) {
+      try {
+        if (typeof gameIframe.contentWindow.applyTheme === 'function') {
+          gameIframe.contentWindow.applyTheme(theme);
+        } else if (gameIframe.contentDocument) {
+          gameIframe.contentDocument.documentElement.setAttribute('data-theme', theme);
+          gameIframe.contentDocument.body.setAttribute('data-theme', theme);
+        }
+      } catch (e) {}
+    }
   }
 
   // Apply initial theme
@@ -186,6 +199,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load game URL in iframe
     gameIframe.src = `${gameId}.html`;
+
+    // Sync theme immediately on load
+    gameIframe.onload = () => {
+      try {
+        if (typeof gameIframe.contentWindow.applyTheme === 'function') {
+          gameIframe.contentWindow.applyTheme(currentTheme);
+        } else if (gameIframe.contentDocument) {
+          gameIframe.contentDocument.documentElement.setAttribute('data-theme', currentTheme);
+          gameIframe.contentDocument.body.setAttribute('data-theme', currentTheme);
+        }
+      } catch (e) {}
+    };
   }
 
   function closeEmbeddedGame() {
